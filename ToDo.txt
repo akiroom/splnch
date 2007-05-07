@@ -1,0 +1,18 @@
+
+Special Laucnh 4 ToDo
+
+【暫定バグ対処】
+・ リソースでアイコンを追加するとインデックスが狂う。
+・ Windows Installer のショートカットの解析に 
+   IShellLinkDataList を使ってるが、エラー処理の except でメ
+   ッセージボックスを出すとその後が実行されない。
+
+【機能追加】
+・ ボタンを押した回数を一覧できるようにする。
+・ スタートメニューを自動的に取得する。
+・ プラグインの並び替え。
+・ SLARunButtonと同様の、ボタンへのファイルドロップ実行を行
+   う API。
+
+・ frmPad に SkinName プロパティ
+・ GetPadInit に SkinName をついか。

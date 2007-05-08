@@ -1,13 +1,12 @@
 
 【ソフト名    】    Special Launch
-【バージョン  】    4.1.0 Build 259
+【バージョン  】    4.1.0 Build 260
 【対応システム】    Windows 95 / 98 / Me / NT 4.0 / 2000 / XP
 【種別        】    フリーソフト（寄付歓迎）
 【開発マシン  】    GIGABYTE GA-7DXR / Athlon 1333 / 512 MB
 【開発言語    】    Borland Delphi 7
 【転載・条件  】    要連絡
 【著作者      】    沢田茂
-【連絡先      】    sl@himatsubu.com
 【最新版の場所】    http://sl.himatsubu.com/
 
 
@@ -101,7 +100,7 @@
    ます。 
 
 
-【4.0.3 Build 241 → 4.1.0 Build 259】
+【4.0.3 Build 241 → 4.1.0 Build 260】
 ・ 開発環境を Delphi 7 にしました。
 ・ Windows XP スタイルに対応しました。
 ・ パッドの設定ダイアログボックスの［デザイン］タブのデザイ

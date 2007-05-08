@@ -30,8 +30,7 @@ uses
   HTMLHelps in 'HTMLHelps.pas',
   Password in 'Password.pas' {dlgPassword},
   SLAPI in 'SLAPI.pas',
-  ShlObjAdditional in 'ShlObjAdditional.pas',
-  BtnPanel in 'BtnPanel.pas';
+  ShlObjAdditional in 'ShlObjAdditional.pas';
 
 {$R *.RES}
 {$R DATA.RES}

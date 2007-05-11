@@ -1,6 +1,6 @@
 
 【ソフト名    】    Special Launch
-【バージョン  】    4.1.1 Build 261
+【バージョン  】    4.1.1 Build 261 
 【対応システム】    Windows 95 / 98 / Me / NT 4.0 / 2000 / XP
 【種別        】    フリーソフト（寄付歓迎）
 【開発マシン  】    GIGABYTE GA-7DXR / Athlon 1333 / 512 MB

@@ -1,0 +1,907 @@
+
+
+Special Launch 4 用プラグイン開発マニュアル
+
+
+【概要】
+・ プラグインは、Special Launch 4（以下 SL4）に、拡張された
+   ボタンとメニューを追加することができます。プラグインを使
+   用することによって、SL4 に Windows の終了メニューを追加し
+   たり、時計ボタンを追加したりすることが可能になります。
+・ プラグインは、特定のプログラムを持つ DLL であり、他の 
+   DLL と区別するために拡張子を slx に変更したものです。
+・ DLL を作成することができるほぼすべてのコンパイラで作成可
+   能です。
+・ プラグインは、SL4 に組み込まれている API（以下 SLAPI）を
+   使うことで、SL4 を操作したり必要な情報を取得することがで
+   きます。
+・ 構文はすべて Delphi の文法で記述してあります。
+
+
+【実装時の注意】
+・ プラグインはすべてのプラグイン関数を実装する必要はありま
+   せんが、関数 SLXGetName だけは実装する必要があります。プ
+   ラグインで実装されていないプラグイン関数は SL4 で無視しま
+   す。
+・ 関数 SLXGetName で取得するプラグインの名前は、他のプラグ
+   インと重複することはできません。ユニークな名前を付けるよ
+   うにしてください。日本語の名前も使えます。
+・ SLAPI をマップする際は Win32API の LoadLibrary は使わずに
+   GetModuleHandle を使ってマップする必要があります。
+
+
+【SL4 の呼び出し手順】
+SL4 は以下の手順でプラグインを組み込みます。
+
+［SL4 起動］
+  1. SL4 は、起動時に Plugins フォルダを検索し、プラグインフ
+     ァイルをロードします。
+  2. 関数 SLXGetName を実行し、プラグインの名前を取得します。
+     もし同じ名前のプラグインが既に組み込まれている場合はエ
+     ラーになり、その旨がユーザーに通知されます。
+  3. プラグインファイルをアンロードします。
+
+［プラグイン起動］
+  1. プラグインファイルをロードします。
+  2. 関数 SLXSetInitFile を実行し、プラグインに設定ファイル
+     の名前を通知します。
+  3. 関数 SLXGetButton を実行し、プラグインが持つボタンをロ
+     ードします。
+  4. 関数 SLXGetMenu を実行し、プラグインが持つメニューをロ
+     ードします。
+  5. 関数 SLXBeginPlugin を実行し、プラグインに開始を通知し
+     ます。通常このときにプラグインは関数 SLXSetInitFile で
+     取得したファイルから設定を読み込みます。
+
+［プラグイン停止］
+  1. 関数 SLXEndPlugin を実行し、プラグインに終了を知らせま
+     す。通常このときにプラグインは関数 SLXSetInitFile で取
+     得したファイルに設定を保存します。
+  2. プラグインファイルをアンロードします。
+
+［ボタン］
+  1. ボタンがパッドに作成される際に、関数 SLXButtonCreate を
+     実行します。
+  2. ボタンがパッドから削除される際に、関数 
+     SLXButtonDestroy を実行します。
+  3. ボタンをクリックで関数 SLXButtonClick を実行します。
+  4. ボタンでファイルを開く際に、関数 SLXButtonDropFiles を
+     実行します。
+  5. 構造体 TSLXButtonInfo メンバ OwnerDraw が True の場合、
+     ボタン描画時に関数 SLXButtonDraw と関数 
+     SLXButtonDrawEx を実行します。
+  6. 構造体 TSLXButtonInfo のメンバ UpdateInterval が 1 以上
+     のボタンの場合、指定の間隔で関数 SLXButtonUpdate を実行
+     します。また、関数 SLXButtonUpdate の戻り値が True だっ
+     た場合、ボタンを再描画します。
+  7. 構造体 TSLXButtonInfo のメンバ OwnerChip が True のボタ
+     ンの場合、ボタンにカーソル通過で SLXButtonChip を実行し、
+     チップを表示します。
+  8. ボタンの追加／変更ダイアログの設定ボタンのクリックで関
+     数 SLXButtonOptions を実行します。SLXButtonOptions がな
+     い場合、関数 SLXChangeOptions を実行します。
+
+［メニュー］
+  1. メニューの選択で関数 SLXMenuClick を実行します。
+  2. メニュー表示時に関数 SLXMenuCheck を実行し、戻り値が
+     True の場合メニューにチェックマークを付けます。
+
+［オプション］
+  1. プラグインの情報で、関数 SLXGetExplanation を実行します。
+  2. プラグインの設定で、関数 SLXChangeOptions を実行します。
+     戻り値が True の場合、関数 SLXButtonUpdate を実行します。
+
+
+【構造体】
+ ○ PSLXButtonInfo
+  説明：
+    TSLXButtonInfo のポインタです。
+
+ ○ TSLXButtonInfo
+  説明：
+    SL4 に追加するプラグインボタンを定義した構造体です。
+  メンバ：
+    Name           ボタン名
+    IconIndex      描画機能がない場合に使うアイコンの 0 から始まるインデックス
+    OwnerDraw      描画機能がある=True
+    UpdateInterval データの更新までの間隔（×0.1秒）
+    OwnerChip      独自チップ機能がある=True
+
+ ○ PSLXMenuInfo
+  説明：
+    TSLXMenuInfo のポインタです。
+
+ ○ TSLXMenuInfo
+  説明：
+    SL4 に追加するプラグインメニューを定義した構造体です。
+  メンバ：
+    Name メニュー名
+    SCut ショートカットキー
+
+ ○ PSLAGroup
+  説明：
+    TSLAGroup のポインタです。
+
+ ○ TSLAGroup
+  説明：
+    ボタングループの情報を定義した構造体です。
+  メンバ：
+    PadID         所属するパッドのID
+    GroupIndex    グループの 0 から始まるインデックス
+    Name          ボタングループ名
+    ButtonCount   ボタンの数
+
+ ○ PSLAButton
+  説明：
+    TSLAButton のポインタです。
+
+ ○ TSLAButton
+  説明：
+    ボタンの情報を定義した構造体です。
+  メンバ：
+    PadID            所属するパッドのID（読み取りのみ）
+    GroupIndex       グループの 0 から始まるインデックス（読み取りのみ）
+    ButtonIndex      ボタンの 0 から始まるインデックス（読み取りのみ）
+    ScreenRect       画面上での座標（読み取りのみ）
+    Name             ボタン名
+    ClickCount       クリック回数
+    Kind             ボタンの種類
+    FileName         リンク先のファイル名
+    ItemIDList       リンク先の PIDL
+    Option           実行時引数
+    Folder           作業用フォルダ
+    WindowSize       実行時の大きさ
+    IconFile         アイコンファイル
+    IconIndex        アイコンの 0 から始まるインデックス
+    PluginName       プラグインの名前
+    PluginNo         プラグインボタンの番号
+
+
+【定数】
+  ○ PadX.ini の DragBar の値
+  DS_NONE            表示しない
+  DS_LEFT            左
+  DS_TOP             上
+  DS_RIGHT           右
+  DS_BOTTOM          下
+
+  ○ PadX.ini の DropAction の値
+  DA_ADDHERE         ドロップした場所に追加
+  DA_ADDLAST         最後に追加
+  DA_OPENHERE        ドロップ先のボタンで開く
+  DA_COPYNAME        ファイル名をコピー
+
+  ○ PadX.ini の BtnCaption の値
+  CA_COMLINE         指定して実行を開く
+  CA_BTNEDIT         ボタンの編集を開く
+  CA_GRPCHANGE       ボタングループ変更メニューを開く
+  CA_NEXTGROUP       次のボタングループへ移動する
+  CA_PADPRO          パッドの設定を開く
+  CA_OPTION          全体の設定を開く
+  CA_HIDE            パッドを隠す
+
+  ○ PadX.ini の BtnCaption の値
+  CP_NONE            ボタン名を表示しない
+  CP_BOTTOM          アイコンの下
+  CP_RIGHT           アイコンの右
+
+  ○ TSLAButton の Kind の値
+  BK_SPACE            空白
+  BK_RETURN           改行
+  BK_NORMAL           通常ボタン
+  BK_PLUGIN           プラグインボタン
+
+  ○ TSLAButton の WindowSize の値
+  BW_NORMAL           通常のウィンドウ
+  BW_MINIMIZED        最小化
+  BW_MAXMIZED         最大化
+
+  ○ SLAGetIcon の FileType の値
+  FT_ICONPATH         アイコンが含まれるファイルへのパス
+  FT_FILEPATH         通常のファイルへのパス
+  FT_PIDL             PIDL
+
+
+【プラグイン関数一覧】
+
+［全般の関数］
+  SLXGetName         プラグインの名前を返します。
+  SLXGetExplanation  プラグインの説明を返します。
+  SLXSetInitFile     プラグインが使用できる設定ファイルを受け取ります。
+  SLXBeginPlugin     プラグインが開始された際に呼ばれます。
+  SLXEndPlugin       プラグインが終了された際に呼ばれます。
+  SLXChangeOptions   プラグインの設定ダイアログを表示します。
+
+［ボタン用関数］
+  SLXGetButton       ボタンの情報（PPIButtonInfo）を次々に返ます。
+  SLXButtonCreate    ボタンがパッドに作成される際に呼ばれます。
+  SLXButtonDestroy   ボタンがパッドから削除される際に呼ばれます。
+  SLXButtonClick     ボタンが押された際に呼ばれます。
+  SLXButtonDropFiles ボタンにファイルをドロップした際に呼ばれます。
+  SLXButtonDraw      描画ボタンを描画する際に呼ばれます。
+  SLXButtonDrawEx    描画ボタンを描画する際に呼ばれます。
+  SLXButtonUpdate    ボタンのデータを更新する必要がある際に呼ばれます。
+  SLXButtonChip      ボタンのチップが表示される際に呼ばれます。
+  SLXButtonOptions   ボタンの設定ダイアログを呼び出します。
+
+［メニュー用関数］
+  SLXGetMenu         メニューの情報（PPIMenuInfo）を次々に返します。
+  SLXMenuClick       メニューが選択された際に呼ばれます。
+  SLXMenuCheck       メニューが表示される際に呼ばれます。
+
+
+【Special Launch API 一覧】
+
+［パッド関係］
+  SLAGetPadCount          パッドの数を取得します。
+  SLAGetPadID             パッドのウィンドウハンドルからパッドの ID を取得します。
+  SLAGetNextPadID         指定したパッドの次のパッドを取得します。
+  SLAGetPadWnd            PadID からパッドのウィンドウハンドルを取得します。
+  SLAGetPadTabWnd         PadID からパッドの隠れている時のウィンドウハンドルを取得します。
+  SLAGetPadInit           パッドのプロパティを 1 つ取得します。
+  SLASetPadInit           パッドのプロパティを 1 つセットします。
+
+［プラグイン関係］
+  SLAChangePluginButtons  プラグインボタンを取得しなおします。
+  SLAChangePluginMenus    プラグインメニューを取得しなおします。
+  SLARedrawPluginButtons  プラグインボタンを再描画します。
+
+［ボタングループ関係］
+  SLAGetGroupCount        ボタングループの数を取得します。
+  SLAGetGroup             ボタングループの情報を取得します。
+  SLAInsertGroup          ボタングループを挿入します。
+  SLARenameGroup          ボタングループの名前を変更します。
+  SLACopyGroup            ボタングループを複製します。
+  SLADeleteGroup          ボタングループを削除します。
+
+［ボタン関係］
+  SLAGetButton            ボタンの情報を取得します。
+  SLAInsertButton         ボタンを挿入します。
+  SLAChangeButton         ボタンを変更します。
+  SLADeleteButton         ボタンを削除します。
+  SLACopyButton           ボタンをクリップボードにコピーします。
+  SLAPasteButton          ボタンをクリップボードから貼り付けます。
+  SLAButtonInClipbord     クリップボードにボタンとして貼り付けられるデータがあるかを返します。
+  SLARunButton            ボタンデータを実行します。
+  SLAGetIcon              アイコンを取得します。
+
+
+【プラグイン関数リファレンス】
+
+［全般の関数］
+
+ ○ SLXGetName
+  構文：
+    function SLXGetName(Name: PChar; Size: Word): BOOL;
+  機能：
+    プラグインの名前を返します。
+    起動時に呼ばれます。
+  引数：
+    Name 名前を返すバッファを指すポインタ
+    Size Name のサイズ
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLXGetExplanation
+  構文：
+    function SLXGetExplanation(Explanation: PChar; Size: Word): BOOL; stdcall;
+  機能：
+    プラグインの説明を返します。
+    バージョン情報を表示する際に呼ばれます。
+  引数：
+    Explanation 説明を返すバッファを指すポインタ
+    Size        Explanation のサイズ
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLXSetInitFile
+  構文：
+    function SLXSetInitFile(InitFile: PChar): BOOL; stdcall;
+  機能：
+    プラグインが使用できる設定ファイルを受け取ります。
+    起動時に呼ばれます。
+    通常は SL4 のデータフォルダに、プラグインの拡張子を
+     .ini に変更したものを受け取ります。
+  引数：
+    InitFile 設定ファイルの名前
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLXBeginPlugin
+  構文：
+    function SLXBeginPlugin: BOOL; stdcall;
+  機能：
+    プラグインの開始を通知します。
+    起動時に呼び出されます
+  引数：
+    なし
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLXEndPlugin
+  構文：
+    function SLXEndPlugin: BOOL; stdcall;
+  機能：
+    プラグインの終了を通知します。
+    終了時に呼ばれます。
+  引数：
+    なし
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLXChangeOptions
+  構文：
+    function SLXChangeOptions(hWnd: HWND): BOOL; stdcall;
+  機能：
+    プラグインの設定ダイアログを表示します。True を返すと各
+    ボタンの関数 UpdateButton が呼ばれます。
+  引数：
+    hWnd  設定ダイアログの親ウィンドウになるウィンドウのハンドル
+  戻り値：
+    True  設定を変更して SLXButtonUpdate を実行する
+    False 設定を変更しない
+
+
+［ボタン用関数］
+
+ ○ SLXGetButton
+  構文：
+    function SLXGetButton(No: Integer; ButtonInfo: PSLXButtonInfo): BOOL; stdcall;
+  機能：
+    ボタンの情報 PPIButtonInfo を次々に返します。
+    SL4 は No が 0 から順に実行し、SLXGetButton が False を
+    返すまで実行します。
+  引数：
+    No         ボタン番号
+    ButtonInfo ボタン情報
+  戻り値：
+    True  成功
+    False ボタンはない
+
+ ○ SLXButtonCreate
+  構文：
+    function SLXButtonCreate(No: Integer; hWnd: HWND; ButtonIndex: Integer): BOOL; stdcall;
+  機能：
+    ボタンがパッド上に作成される際に呼ばれます。
+    ボタングループの切り替えやパッドのサイズ変更等でも、すべ
+    てのボタンは一旦削除され、再作成します。
+  引数：
+    No           ボタン番号
+    hWnd         パッドのウィンドウハンドル
+    ButtonIndex  作成されたボタンの 0 から始まるインデックス
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLXButtonDestroy
+  構文：
+    function SLXButtonDestroy(No: Integer; hWnd: HWND; ButtonIndex: Integer): BOOL; stdcall;
+  機能：
+    ボタンがパッド上から削除される際に呼ばれます。
+    ボタングループの切り替えやパッドのサイズ変更等でも、すべ
+    てのボタンは一旦削除され、再作成します。
+  引数：
+    No           ボタン番号
+    hWnd         パッドのウィンドウハンドル
+    ButtonIndex  削除されたボタンの 0 から始まるインデックス
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLXButtonClick
+  構文：
+    function SLXButtonClick(No: Integer; hWnd: HWND): BOOL; stdcall;
+  機能：
+    ボタンが押された際に呼ばれます。
+    成功すると再描画されます。
+  引数：
+    No   ボタン番号
+    hWnd ボタンがあるウィンドウのハンドル
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLXButtonDropFiles
+  構文：
+    function SLXButtonDropFiles(No: Integer; hWnd: HWND; Files: PChar): BOOL; stdcall;
+  機能：
+    ボタンにファイルをドロップした際に呼ばれます。
+    複数のファイルは改行で区切られて渡されます。
+    成功すると再描画されます。
+  引数：
+    No    ボタン番号
+    hWnd  ボタンがあるウィンドウのハンドル
+    Files ファイル名
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLXButtonDraw
+  構文：
+    function SLXButtonDraw(No: Integer; DC: HDC; ARect: PRect): BOOL; stdcall;
+  機能：
+    描画ボタンを描画する際に呼ばれます。
+    プラグインは DC の ARect に囲まれ場部分のみを描画しなく
+    てはなりません。
+  引数：
+    No    ボタン番号
+    DC    デバイスコンテキストのハンドル
+    ARect 描画する長方形
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLXButtonDrawEx
+  構文：
+    function SLXButtonDrawEx(No: Integer; hWnd: HWND; GroupIndex, ButtonIndex: Integer; DC: HDC; ARect: PRect): BOOL; stdcall;
+  機能：
+    描画ボタンを描画する際に呼ばれます。関数 SLXButtonDraw 
+    が実装されている場合、その後に呼ばれます。
+    プラグインは DC の ARect に囲まれ場部分のみを描画しなく
+    てはなりません。
+  引数：
+    No          ボタン番号
+    hWnd        ボタンがあるウィンドウのハンドル
+    GroupIndex  ボタンがあるボタングループの 0 から始まるインデックス
+    ButtonIndex ボタンの 0 から始まるインデックス
+    DC          デバイスコンテキストのハンドル
+    ARect       描画する長方形
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLXButtonUpdate
+  構文：
+    function SLXButtonUpdate(No: Integer): BOOL; stdcall;
+  機能：
+    ボタンをのデータが更新する必要があるときに呼ばれます。
+    True を返すとそのボタンは再描画されます。
+  引数：
+    No ボタン番号
+  戻り値：
+    True  再描画する
+    False 再描画しない
+
+ ○ SLXButtonChip
+  構文：
+    function SLXButtonChip(No: Integer; Value: PChar; Size: Word): BOOL; stdcall;
+  機能：
+    ボタンのチップが表示される際に呼ばれます。
+  引数：
+    No    ボタン番号
+    Value チップにする文字列を返すバッファを指すポインタ
+    Size  Valueのサイズ
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLXButtonOptions
+  構文：
+    function SLXButtonOptions(No: Integer; hWnd: HWND): BOOL; stdcall;
+  機能：
+    ボタンの設定ダイアログを呼び出します。
+  引数：
+    No    ボタン番号
+    hWnd  設定ダイアログの親ウィンドウになるウィンドウのハンドル
+  戻り値：
+    True  設定を変更して SLXButtonUpdate を実行する
+    False 設定を変更しない
+
+［メニュー用関数］
+
+ ○ SLXGetMenu
+  構文：
+    function SLXGetMenu(No: Integer; MenuInfo: PPIMenuInfo): BOOL; stdcall;
+  機能：
+    メニューの情報 PPIMenuInfo を次々に返します。
+    SL4 は No が 0 から順に実行し、GetMenuがFalse を返すまで
+    実行します。
+    No が 0 は 1 階層目のメニューを表し、それ以降は No 0 の
+    サブメニューになります。
+    1 階層目のメニューを複数作ることはできません。
+  引数：
+    No       メニュー番号
+    MenuInfo メニュー情報
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLXMenuClick
+  構文：
+    function SLXMenuClick(No: Integer; hWnd: HWND): BOOL; stdcall;
+  機能：
+    メニューが選択された際に呼ばれます。
+  引数：
+    No   メニュー番号
+    hWnd メニューを選択したウィンドウのハンドル
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLXMenuCheck
+  構文：
+    function SLXMenuCheck(No: Integer): BOOL; stdcall;
+  機能：
+    メニューが表示される際に呼ばれます。
+    チェックが付いているかを返します。
+  引数：
+    No   メニュー番号
+  戻り値：
+    True  チェックあり
+    False チェックなし
+
+
+【Special Launch API リファレンス】
+
+［パッド関係］
+
+ ○ SLAGetPadCount
+  構文：
+    function SLAGetPadCount: Integer; stdcall;
+  機能：
+    パッドの数を取得します。
+  引数：
+    なし
+  戻り値：
+    パッドの数
+
+ ○ SLAGetPadID
+  構文：
+    function SLAGetPadID(hWnd: HWND): Integer; stdcall;
+  機能：
+    パッドのウィンドウハンドルからパッドの ID を取得します。
+    ウィンドウハンドルは起動毎に違いますが、ID は再起動後も有効です。
+  引数：
+    hWnd  ウィンドウハンドル
+  戻り値：
+    パッドの ID
+
+ ○ SLAGetNextPadID
+  構文：
+    function SLAGetNextPadID(ID: Integer): Integer; stdcall;
+  機能：
+    指定したパッドの次のパッドを取得します。
+    この順番は最近アクティブになったものから返ります。
+    （Ctrl+Tab の順番と同じです。）
+  引数：
+    ID   パッドの ID
+  戻り値：
+    次のパッドの ID
+
+ ○ SLAGetPadWnd
+  構文：
+    function SLAGetPadWnd(ID: Integer): HWND; stdcall;
+  機能：
+    PadID からパッドのウィンドウハンドルを取得します。
+  引数：
+    ID   パッドの ID
+  戻り値：
+    パッドのウィンドウハンドル
+
+ ○ SLAGetPadTabWnd
+  構文：
+    function SLAGetPadTabWnd(ID: Integer): HWND; stdcall;
+  機能：
+    PadID からパッドの隠れている時のウィンドウハンドルを取得します。
+  引数：
+    ID   パッドの ID
+  戻り値：
+    パッドの隠れている時のウィンドウハンドル
+
+ ○ SLAGetPadInit
+  構文：
+    function SLAGetPadInit(ID: Integer; Key: PChar; Buf: PChar; BufSize: Integer): BOOL; stdcall;
+  機能：
+    パッドのプロパティを 1 つ取得します。
+    取得するプロパティは、引数 Key に PadX.ini ファイルと同じ名前を指定します。
+    取得したプロパティは Buf に文字列として格納されます。
+  引数：
+    ID      パッドの ID
+    Key     パッドのプロパティの名前
+    Buf     プロパティの内容を入れるバッファ
+    BufSize バッファのサイズ
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLASetPadInit
+  構文：
+    function SLASetPadInit(ID: Integer; Key: PChar; Item: PChar): BOOL; stdcall;
+  機能：
+    パッドのプロパティを 1 つセットします。
+    セットするプロパティは、引数 Key に PadX.ini ファイルと同じ名前を指定します。
+  引数：
+    ID      パッドの ID
+    Key     パッドのプロパティの名前（PadX.Ini ファイルと同じ）
+    Buf     プロパティの内容を入れるバッファ
+  戻り値：
+    True  成功
+    False 失敗
+
+
+［プラグイン関係］
+
+ ○ SLAChangePluginButtons
+  構文：
+    function SLAChangePluginButtons(Name: PChar): BOOL; stdcall;
+  機能：
+    プラグインボタンを取得しなおします。
+  引数：
+    Name    プラグインの名前へのポインタ
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLAChangePluginMenus
+  構文：
+    function SLAChangePluginMenus(Name: PChar): BOOL; stdcall;
+  機能：
+    プラグインメニューを取得しなおします。
+  引数：
+    Name    プラグインの名前へのポインタ
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLARedrawPluginButtons
+  構文：
+    function SLARedrawPluginButtons(Name: PChar; No: Integer): BOOL; stdcall;
+  機能：
+    プラグインボタンを再描画します。
+  引数：
+    Name    プラグインの名前へのポインタ
+    No      ボタン番号
+  戻り値：
+    True  成功
+    False 失敗
+
+
+［ボタングループ関係］
+
+ ○ SLAGetGroupCount
+  構文：
+    function SLAGetGroupCount(ID): Integer; stdcall;
+  機能：
+    ボタングループの数を取得します。
+  引数：
+    ID           パッドの ID
+  戻り値：
+    ボタングループの数
+
+ ○ SLAGetGroup
+  構文：
+    function SLAGetGroup(ID, GroupIndex: Integer; Group: PSLAGroup): BOOL; stdcall;
+  機能：
+    ボタングループの情報を取得します。
+  引数：
+    ID           パッドの ID
+    GroupIndex   ボタングループの 0 から始まるインデックス
+    Group        グループ情報へのポインタ
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLAInsertGroup
+  構文：
+    function SLAInsertGroup(ID, GroupIndex: Integer; Name: PChar): BOOL; stdcall;
+  機能：
+    ボタングループを挿入します。
+  引数：
+    ID           パッドの ID
+    GroupIndex   ボタングループの 0 から始まるインデックス
+    Name         グループ名へのポインタ
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLARenameGroup
+  構文：
+    function SLARenameGroup(ID, GroupIndex: Integer; Name: PChar): BOOL; stdcall;
+  機能：
+    ボタングループの名前を変更します。
+  引数：
+    ID           パッドの ID
+    GroupIndex   ボタングループの 0 から始まるインデックス
+    Name         ボタングループの名前へのポインタ
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLACopyGroup
+  構文：
+    function SLACopyGroup(ID, GroupIndex, NewIndex: Integer): BOOL; stdcall;
+  機能：
+    ボタングループを複製します
+  引数：
+    ID           パッドの ID
+    GroupIndex   ボタングループのコピー元の 0 から始まるインデックス
+    NewIndex     ボタングループのコピー先の 0 から始まるインデックス
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLADeleteGroup
+  構文：
+    function SLADeleteGroup(ID, GroupIndex: Integer): BOOL; stdcall;
+  機能：
+    ボタングループを削除します。
+  引数：
+    ID           パッドの ID
+    GroupIndex   ボタングループの 0 から始まるインデックス
+  戻り値：
+    True  成功
+    False 失敗
+
+
+［ボタン関係］
+
+ ○ SLAGetButton
+  構文：
+    function SLAGetButton(ID, GroupIndex, ButtonIndex: Integer; Button: PSLAButton): BOOL; stdcall;
+  機能：
+    ボタンの情報を取得します。
+  引数：
+    ID           パッドの ID
+    GroupIndex   ボタングループの 0 から始まるインデックス
+    ButtonIndex  ボタンの 0 から始まるインデックス
+    Button       ボタン情報へのポインタ
+  戻り値：
+    True  成功
+    False 失敗
+  注意：
+    Button を元に新しいボタンとして SLAInsertButton を呼び出
+    す場合は、ポインタ型のメンバ PIDL をそのまま使わないでく
+    ださい。多重参照になりますので必ずコピーを作ってください。
+
+ ○ SLAInsertButton
+  構文：
+    function SLAInsertButton(ID, GroupIndex, ButtonIndex: Integer; Button: PSLAButton): BOOL; stdcall;
+  機能：
+    ボタンを挿入します。
+  引数：
+    ID           パッドの ID
+    GroupIndex   ボタングループの 0 から始まるインデックス
+    ButtonIndex  ボタンの 0 から始まるインデックス
+    Button       ボタン情報へのポインタ
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLAChangeButton
+  構文：
+    function SLAChangeButton(ID, GroupIndex, ButtonIndex: Integer; Button: PSLAButton): BOOL; stdcall;
+  機能：
+    ボタンを変更します。
+  引数：
+    ID           パッドの ID
+    GroupIndex   ボタングループの 0 から始まるインデックス
+    ButtonIndex  ボタンの 0 から始まるインデックス
+    Button       ボタン情報へのポインタ
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLADeleteButton
+  構文：
+    function SLADeleteButton(ID, GroupIndex, ButtonIndex: Integer): BOOL; stdcall;
+  機能：
+    ボタンを削除します。
+  引数：
+    ID           パッドの ID
+    GroupIndex   ボタングループの 0 から始まるインデックス
+    ButtonIndex  ボタンの 0 から始まるインデックス
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLACopyButton
+  構文：
+    function SLACopyButton(ID, GroupIndex, ButtonIndex: Integer): BOOL; stdcall;
+  機能：
+    ボタンをクリップボードにコピーします。
+  引数：
+    ID           パッドの ID
+    GroupIndex   ボタングループの 0 から始まるインデックス
+    ButtonIndex  ボタンの 0 から始まるインデックス
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLAPasteButton
+  構文：
+    function SLAPasteButton(ID, GroupIndex, ButtonIndex: Integer): BOOL; stdcall;
+  機能：
+    ボタンをクリップボードから貼り付けます。
+  引数：
+    ID           パッドの ID
+    GroupIndex   ボタングループの 0 から始まるインデックス
+    ButtonIndex  ボタンの 0 から始まるインデックス
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLAButtonInClipbord
+  構文：
+    function SLAButtonInClipbord: BOOL; stdcall;
+  機能：
+    クリップボードにボタンで貼り付けられるデータがあるかを返します。
+  引数：
+    なし
+  戻り値：
+    True  クリップボードにボタンで貼り付けられるデータがある
+    False クリップボードにボタンで貼り付けられるデータがない
+
+ ○ SLARunButton
+  構文：
+    function SLARunButton(ID: Integer; Button: PSLAButton): BOOL; stdcall;
+  機能：
+    ボタンデータを実行します。
+  引数：
+    ID      パッドの ID（親ウィンドウになるため必要です。）
+    Button  ボタン情報へのポインタ
+  戻り値：
+    True  成功
+    False 失敗
+
+ ○ SLAGetIcon
+  構文：
+    function SLAGetIcon(FilePoint: Pointer; FileType, IconIndex: Integer; SmallIcon, UseCache: BOOL): HIcon; stdcall;
+  機能：
+    アイコンを取得します。
+  引数：
+    FilePoint  アイコンを持つファイルを指すファイル名や PIDL へのポインタ
+    FileType   FilePoint の種類
+               次のいずれかの値を指定します。
+                 FT_ICONPATH  アイコンが含まれるファイルへのパス
+                 FT_FILEPATH  通常のファイルへのパス
+                 FT_PIDL      PIDL
+    IconIndex  アイコンのインデックス
+    SmallIcon  小さいアイコンを取得するかの指定
+    UseCache   アイコンキャッシュを使う
+  戻り値：
+    True  成功
+    False 失敗
+
+
+【更新履歴】
+1.0.0 Build 3 2000/1/27
+・ Special Launch 4.0.0 Build 189 以降に対応しました。
+
+1.0.0 Build 4 2000/2/2
+・ Special Launch 4.0.0 Build 191 以降に対応しました。
+
+1.0.0 Build 5 2000/2/4
+・ ボタン情報とメニュー情報の定数を見やすくしました。
+
+1.0.0 Build 5 2000/4/13
+・ Special Launch 4.0.0 Build 194 以降に対応しました。
+
+1.0.0 Build 6 2000/7/19
+・ 関数 SLXChangeOptions を変更しました。
+
+1.0.0 Build 9 2000/12/22
+・ Special Launch 4.0.0 Build 225 以降に対応しました。
+・ 関数 SLXButtonDrawEx を追加しました。
+・ 関数 SLXButtonCreate を追加しました。
+・ 関数 SLXButtonDestroy を追加しました。
+・ Special Launch API を追加しました。
+
+1.0.0 Build 10 2001/2/1
+・ Special Launch 4.0.0 Build 226 以降に対応しました。
+・ Special Launch API に関数 SLAGetIcon を追加しました。
+
+1.0.0 Build 11 2002/3/19
+・ 正式版
+・ Special Launch 4.0.2 Build 240 以降に対応しました。
+・ 関数 SLXButtonOptions を追加しました。
+
+
+__________________________________________________________
+                                     Copyright(C)1996-2001
+                        SAWADA Shigeru All rights reserved.
+                                        制作・著作  沢田茂

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLAGetPadWnd</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>SLAGetPadWnd</h2>
+<p>
+	パッドの ID からパッドのウィンドウハンドルを取得します。
+</p>
+
+<h3>構文</h3>
+<pre>
+function <strong>SLAGetPadWnd</strong>(<strong>ID</strong>: Integer): HWND; stdcall;
+</pre>
+
+<h3>引数</h3>
+<table>
+	<tr>
+		<th>ID</th>
+		<td>ウィンドウハンドルを取得するパッドの ID</td>
+	</tr>
+</table>
+
+<h3>戻り値</h3>
+<p>
+	パッドのウィンドウハンドルを返します。
+</p>
+
+<h3>解説</h3>
+<p>
+	パッドの ID からパッドのウィンドウハンドルを取得します。
+</p>
+
+<p>
+	隠れている状態のパッドは別のウィンドウになります。隠れているパッドのウィンドウハンドルを取得するには <a href="SLAGetPadTabWnd.html"><strong>SLAGetPadTabWnd</strong></a> を使う必要があります。
+</p>
+
+
+
+
+<h3>SL4 の対応</h3>
+<p>
+	4.0.0 Build 225 2000/12/22 以降
+</p>
+
+<div class="related">
+	<A href="SLAGetPadID.html"><IMG src="arrow.gif">SLAGetPadID</A><BR>
+	<A href="SLAGetPadTabWnd.html"><IMG src="arrow.gif">SLAGetPadTabWnd</A><BR>
+</div>
+
+</body>
+</html>

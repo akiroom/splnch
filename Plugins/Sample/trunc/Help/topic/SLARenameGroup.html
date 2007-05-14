@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLARenameGroup</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>SLARenameGroup</h2>
+<p>
+	ボタングループの名前を変更します。
+</p>
+
+<h3>構文</h3>
+<pre>
+function <strong>SLARenameGroup</strong>(<strong>ID</strong>, <strong>GroupIndex</strong>: Integer; <strong>Name</strong>: PChar): BOOL; stdcall;
+</pre>
+
+<h3>引数</h3>
+<table>
+	<tr>
+		<th>ID</th>
+		<td>名前を変更するボタングループがあるパッドの ID</td>
+	</tr>
+	<tr>
+		<th>GroupIndex</th>
+		<td>名前を変更するボタングループのインデックス</td>
+	</tr>
+	<tr>
+		<th>Name</th>
+		<td>新しい名前へのポインタ</td>
+	</tr>
+</table>
+
+<h3>戻り値</h3>
+<p>
+	関数が成功したら TRUE 、失敗したら FALSE を返します。
+</p>
+
+<h3>解説</h3>
+<p>
+	既存のボタングループの名前を、引数 <strong>Name</strong> が指す名前に変更します。
+</p>
+
+
+
+
+<h3>SL4 の対応</h3>
+<p>
+	4.0.0 Build 225 2000/12/22 以降
+</p>
+
+<div class="related">
+	<A href="SLAInsertGroup.html"><IMG src="arrow.gif">SLAInsertGroup</A><BR>
+	<A href="SLACopyGroup.html"><IMG src="arrow.gif">SLACopyGroup</A><BR>
+	<A href="SLADeleteGroup.html"><IMG src="arrow.gif">SLADeleteGroup</A><BR>
+</div>
+
+</body>
+</html>

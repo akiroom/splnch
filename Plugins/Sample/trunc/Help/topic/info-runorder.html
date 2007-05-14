@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>呼び出し手順</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>呼び出し手順</h2>
+<p>
+	SL4 は以下の手順でプラグインを組み込み、実行します。
+</p>
+
+<h3>SL4 起動</h3>
+<ol>
+	<li>SL4 は、起動時に Plugins フォルダを検索し、プラグインファイルをロードします。</li>
+	<li>関数 <a href="SLXGetName.html"><strong>SLXGetName</strong></a> を実行し、プラグインの名前を取得します。もし同じ名前のプラグインが既に組み込まれている場合はエラーになり、その旨がユーザーに通知されます。</li>
+	<li>プラグインファイルをアンロードします。</li>
+</ol>
+
+
+<h3>プラグイン起動</h3>
+<ol>
+	<li>プラグインファイルをロードします。</li>
+	<li>関数 <a href="SLXSetInitFile.html"><strong>SLXSetInitFile</strong></a> を実行し、プラグインに設定ファイルの名前を通知します。</li>
+	<li>関数 <a href="SLXGetButton.html"><strong>SLXGetButton</strong></a> を実行し、プラグインが持つボタンをロードします。</li>
+	<li>関数 <a href="SLXGetMenu.html"><strong>SLXGetMenu</strong></a> を実行し、プラグインが持つメニューをロードします。</li>
+	<li>関数 <a href="SLXBeginPlugin.html"><strong>SLXBeginPlugin</strong></a> を実行し、プラグインに開始を通知します。通常このときにプラグインは関数 <a href="SLXSetInitFile.html"><strong>SLXSetInitFile</strong></a> で取得したファイルから設定を読み込みます。</li>
+</ol>
+
+<h3>プラグイン停止</h3>
+<ol>
+	<li>関数 <a href="SLXEndPlugin.html"><strong>SLXEndPlugin</strong></a> を実行し、プラグインに終了を知らせます。通常このときにプラグインは関数 <a href="SLXSetInitFile.html"><strong>SLXSetInitFile</strong></a> で取得したファイルに設定を保存します。</li>
+	<li>プラグインファイルをアンロードします。</li>
+</ol>
+
+<h3>ボタン</h3>
+<ol>
+	<li>ボタンがパッドに作成される際に、関数 <a href="SLXButtonCreate.html"><strong>SLXButtonCreate</strong></a> を実行します。</li>
+	<li>ボタンがパッドから削除される際に、関数 <a href="SLXButtonDestroy.html"><strong>SLXButtonDestroy</strong></a> を実行します。</li>
+	<li>ボタンをクリックで関数 <a href="SLXButtonClick.html"><strong>SLXButtonClick</strong></a> を実行します。</li>
+	<li>ボタンでファイルを開く際に、関数 <a href="SLXButtonDropFiles.html"><strong>SLXButtonDropFiles</strong></a> を実行します。</li>
+	<li>構造体 <a href="TSLXButtonInfo.html"><strong>TSLXButtonInfo</strong></a> のメンバ <strong>OwnerDraw</strong> が TRUE の場合、ボタン描画時に関数 <a href="SLXButtonDraw.html"><strong>SLXButtonDraw</strong></a> と関数 <a href="SLXButtonDrawEx.html"><strong>SLXButtonDrawEx</strong></a> を実行します。</li>
+	<li>構造体 <a href="TSLXButtonInfo.html"><strong>TSLXButtonInfo</strong></a> のメンバ <strong>UpdateInterval</strong> が 1 以上のボタンの場合、指定の間隔で関数 <a href="SLXButtonUpdate.html"><strong>SLXButtonUpdate</strong></a> を実行します。また、関数 <a href="SLXButtonUpdate.html"><strong>SLXButtonUpdate</strong></a> の戻り値が TRUE だった場合、ボタンを再描画します。</li>
+	<li>構造体 <a href="TSLXButtonInfo.html"><strong>TSLXButtonInfo</strong></a> のメンバ <strong>OwnerChip</strong> が TRUE のボタンの場合、ボタンにカーソル通過で関数 <a href="SLXButtonChip.html"><strong>SLXButtonChip</strong></a> を実行し、チップを表示します。</li>
+	<li>ボタンの追加／変更ダイアログの設定ボタンのクリックで関数 <a href="SLXButtonOptions.html"><strong>SLXButtonOptions</strong></a> を実行します。</li>
+</ol>
+
+<h3>メニュー</h3>
+<ol>
+	<li>メニューの選択で関数 <a href="SLXMenuClick.html"><strong>SLXMenuClick</strong></a> を実行します。</li>
+	<li>メニュー表示時に関数 <a href="SLXMenuCheck.html"><strong>SLXMenuCheck</strong></a> を実行し、戻り値が TRUE の場合メニューにチェックマークを付けます。</li>
+</ol>
+
+<h3>オプション</h3>
+<ol>
+	<li>プラグインの情報で、関数 <a href="SLXGetExplanation.html"><strong>SLXGetExplanation</strong></a> を実行します。</li>
+	<li>プラグインの設定で、関数 <a href="SLXChangeOptions.html"><strong>SLXChangeOptions</strong></a> を実行します。戻り値が TRUE の場合、関数 <a href="SLXButtonUpdate.html"><strong>SLXButtonUpdate</strong></a> を実行します。</li>
+</ol>
+
+
+</body>
+</html>

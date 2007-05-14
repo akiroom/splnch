@@ -1,0 +1,257 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="表紙">
+		<param name="Local" value="topic\title.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="概要">
+		<param name="Local" value="topic\info-readme.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="実装時の注意">
+		<param name="Local" value="topic\info-attention.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="呼び出し手順">
+		<param name="Local" value="topic\info-runorder.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="旧バージョンとの互換性">
+		<param name="Local" value="topic\info-compatibility.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="コールバック関数">
+		<param name="Local" value="topic\slx.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLXGetName">
+		<param name="Local" value="topic\SLXGetName.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLXGetExplanation">
+		<param name="Local" value="topic\SLXGetExplanation.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLXSetInitFile">
+		<param name="Local" value="topic\SLXSetInitFile.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLXBeginPlugin">
+		<param name="Local" value="topic\SLXBeginPlugin.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLXEndPlugin">
+		<param name="Local" value="topic\SLXEndPlugin.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLXChangeOptions">
+		<param name="Local" value="topic\SLXChangeOptions.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLXGetButton">
+		<param name="Local" value="topic\SLXGetButton.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLXButtonCreate">
+		<param name="Local" value="topic\SLXButtonCreate.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLXButtonDestroy">
+		<param name="Local" value="topic\SLXButtonDestroy.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLXButtonClick">
+		<param name="Local" value="topic\SLXButtonClick.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLXButtonDropFiles">
+		<param name="Local" value="topic\SLXButtonDropFiles.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLXButtonDraw">
+		<param name="Local" value="topic\SLXButtonDraw.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLXButtonDrawEx">
+		<param name="Local" value="topic\SLXButtonDrawEx.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLXButtonUpdate">
+		<param name="Local" value="topic\SLXButtonUpdate.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLXButtonChip">
+		<param name="Local" value="topic\SLXButtonChip.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLXButtonOptions">
+		<param name="Local" value="topic\SLXButtonOptions.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLXGetMenu">
+		<param name="Local" value="topic\SLXGetMenu.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLXMenuClick">
+		<param name="Local" value="topic\SLXMenuClick.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLXMenuCheck">
+		<param name="Local" value="topic\SLXMenuCheck.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="TSLXButtonInfo">
+		<param name="Local" value="topic\TSLXButtonInfo.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="TSLXMenuInfo">
+		<param name="Local" value="topic\TSLXMenuInfo.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Special Launch API">
+		<param name="Local" value="topic\sla.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLAGetPadCount">
+		<param name="Local" value="topic\SLAGetPadCount.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLAGetPadID">
+		<param name="Local" value="topic\SLAGetPadID.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLAGetNextPadID">
+		<param name="Local" value="topic\SLAGetNextPadID.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLAGetPadWnd">
+		<param name="Local" value="topic\SLAGetPadWnd.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLAGetPadTabWnd">
+		<param name="Local" value="topic\SLAGetPadTabWnd.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLAGetPadInit">
+		<param name="Local" value="topic\SLAGetPadInit.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLASetPadInit">
+		<param name="Local" value="topic\SLASetPadInit.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLAGetPadInit と SLASetPadInit で引数 Key に指定できる文字とその意味">
+		<param name="Local" value="topic\PadInitKey.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLAChangePluginButtons">
+		<param name="Local" value="topic\SLAChangePluginButtons.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLAChangePluginMenus">
+		<param name="Local" value="topic\SLAChangePluginMenus.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLARedrawPluginButtons">
+		<param name="Local" value="topic\SLARedrawPluginButtons.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLAGetGroupCount">
+		<param name="Local" value="topic\SLAGetGroupCount.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLAGetGroup">
+		<param name="Local" value="topic\SLAGetGroup.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLAInsertGroup">
+		<param name="Local" value="topic\SLAInsertGroup.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLARenameGroup">
+		<param name="Local" value="topic\SLARenameGroup.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLACopyGroup">
+		<param name="Local" value="topic\SLACopyGroup.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLADeleteGroup">
+		<param name="Local" value="topic\SLADeleteGroup.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLAGetButton">
+		<param name="Local" value="topic\SLAGetButton.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLAInsertButton">
+		<param name="Local" value="topic\SLAInsertButton.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLAChangeButton">
+		<param name="Local" value="topic\SLAChangeButton.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLADeleteButton">
+		<param name="Local" value="topic\SLADeleteButton.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLACopyButton">
+		<param name="Local" value="topic\SLACopyButton.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLAPasteButton">
+		<param name="Local" value="topic\SLAPasteButton.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLAButtonInClipbord">
+		<param name="Local" value="topic\SLAButtonInClipbord.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLARunButton">
+		<param name="Local" value="topic\SLARunButton.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLAGetIcon">
+		<param name="Local" value="topic\SLAGetIcon.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="TSLAGroup">
+		<param name="Local" value="topic\TSLAGroup.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="TSLAButton">
+		<param name="Local" value="topic\TSLAButton.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Tips">
+		<param name="Local" value="topic\tips.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="もっともシンプルなプラグイン">
+		<param name="Local" value="topic\tips-simplest.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Delphi での便利な設定">
+		<param name="Local" value="topic\tips-delphi.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="独自メニューを追加する">
+		<param name="Local" value="topic\tips-menu.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Special Launch API を使う">
+		<param name="Local" value="topic\tips-usesla.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="パッドの状態を取得する">
+		<param name="Local" value="topic\tips-padinit.html">
+		</OBJECT>
+</UL>
+</BODY></HTML>

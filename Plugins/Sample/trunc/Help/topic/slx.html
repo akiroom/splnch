@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<link href="main.css" rel="stylesheet" type="text/css">
+<title>コールバック関数</title>
+<style>
+<!--
+	.h3 {
+		background-color: transparent;
+	}
+-->
+</style>
+</head>
+<body>
+
+<h2>コールバック関数</h2>
+<p>
+	プラグインは、これらのコールバック関数をエクスポートした DLL です。
+</p>
+<p>
+	プラグインはすべてのコールバック関数を実装する必要はありませんが、関数 <a href="SLXGetName.html"><strong>SLXGetName</strong></a> だけは実装する必要があります。プラグインで実装されていないコールバック関数は SL4 で無視します。
+</p>
+<p>
+	関数 <a href="SLXGetName.html"><strong>SLXGetName</strong></a> で返すプラグインの名前は、他のプラグインと重複することはできません。ユニークな名前を返すようにしてください。日本語の名前（Shift-JIS）も使えます。
+</p>
+
+
+<table>
+<tr>
+	<td class="h3" colspan="2"><h3>全般の関数</h3></td>
+</tr>
+
+<tr>
+	<th><a href="SLXGetName.html">SLXGetName</a></th>
+	<td>プラグインの名前を返します。</td>
+</tr>
+<tr>
+	<th><a href="SLXGetExplanation.html">SLXGetExplanation</a></th>
+	<td>バージョン情報に表示するプラグインの説明を返します。</td>
+</tr>
+<tr>
+	<th><a href="SLXSetInitFile.html">SLXSetInitFile</a></th>
+	<td>プラグインが使用できる設定ファイルを受け取ります。</td>
+</tr>
+<tr>
+	<th><a href="SLXBeginPlugin.html">SLXBeginPlugin</a></th>
+	<td>プラグインの開始の通知を受けます。</td>
+</tr>
+<tr>
+	<th><a href="SLXEndPlugin.html">SLXEndPlugin</a></th>
+	<td>プラグインの終了の通知を受けます。</td>
+</tr>
+<tr>
+	<th><a href="SLXChangeOptions.html">SLXChangeOptions</a></th>
+	<td>プラグインの設定ダイアログボックスを表示します。</td>
+</tr>
+
+
+
+
+
+
+<tr>
+	<td class="h3" colspan="2"><h3>ボタン用関数</h3></td>
+</tr>
+<tr>
+	<th><a href="SLXGetButton.html">SLXGetButton</a></th>
+	<td>プラグインに含まれるボタンの種類を返します。 </td>
+</tr>
+<tr>
+	<th><a href="SLXButtonCreate.html">SLXButtonCreate</a></th>
+	<td>ボタンの実体がパッド上に作成されると呼ばれます。</td>
+</tr>
+<tr>
+	<th><a href="SLXButtonDestroy.html">SLXButtonDestroy</a></th>
+	<td>ボタンの実体がパッド上から削除されると呼ばれます。 </td>
+</tr>
+<tr>
+	<th><a href="SLXButtonClick.html">SLXButtonClick</a></th>
+	<td>ボタンがパッド上でクリックされると呼ばれます。</td>
+</tr>
+<tr>
+	<th><a href="SLXButtonDropFiles.html">SLXButtonDropFiles</a></th>
+	<td>ボタンにファイルをドラッグ＆ドロップされると呼ばれます。</td>
+</tr>
+<tr>
+	<th><a href="SLXButtonDraw.html">SLXButtonDraw</a></th>
+	<td>描画機能のあるボタンを描画する際に呼ばれます。</td>
+</tr>
+<tr>
+	<th><a href="SLXButtonDrawEx.html">SLXButtonDrawEx</a></th>
+	<td>描画機能のあるボタンを描画する際に呼ばれます。</td>
+</tr>
+<tr>
+	<th><a href="SLXButtonUpdate.html">SLXButtonUpdate</a></th>
+	<td>ボタンのデータを更新する必要があるときに呼ばれます。</td>
+</tr>
+<tr>
+	<th><a href="SLXButtonChip.html">SLXButtonChip</a></th>
+	<td>ボタンのチップに表示する文字列を返します。</td>
+</tr>
+<tr>
+	<th><a href="SLXButtonOptions.html">SLXButtonOptions</a></th>
+	<td>プラグインボタンの設定ダイアログボックスを表示します。</td>
+</tr>
+
+
+
+<tr>
+	<td class="h3" colspan="2"><h3>メニュー用関数</h3></td>
+</tr>
+<tr>
+	<th><a href="SLXGetMenu.html">SLXGetMenu</a></th>
+	<td>プラグインに含まれるメニューを返します。</td>
+</tr>
+<tr>
+	<th><a href="SLXMenuClick.html">SLXMenuClick</a></th>
+	<td>メニューが選択されると呼ばれます。</td>
+</tr>
+<tr>
+	<th><a href="SLXMenuCheck.html">SLXMenuCheck</a></th>
+	<td>メニューにチェックを付けるかを返します。</td>
+</tr>
+
+
+<tr>
+	<td class="h3" colspan="2"><h3>コールバック関数で使用する構造体</h3></td>
+</tr>
+<tr>
+	<th><a href="TSLXButtonInfo.html">TSLXButtonInfo</a></th>
+	<td>SL4 に追加するプラグインボタンの種類を定義する構造体です。</td>
+</tr>
+<tr>
+	<th><a href="TSLXMenuInfo.html">TSLXMenuInfo</a></th>
+	<td>SL4 に追加するプラグインメニューの種類を定義する構造体です。</td>
+</tr>
+</table>
+
+
+
+
+
+</body>
+</html>

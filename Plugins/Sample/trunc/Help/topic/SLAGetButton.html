@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLAGetButton</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>SLAGetButton</h2>
+<p>
+	ボタンの情報を取得します。
+</p>
+
+<h3>構文</h3>
+<pre>
+function <strong>SLAGetButton</strong>(<strong>ID</strong>, <strong>GroupIndex</strong>, <strong>ButtonIndex</strong>: Integer; <strong>Button</strong>: PSLAButton): BOOL; stdcall;
+</pre>
+
+<h3>引数</h3>
+<table>
+	<tr>
+		<th>ID</th>
+		<td>ボタンの情報を取得するパッドの ID</td>
+	</tr>
+	<tr>
+		<th>GroupIndex</th>
+		<td>ボタンの情報を取得するボタングループのインデックス</td>
+	</tr>
+	<tr>
+		<th>ButtonIndex</th>
+		<td>ボタンの情報を取得するボタンのインデックス</td>
+	</tr>
+	<tr>
+		<th>Button</th>
+		<td>ボタンの情報が入る構造体 <a href="TSLAButton.html"><strong>TSLAButton</strong></a> へのポインタ</td>
+	</tr>
+</table>
+
+<h3>戻り値</h3>
+<p>
+	関数が成功したら TRUE 、失敗したら FALSE を返します。
+</p>
+
+<h3>解説</h3>
+<p>
+	ボタンの情報を引数 Button が指す構造体 Button に取得します。
+</p>
+
+
+
+
+<h3>SL4 の対応</h3>
+<p>
+	4.0.0 Build 225 2000/12/22 以降
+</p>
+
+<div class="related">
+	<A href="SLAChangeButton.html"><IMG src="arrow.gif">SLAChangeButton</A><BR>
+	<A href="SLARunButton.html"><IMG src="arrow.gif">SLARunButton</A><BR>
+	<A href="TSLAButton.html"><IMG src="arrow.gif">TSLAButton</A><BR>
+</div>
+
+</body>
+</html>

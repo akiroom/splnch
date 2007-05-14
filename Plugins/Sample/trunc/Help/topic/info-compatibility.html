@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>旧バージョンとの互換性</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>旧バージョンとの互換性</h2>
+<p>
+	SL4 本体のバージョンアップに伴い、新<a href="slx.html">コールバック関数</a>、新 <a href="sla.html">Special Launch API</a> が追加されます。
+</p>
+<p>
+	プラグインはこれらの新機能を使う場合に限り、SL4 本体のバージョンアップを必要とします。
+</p>
+
+
+
+
+
+<dl>
+	<dt>4.0.0 Build 191 2000/2/2</dt>
+		<dd>プラグインのすべての関数、すべての構造体の名前を変更しました。この変更により、古いプラグインはすべて使えなくなります。</dd>
+	<dt>4.0.0 Build 204 2000/7/19</dt>
+		<dd>プラグインの仕様を変更しました。関数 <a href="SLXChangeOptions.html"><strong>SLXChangeOptions</strong></a> の引数に呼び出し元ウィンドウハンドルを追加しました。このため、古いプラグインは設定ダイアログを開く際にエラーが発生し止まることがあります。</dd>
+	<dt>4.0.0 Build 225 2000/12/22</dt>
+		<dd>関数 <a href="SLXButtonDrawEx.html"><strong>SLXButtonDrawEx</strong></a> を追加しました。</dd>
+		<dd>関数 <a href="SLXButtonCreate.html"><strong>SLXButtonCreate</strong></a> を追加しました。</dd>
+		<dd>関数 <a href="SLXButtonDestroy.html"><strong>SLXButtonDestroy</strong></a> を追加しました。</dd>
+		<dd><a href="sla.html"><strong>Special Launch API</strong></a> を追加しました。</dd>
+	<dt>4.0.0 Build 226 2001/2/1</dt>
+		<dd><a href="sla.html">Special Launch API</a> に <a href="SLAGetIcon.html"><strong>SLAGetIcon</strong></a> を追加しました。</dd>
+	<dt>4.0.2 Build 240 2002/3/19</dt>
+		<dd>関数 <a href="SLXButtonOptions.html"><strong>SLXButtonOptions</strong></a> を追加しました。</dd>
+</dl>
+
+
+</body>
+</html>

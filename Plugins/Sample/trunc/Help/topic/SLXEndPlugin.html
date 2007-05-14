@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLXEndPlugin</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>SLXEndPlugin</h2>
+<p>
+	プラグインの終了の通知を受けます。
+</p>
+
+<h3>構文</h3>
+<pre>
+function <strong>SLXEndPlugin</strong>: BOOL; stdcall;
+</pre>
+
+<h3>引数</h3>
+<p>
+	なし
+</p>
+
+<h3>戻り値</h3>
+<p>
+	関数が成功したら TRUE 、失敗したら FALSE を返します。
+</p>
+
+<h3>解説</h3>
+<p>
+	プラグインの終了時に呼ばれます。
+</p>
+
+<p>
+	通常この関数で、関数 <a href="SLXSetInitFile.html"><strong>SLXSetInitFile</strong></a> で受け取った設定ファイルへ設定の保存を行ってください。
+</p>
+
+
+
+
+
+<h3>SL4 の対応</h3>
+<p>
+	4.0.0 Build 191 2000/2/2 以降
+</p>
+
+<div class="related">
+	<A href="SLXSetInitFile.html"><IMG src="arrow.gif">SLXSetInitFile</A><BR>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLXButtonCreate</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>SLXButtonCreate</h2>
+<p>
+	ボタンの実体がパッド上に作成されると呼ばれます。
+</p>
+
+<h3>構文</h3>
+<pre>
+function <strong>SLXButtonCreate</strong>(<strong>No</strong>: Integer; <strong>hWnd</strong>: HWND; <strong>ButtonIndex</strong>: Integer): BOOL; stdcall;
+</pre>
+
+<h3>引数</h3>
+<table>
+	<tr>
+		<th>No</th>
+		<td>ボタン番号</td>
+	</tr>
+	<tr>
+		<th>hWnd</th>
+		<td>ボタンが作られるパッドのウィンドウハンドル</td>
+	</tr>
+	<tr>
+		<th>ButtonIndex</th>
+		<td>作成されるボタンの、ボタングループでのインデックス</td>
+	</tr>
+</table>
+
+<h3>戻り値</h3>
+<p>
+	関数が成功したら TRUE 、失敗したら FALSE を返します。
+</p>
+
+<h3>解説</h3>
+<p>
+	ボタンの実体がパッド上に作成されるとこの関数が呼ばれます。
+</p>
+
+<p>
+	SL4 はボタングループの切り替えやパッドのサイズ変更等でも、すべてのボタンは一旦削除され、再作成します。
+</p>
+
+
+
+
+
+<h3>SL4 の対応</h3>
+<p>
+	4.0.0 Build 225 2000/12/22 以降
+</p>
+
+<div class="related">
+	<A href="SLXButtonDestroy.html"><IMG src="arrow.gif">SLXButtonDestroy</A><BR>
+</div>
+
+</body>
+</html>

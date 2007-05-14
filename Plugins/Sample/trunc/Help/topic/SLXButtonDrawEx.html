@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLXButtonDrawEx</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>SLXButtonDrawEx</h2>
+<p>
+	描画機能のあるボタンを描画する際に呼ばれます。
+</p>
+
+<h3>構文</h3>
+<pre>
+function <strong>SLXButtonDrawEx</strong>(<strong>No</strong>: Integer; <strong>hWnd</strong>: HWND; <strong>GroupIndex</strong>, <strong>ButtonIndex</strong>: Integer; <strong>DC</strong>: HDC; <strong>ARect</strong>: PRect): BOOL; stdcall;
+</pre>
+
+<h3>引数</h3>
+<table>
+	<tr>
+		<th>No</th>
+		<td>押されたボタンの番号</td>
+	</tr>
+	<tr>
+		<th>hWnd</th>
+		<td>ボタンがあるウィンドウのハンドル</td>
+	</tr>
+	<tr>
+		<th>GroupIndex</th>
+		<td>描画するボタンがあるボタングループのパッドでのインデックス</td>
+	</tr>
+	<tr>
+		<th>ButtonIndex</th>
+		<td>描画するボタンのボタングループでのインデックス</td>
+	</tr>
+	<tr>
+		<th>DC</th>
+		<td>描画するデバイスコンテキストのハンドル</td>
+	</tr>
+	<tr>
+		<th>ARect</th>
+		<td>描画範囲の長方形へのポインタ</td>
+	</tr>
+</table>
+
+<h3>戻り値</h3>
+<p>
+	関数が成功したら TRUE 、失敗したら FALSE を返します。
+</p>
+
+<h3>解説</h3>
+<p>
+	関数 <a href="SLXGetButton.html"><strong>SLXGetButton</strong></a> で描画機能ありのボタンとした場合に、ボタンを描画する際に呼ばれます。
+</p>
+
+<p>
+	同じ種類のボタンでも、パッドやボタングループでのインデックスによって描画内容を分けることができます。
+</p>
+
+<p>
+	引数 <strong>DC</strong> に対して描画処理を行ってください。
+</p>
+<p>
+	引数 <strong>ARect</strong> の指す長方形に囲まれた部分のみに描画処理を行ってください。
+</p>
+
+
+
+
+
+<h3>SL4 の対応</h3>
+<p>
+	4.0.0 Build 225 2000/12/22 以降
+</p>
+
+<div class="related">
+	<A href="SLXGetButton.html"><IMG src="arrow.gif">SLXGetButton</A><BR>
+	<A href="SLXButtonDraw.html"><IMG src="arrow.gif">SLXButtonDraw</A><BR>
+</div>
+
+</body>
+</html>

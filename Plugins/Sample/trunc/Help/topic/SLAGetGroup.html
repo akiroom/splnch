@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLAGetGroup</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>SLAGetGroup</h2>
+<p>
+	ボタングループの情報を取得します。
+</p>
+
+<h3>構文</h3>
+<pre>
+function <strong>SLAGetGroup</strong>(<strong>ID</strong>, <strong>GroupIndex</strong>: Integer; <strong>Group</strong>: PSLAGroup): BOOL; stdcall;
+</pre>
+
+<h3>引数</h3>
+<table>
+	<tr>
+		<th>ID</th>
+		<td>ボタングループの情報を取得するパッドの ID</td>
+	</tr>
+	<tr>
+		<th>GroupIndex</th>
+		<td>ボタングループのインデックス</td>
+	</tr>
+	<tr>
+		<th>Group</th>
+		<td>ボタングループ情報が入る構造体 <a href="TSLAGroup.html"><strong>TSLAGroup</strong></a> へのポインタ</td>
+	</tr>
+</table>
+
+<h3>戻り値</h3>
+<p>
+	関数が成功したら TRUE 、失敗したら FALSE を返します。
+</p>
+
+<h3>解説</h3>
+<p>
+	ボタングループの情報を引数 <strong>Group</strong> が指す構造体 <a href="TSLAGroup.html"><strong>TSLAGroup</strong></a> に取得します。
+</p>
+
+
+
+<h3>SL4 の対応</h3>
+<p>
+	4.0.0 Build 225 2000/12/22 以降
+</p>
+
+<div class="related">
+	<A href="SLAGetGroupCount.html"><IMG src="arrow.gif">SLAGetGroupCount</A><BR>
+	<A href="TSLAGroup.html"><IMG src="arrow.gif">TSLAGroup</A><BR>
+</div>
+
+</body>
+</html>

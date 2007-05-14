@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLAGetNextPadID</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>SLAGetNextPadID</h2>
+<p>
+	指定したパッドの次のパッドを取得します。
+</p>
+
+<h3>構文</h3>
+<pre>
+function <strong>SLAGetNextPadID</strong>(<strong>ID</strong>: Integer): Integer; stdcall;
+</pre>
+
+<h3>引数</h3>
+<table>
+	<tr>
+		<th>ID</th>
+		<td>前のパッドの ID</td>
+	</tr>
+</table>
+
+<h3>戻り値</h3>
+<p>
+	パッドの ID を返します。
+</p>
+
+<h3>解説</h3>
+<p>
+	指定したパッドの次のパッドを取得します。
+</p>
+
+<p>
+	この順番は最近アクティブになったものから返ります。（Ctrl+Tab の順番と同じです。）
+</p>
+
+<p>
+	<a href="SLAGetPadCount.html"><strong>SLAGetPadCount</strong></a> で取得したパッドの回数分だけ繰り返せば、すべてのパッドを取得することができます。
+</p>
+
+
+
+
+<h3>SL4 の対応</h3>
+<p>
+	4.0.0 Build 225 2000/12/22 以降
+</p>
+
+<div class="related">
+	<A href="SLAGetPadCount.html"><IMG src="arrow.gif">SLAGetPadCount</A><BR>
+	<A href="SLAGetPadWnd.html"><IMG src="arrow.gif">SLAGetPadWnd</A><BR>
+</div>
+
+</body>
+</html>

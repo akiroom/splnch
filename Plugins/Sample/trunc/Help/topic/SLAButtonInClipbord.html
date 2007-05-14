@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLAButtonInClipbord</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>SLAButtonInClipbord</h2>
+<p>
+	クリップボードにボタンで貼り付けられるデータがあるかを返します。
+</p>
+
+<h3>構文</h3>
+<pre>
+function <strong>SLAButtonInClipbord</strong>: BOOL; stdcall;
+</pre>
+
+<h3>引数</h3>
+<p>
+	なし
+</p>
+
+<h3>戻り値</h3>
+<p>
+	クリップボードにボタンで貼り付けられるデータがあれば TRUE 、なければ FALSE を返します。
+</p>
+
+<h3>解説</h3>
+<p>
+	クリップボードを調べ、ボタンとして貼り付けられるかを確認します。
+</p>
+
+<p>
+	SL4 からコピーしたボタンのほかに、ファイルやインターネットのショートカットも貼り付けられます。
+</p>
+
+
+
+
+<h3>SL4 の対応</h3>
+<p>
+	4.0.0 Build 225 2000/12/22 以降
+</p>
+
+<div class="related">
+	<A href="SLACopyButton.html"><IMG src="arrow.gif">SLACopyButton</A><BR>
+	<A href="SLAPasteButton.html"><IMG src="arrow.gif">SLAPasteButton</A><BR>
+</div>
+
+</body>
+</html>

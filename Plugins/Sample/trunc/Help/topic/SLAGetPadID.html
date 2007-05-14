@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLAGetPadID</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>SLAGetPadID</h2>
+<p>
+	パッドのウィンドウハンドルからパッドの ID を取得します。
+</p>
+
+<h3>構文</h3>
+<pre>
+function <strong>SLAGetPadID</strong>(<strong>hWnd</strong>: HWND): Integer; stdcall;
+</pre>
+
+<h3>引数</h3>
+<table>
+	<tr>
+		<th>hWnd</th>
+		<td>ID を取得するパッドのウィンドウハンドル</td>
+	</tr>
+</table>
+
+<h3>戻り値</h3>
+<p>
+	パッドの ID を返します。
+</p>
+
+<h3>解説</h3>
+<p>
+	パッドのウィンドウハンドルからパッドの ID を取得します。
+</p>
+<p>
+	パッドのウィンドウハンドルは起動ごとに毎回違いますが、ID は再起動後も有効です。
+</p>
+<p>
+	<a href="slx.html">コールバック関数</a>で取得できるパッドの情報はウィンドウハンドルのみですが、ID に変換することで、その他の <a href="sla.html">Special Launch API</a> を呼ぶのに役立ちます。
+</p>
+
+
+
+
+
+<h3>SL4 の対応</h3>
+<p>
+	4.0.0 Build 225 2000/12/22 以降
+</p>
+
+<div class="related">
+	<A href="SLAGetNextPadID.html"><IMG src="arrow.gif">SLAGetNextPadID</A><BR>
+	<A href="SLAGetPadWnd.html"><IMG src="arrow.gif">SLAGetPadWnd</A><BR>
+</div>
+
+</body>
+</html>

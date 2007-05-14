@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLXChangeOptions</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>SLXChangeOptions</h2>
+<p>
+	プラグインの設定ダイアログボックスを表示します。
+</p>
+
+<h3>構文</h3>
+<pre>
+function <strong>SLXChangeOptions</strong>(<strong>hWnd</strong>: HWND): BOOL; stdcall;
+</pre>
+
+<h3>引数</h3>
+<table>
+	<tr>
+		<th>hWnd</th>
+		<td>設定ダイアログの親ウィンドウになるウィンドウのハンドル</td>
+	</tr>
+</table>
+
+<h3>戻り値</h3>
+<p>
+	設定を変更したら TRUE 、設定を変更しなければ FALSE を返します。
+</p>
+<p>
+	TRUE を返した場合、SL4 は関数 <a href="SLXButtonUpdate.html"><strong>SLXButtonUpdate</strong></a> を実行します。
+</p>
+
+<h3>解説</h3>
+<p>
+	SL4 の［全体の設定］ダイアログボックスで、プラグインの設定を行う際に呼ばれます。
+</p>
+
+<p>
+	関数 <a href="SLXButtonOptions.html"><strong>SLXButtonOptions</strong></a> が実装されていない場合、SL4 の［ボタンの追加／変更］ダイアログボックスで、プラグインの設定を行う際にも呼ばれます。
+</p>
+
+<p>
+	プラグインの設定ダイアログボックスを表示して、プラグインの各種設定を行ってください。
+</p>
+
+<p>
+	TRUE を返すと各ボタンの再描画のために関数 <a href="SLXButtonUpdate.html"><strong>SLXButtonUpdate</strong></a> が呼ばれます。
+</p>
+
+
+
+
+<h3>SL4 の対応</h3>
+<p>
+	4.0.0 Build 204 2000/7/19 以降
+</p>
+
+<div class="related">
+	<A href="SLXButtonOptions.html"><IMG src="arrow.gif">SLXButtonOptions</A><BR>
+</div>
+
+</body>
+</html>

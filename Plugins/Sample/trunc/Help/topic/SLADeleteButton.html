@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLADeleteButton</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>SLADeleteButton</h2>
+<p>
+	ボタンを削除します。
+</p>
+
+<h3>構文</h3>
+<pre>
+function <strong>SLADeleteButton</strong>(<strong>ID</strong>, <strong>GroupIndex</strong>, <strong>ButtonIndex</strong>: Integer): BOOL; stdcall;
+</pre>
+
+<h3>引数</h3>
+<table>
+	<tr>
+		<th>ID</th>
+		<td>ボタンを削除するパッドの ID</td>
+	</tr>
+	<tr>
+		<th>GroupIndex</th>
+		<td>削除するボタンがあるボタングループのインデックス</td>
+	</tr>
+	<tr>
+		<th>ButtonIndex</th>
+		<td>削除するボタンの位置を示すインデックス</td>
+	</tr>
+</table>
+
+<h3>戻り値</h3>
+<p>
+	関数が成功したら TRUE 、失敗したら FALSE を返します。
+</p>
+
+<h3>解説</h3>
+<p>
+	既存のボタンを削除します。
+</p>
+
+
+
+
+<h3>SL4 の対応</h3>
+<p>
+	4.0.0 Build 225 2000/12/22 以降
+</p>
+
+<div class="related">
+	<A href="SLAInsertButton.html"><IMG src="arrow.gif">SLAInsertButton</A><BR>
+	<A href="SLAChangeButton.html"><IMG src="arrow.gif">SLAChangeButton</A><BR>
+</div>
+
+</body>
+</html>

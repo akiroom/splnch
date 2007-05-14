@@ -1,0 +1,164 @@
+<HTML>
+<HEAD>
+	<META http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+	<META http-equiv="Content-Script-Type" content="text/javascript">
+	<META http-equiv="Content-Style-Type" content="text/css">
+	<LINK rel="stylesheet" type="text/css" href="main.css">
+	<STYLE>
+		<!--
+		BODY {
+			white-space: nowrap;
+		}
+		A {
+			color: black;
+			text-decoration: none;
+		}
+		A:active {
+			color: blue;
+			text-decoration: underline;
+		}
+
+		A:hover {
+			color: blue;
+			text-decoration: underline;
+		}
+
+		IMG {
+			margin-right: 3pt;
+		}
+		-->
+	</STYLE>
+
+	<SCRIPT language="JavaScript" src="main.js"></SCRIPT>
+	<SCRIPT type="text/javascript">
+		<!--
+		function CheckWindow()
+		{
+			var i;
+			if (window.name == "contents") {
+				for (i = 0; i < document.links.length; i++) {
+					if (document.links[i].hash != "#nowhere") {
+						document.links[i].target = "topic";
+					}
+				}
+
+				CloseBook(slx, slxfld);
+				CloseBook(sla, slafld);
+				CloseBook(tips, tipsfld);
+			}
+		}
+
+		function doExpand(id, idFld) {
+			if (id.style.display == "none") {
+				CloseBook(slx, slxfld);
+				CloseBook(sla, slafld);
+				CloseBook(tips, tipsfld);
+				OpenBook(id, idFld);
+			} else {
+				CloseBook(id, idFld);
+			}
+		}
+
+		-->
+	</SCRIPT>
+
+	<TITLE>目次</TITLE>
+</HEAD>
+
+<BODY onload="CheckWindow()">
+
+<NOBR>
+
+<A name="topiclink" href="title.html"><IMG src="title.gif" width="16" height="16"  border="0">表紙</A><BR>
+
+<A name="topiclink" href="info-readme.html"><IMG src="topic.gif" width="16" height="16"  border="0">概要</A><BR>
+
+<A name="topiclink" href="info-attention.html"><IMG src="topic.gif" width="16" height="16"  border="0">実装時の注意</A><BR>
+
+<A name="topiclink" href="info-runorder.html"><IMG src="topic.gif" width="16" height="16"  border="0">呼び出し手順</A><BR>
+
+<A name="topiclink" href="info-compatibility.html"><IMG src="topic.gif" width="16" height="16"  border="0">旧バージョンとの互換性</A><BR>
+
+
+
+<A onclick="doExpand(slx, slxfld)" href="#nowhere"><IMG src="openbook.gif" id="slxfld" width="16" height="16" border="0">コールバック関数</A><BR>
+<DIV id="slx">
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="slx.html"><IMG src="title.gif" width="16" height="16" border="0">一覧</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLXGetName.html"><IMG src="topic.gif" width="16" height="16" border="0">SLXGetName</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLXGetExplanation.html"><IMG src="topic.gif" width="16" height="16" border="0">SLXGetExplanation</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLXSetInitFile.html"><IMG src="topic.gif" width="16" height="16" border="0">SLXSetInitFile</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLXBeginPlugin.html"><IMG src="topic.gif" width="16" height="16" border="0">SLXBeginPlugin</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLXEndPlugin.html"><IMG src="topic.gif" width="16" height="16" border="0">SLXEndPlugin</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLXChangeOptions.html"><IMG src="topic.gif" width="16" height="16" border="0">SLXChangeOptions</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLXGetButton.html"><IMG src="topic.gif" width="16" height="16" border="0">SLXGetButton</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLXButtonCreate.html"><IMG src="topic.gif" width="16" height="16" border="0">SLXButtonCreate</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLXButtonDestroy.html"><IMG src="topic.gif" width="16" height="16" border="0">SLXButtonDestroy</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLXButtonClick.html"><IMG src="topic.gif" width="16" height="16" border="0">SLXButtonClick</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLXButtonDropFiles.html"><IMG src="topic.gif" width="16" height="16" border="0">SLXButtonDropFiles</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLXButtonDraw.html"><IMG src="topic.gif" width="16" height="16" border="0">SLXButtonDraw</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLXButtonDrawEx.html"><IMG src="topic.gif" width="16" height="16" border="0">SLXButtonDrawEx</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLXButtonUpdate.html"><IMG src="topic.gif" width="16" height="16" border="0">SLXButtonUpdate</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLXButtonChip.html"><IMG src="topic.gif" width="16" height="16" border="0">SLXButtonChip</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLXButtonOptions.html"><IMG src="topic.gif" width="16" height="16" border="0">SLXButtonOptions</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLXGetMenu.html"><IMG src="topic.gif" width="16" height="16" border="0">SLXGetMenu</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLXMenuClick.html"><IMG src="topic.gif" width="16" height="16" border="0">SLXMenuClick</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLXMenuCheck.html"><IMG src="topic.gif" width="16" height="16" border="0">SLXMenuCheck</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="TSLXButtonInfo.html"><IMG src="topic.gif" width="16" height="16" border="0">TSLXButtonInfo</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="TSLXMenuInfo.html"><IMG src="topic.gif" width="16" height="16" border="0">TSLXMenuInfo</A><BR>
+</DIV>
+
+
+
+
+
+<A onclick="doExpand(sla, slafld)" href="#nowhere"><IMG src="openbook.gif" id="slafld" width="16" height="16" border="0">Special Launch API</A><BR>
+<DIV id="sla">
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="sla.html"><IMG src="title.gif" width="16" height="16" border="0">一覧</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLAGetPadCount.html"><IMG src="topic.gif" width="16" height="16" border="0">SLAGetPadCount</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLAGetPadID.html"><IMG src="topic.gif" width="16" height="16" border="0">SLAGetPadID</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLAGetNextPadID.html"><IMG src="topic.gif" width="16" height="16" border="0">SLAGetNextPadID</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLAGetPadWnd.html"><IMG src="topic.gif" width="16" height="16" border="0">SLAGetPadWnd</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLAGetPadTabWnd.html"><IMG src="topic.gif" width="16" height="16" border="0">SLAGetPadTabWnd</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLAGetPadInit.html"><IMG src="topic.gif" width="16" height="16" border="0">SLAGetPadInit</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLASetPadInit.html"><IMG src="topic.gif" width="16" height="16" border="0">SLASetPadInit</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLAChangePluginButtons.html"><IMG src="topic.gif" width="16" height="16" border="0">SLAChangePluginButtons</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLAChangePluginMenus.html"><IMG src="topic.gif" width="16" height="16" border="0">SLAChangePluginMenus</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLARedrawPluginButtons.html"><IMG src="topic.gif" width="16" height="16" border="0">SLARedrawPluginButtons</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLAGetGroupCount.html"><IMG src="topic.gif" width="16" height="16" border="0">SLAGetGroupCount</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLAGetGroup.html"><IMG src="topic.gif" width="16" height="16" border="0">SLAGetGroup</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLAInsertGroup.html"><IMG src="topic.gif" width="16" height="16" border="0">SLAInsertGroup</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLARenameGroup.html"><IMG src="topic.gif" width="16" height="16" border="0">SLARenameGroup</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLACopyGroup.html"><IMG src="topic.gif" width="16" height="16" border="0">SLACopyGroup</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLADeleteGroup.html"><IMG src="topic.gif" width="16" height="16" border="0">SLADeleteGroup</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLAGetButton.html"><IMG src="topic.gif" width="16" height="16" border="0">SLAGetButton</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLAInsertButton.html"><IMG src="topic.gif" width="16" height="16" border="0">SLAInsertButton</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLAChangeButton.html"><IMG src="topic.gif" width="16" height="16" border="0">SLAChangeButton</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLADeleteButton.html"><IMG src="topic.gif" width="16" height="16" border="0">SLADeleteButton</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLACopyButton.html"><IMG src="topic.gif" width="16" height="16" border="0">SLACopyButton</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLAPasteButton.html"><IMG src="topic.gif" width="16" height="16" border="0">SLAPasteButton</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLAButtonInClipbord.html"><IMG src="topic.gif" width="16" height="16" border="0">SLAButtonInClipbord</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLARunButton.html"><IMG src="topic.gif" width="16" height="16" border="0">SLARunButton</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="SLAGetIcon.html"><IMG src="topic.gif" width="16" height="16" border="0">SLAGetIcon</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="TSLAGroup.html"><IMG src="topic.gif" width="16" height="16" border="0">TSLAGroup</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="TSLAButton.html"><IMG src="topic.gif" width="16" height="16" border="0">TSLAButton</A><BR>
+</DIV>
+
+<A onclick="doExpand(tips, tipsfld)" href="#nowhere"><IMG src="openbook.gif" id="tipsfld" width="16" height="16" border="0">Tips</A><BR>
+<DIV id="tips">
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="tips.html"><IMG src="title.gif" width="16" height="16" border="0">一覧</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="tips-simplest.html"><IMG src="hint.gif" width="16" height="16" border="0">もっともシンプルなプラグイン</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="tips-delphi.html"><IMG src="hint.gif" width="16" height="16" border="0">Delphi での便利な設定</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="tips-menu.html"><IMG src="hint.gif" width="16" height="16" border="0">独自メニューを追加する</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="tips-usesla.html"><IMG src="hint.gif" width="16" height="16" border="0">Special Launch API を使う</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="tips-padinit.html"><IMG src="hint.gif" width="16" height="16" border="0">パッドの状態を取得する</A><BR>
+</DIV>
+
+
+
+
+
+</NOBR>
+
+</BODY>
+
+</HTML>

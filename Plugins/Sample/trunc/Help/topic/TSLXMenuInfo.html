@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>TSLXMenuInfo</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>TSLXMenuInfo</h2>
+
+<p>
+	SL4 に追加するプラグインメニューの種類を定義する構造体です。
+</p>
+
+
+<h3>構文</h3>
+<pre>
+type
+  <strong>PSLXMenuInfo</strong> = ^<strong>TSLXMenuInfo</strong>;
+  <strong>TSLXMenuInfo</strong> = packed record
+    <strong>Name</strong>: array[0..63] of Char;
+    <strong>SCut</strong>: array[0..63] of Char;
+  end;
+</pre>
+
+<h3>メンバ</h3>
+<table>
+	<tr>
+		<th>Name</th>
+		<td>メニュー名</td>
+	</tr>
+	<tr>
+		<th>SCut</th>
+		<td>ショートカットキー</td>
+	</tr>
+</table>
+
+
+
+<div class="related">
+	<a href="SLXGetMenu.html"><IMG src="arrow.gif">SLXGetMenu</strong></a>
+</div>
+
+
+
+</body>
+</html>

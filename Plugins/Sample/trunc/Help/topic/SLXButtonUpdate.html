@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLXButtonUpdate</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>SLXButtonUpdate</h2>
+<p>
+	ボタンのデータを更新する必要があるときに呼ばれます。
+</p>
+
+<h3>構文</h3>
+<pre>
+function <strong>SLXButtonUpdate</strong>(<strong>No</strong>: Integer): BOOL; stdcall;
+</pre>
+
+<h3>引数</h3>
+<table>
+	<tr>
+		<th>No</th>
+		<td>更新するボタンの番号</td>
+	</tr>
+</table>
+
+<h3>戻り値</h3>
+<p>
+	再描画の必要がある場合 TRUE 、ない場合は FALSE を返します。
+</p>
+
+<h3>解説</h3>
+<p>
+	ボタンのデータを更新する必要があるときに呼ばれます。
+</p>
+
+<p>
+	関数 <a href="SLXGetButton.html"><strong>SLXGetButton</strong></a> で、定期的に呼ばれるように設定することが可能です。
+</p>
+
+
+
+
+<h3>SL4 の対応</h3>
+<p>
+	4.0.0 Build 191 2000/2/2 以降
+</p>
+
+<div class="related">
+	<A href="SLXGetButton.html"><IMG src="arrow.gif">SLXGetButton</A><BR>
+	<A href="SLXButtonDrawEx.html"><IMG src="arrow.gif">SLXButtonDraw</A><BR>
+	<A href="SLXButtonDrawEx.html"><IMG src="arrow.gif">SLXButtonDrawEx</A><BR>
+</div>
+
+</body>
+</html>

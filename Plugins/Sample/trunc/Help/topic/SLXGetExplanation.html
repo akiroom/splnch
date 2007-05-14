@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLXGetExplanation</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>SLXGetExplanation</h2>
+<p>
+	バージョン情報に表示するプラグインの説明を返します。
+</p>
+
+<h3>構文</h3>
+<pre>
+function <strong>SLXGetExplanation</strong>(<strong>Explanation</strong>: PChar; <strong>Size</strong>: Word): BOOL; stdcall;
+</pre>
+
+<h3>引数</h3>
+<table>
+	<tr>
+		<th>Explanation</th>
+		<td>説明を返すバッファを指すポインタ</td>
+	</tr>
+	<tr>
+		<th>Size</th>
+		<td><strong>Explanation</strong> が指すバッファのサイズ</td>
+	</tr>
+</table>
+
+<h3>戻り値</h3>
+<p>
+	関数が成功したら TRUE 、失敗したら FALSE を返します。
+</p>
+
+<h3>解説</h3>
+<p>
+	バージョン情報を表示する際に呼ばれます。
+</p>
+
+<p>
+	引数 <strong>Explanation</strong> が指すバッファに、バージョン情報に表示するプラグインの説明を返してください。バッファには、引数 <strong>Size</strong> が示すサイズ以上は入れないようにしてください。バッファーオーバーフローを起こします。
+</p>
+
+
+
+
+<h3>SL4 の対応</h3>
+<p>
+	4.0.0 Build 191 2000/2/2 以降
+</p>
+
+<div class="related">
+	<A href="SLXGetName.html"><IMG src="arrow.gif">SLXGetName</A><BR>
+</div>
+
+</body>
+</html>

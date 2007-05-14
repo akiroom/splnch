@@ -1,0 +1,11 @@
+
+
+SLXGetButton の呼び出しの回数を制限する
+SLXButtonCreate と SLXButtonDestroy の有効な使い方を記述
+SLAInsertGroup でインデックス外の場合の動作
+
+    Button を元に新しいボタンとして SLAInsertButton を呼び出
+    す場合は、ポインタ型のメンバ PIDL をそのまま使わないでく
+    ださい。多重参照になりますので必ずコピーを作ってください。
+ってほんと？
+

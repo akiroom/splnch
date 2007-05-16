@@ -188,28 +188,28 @@ begin
   case StickPosition of
     spLeft:
     begin
-      HidLeft := 0;
+      HidLeft := frmPad.Monitor.Left;
       HidWidth := TabSize;
       pbDragBar.Align := alRight;
       pbDragBar.Width := TabSize;
     end;
     spRight:
     begin
-      HidLeft := Screen.Width - TabSize;
+      HidLeft := frmPad.Monitor.Left + frmPad.Monitor.Width - TabSize;
       HidWidth := TabSize;
       pbDragBar.Align := alLeft;
       pbDragBar.Width := TabSize;
     end;
     spTop:
     begin
-      HidTop := 0;
+      HidTop := frmPad.Monitor.Top;
       HidHeight := TabSize;
       pbDragBar.Align := alBottom;
       pbDragBar.Height := TabSize;
     end;
     else
     begin
-      HidTop := Screen.Height - TabSize;
+      HidTop := frmPad.Monitor.Top + frmPad.Monitor.Height - TabSize;
       HidHeight := TabSize;
       pbDragBar.Align := alTop;
       pbDragBar.Height := TabSize;

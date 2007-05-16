@@ -1,6 +1,6 @@
 object frmPadTab: TfrmPadTab
-  Left = 579
-  Top = 525
+  Left = 580
+  Top = 526
   BorderStyle = bsNone
   Caption = 'Special Launch (Hid)'
   ClientHeight = 41

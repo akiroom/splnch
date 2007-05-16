@@ -1,6 +1,6 @@
 object frmPad: TfrmPad
-  Left = 402
-  Top = 351
+  Left = 403
+  Top = 353
   BorderStyle = bsNone
   Caption = 'Special Launch'
   ClientHeight = 129

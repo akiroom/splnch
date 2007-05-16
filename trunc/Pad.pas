@@ -2406,7 +2406,8 @@ end;
 // 移動中
 procedure TfrmPad.WMWindowPosChanging(var Msg: TWMWindowPosChanging);
 var
-  MaxX, MaxY: Integer;
+  MinX, MinY, MaxX, MaxY: Integer;
+  CursorMonitor: TMonitor;
 begin
   inherited;
 
@@ -2415,16 +2416,19 @@ begin
     if (flags and SWP_NOMOVE) <> 0 then
       Exit;
 
-    MaxX := Screen.Width - cx;
-    MaxY := Screen.Height - cy;
+    CursorMonitor := Screen.MonitorFromPoint(Mouse.CursorPos);
+    MinX := CursorMonitor.Left;
+    MinY := CursorMonitor.Top;
+    MaxX := MinX + CursorMonitor.Width - cx;
+    MaxY := MinY + CursorMonitor.Height - cy;
 
-    if (x < 10) and (x > -10) then
-      x := 0
+    if (x < MinX + 10) and (x > MinX -10) then
+      x := MinX
     else if (x < (MaxX + 10)) and (x > (MaxX - 10)) then
       x := MaxX;
 
-    if (y < 10) and (y > -10) then
-      y := 0
+    if (y < MinY + 10) and (y > MinY -10) then
+      y := MinY
     else if (y < (MaxY + 10)) and (y > (MaxY - 10)) then
       y := MaxY;
 
@@ -2434,21 +2438,29 @@ end;
 
 // 移動中
 procedure TfrmPad.WMMoving(var Msg: TMessage);
+var
+  MinX, MinY, MaxX, MaxY: Integer;
+  CursorMonitor: TMonitor;
 begin
   inherited;
 
+  CursorMonitor := Screen.MonitorFromPoint(Mouse.CursorPos);
+  MinX := CursorMonitor.Left;
+  MinY := CursorMonitor.Top;
+  MaxX := MinX + CursorMonitor.Width;
+  MaxY := MinY + CursorMonitor.Height;
 
   with PRect(Msg.LParam)^ do
   begin
-    if Right > Screen.Width then
-      Left := Screen.Width - Width;
-    if Left < 0 then
-      Left := 0;
+    if Right > MaxX then
+      Left := MaxX - Width;
+    if Left < MinX then
+      Left := MinX;
 
-    if Bottom > Screen.Height then
-      Top := Screen.Height - Height;
-    if Top < 0 then
-      Top := 0;
+    if Bottom > MaxY then
+      Top := MaxY - Height;
+    if Top < MinY then
+      Top := MinY;
 
     Right := Left + Width;
     Bottom := Top + Height;
@@ -2459,25 +2471,26 @@ end;
 // ユーザーが移動した
 procedure TfrmPad.UserMoved;
 begin
-  if Screen.Width = Width then
+
+  if Monitor.Width = Width then
     FLeftPercentage := 0
   else
-    FLeftPercentage := Left * 100 / (Screen.Width - Width);
+    FLeftPercentage := (Left - Monitor.Left) * 100 / (Monitor.Width - Width);
 
-  if Screen.Height = Height then
+  if Monitor.Height = Height then
     FTopPercentage := 0
   else
-    FTopPercentage := Top * 100 / (Screen.Height - Height);
+    FTopPercentage := (Top - Monitor.Top) * 100 / (Monitor.Height - Height);
 
   FStickPositions := [];
-  if Left = 0 then
+  if Left = Monitor.Left then
     FStickPositions := FStickPositions + [spLeft]
-  else if Left = (Screen.Width - Width) then
+  else if Left = (Monitor.Left + Monitor.Width - Width) then
     FStickPositions := FStickPositions + [spRight];
 
-  if Top = 0 then
+  if Top = Monitor.Top then
     FStickPositions := FStickPositions + [spTop]
-  else if Top = (Screen.Height - Height) then
+  else if Top = (Monitor.Top + Monitor.Height - Height) then
     FStickPositions := FStickPositions + [spBottom];
 
 end;
@@ -2591,14 +2604,14 @@ begin
   NWidth := BtnFrameWidth * Cols + BWidth;
   NHeight := BtnFrameHeight * Rows + BHeight;
 
-  if (NLeft + NWidth) > Screen.Width then
-    NLeft := Screen.Width - NWidth;
-  if NLeft < 0 then
-    NLeft := 0;
-  if (NTop + NHeight) > Screen.Height then
-    NTop := Screen.Height - NHeight;
-  if NTop < 0 then
-    NTop := 0;
+  if (NLeft + NWidth) > Monitor.Left + Monitor.Width then
+    NLeft := Monitor.Width - NWidth;
+  if NLeft < Monitor.Left then
+    NLeft := Monitor.Left;
+  if (NTop + NHeight) > Monitor.Top + Monitor.Height then
+    NTop := Monitor.Height - NHeight;
+  if NTop < Monitor.Top then
+    NTop := Monitor.Top;
 
   SetBounds(NLeft, NTop, NWidth, NHeight);
 end;
@@ -2615,8 +2628,8 @@ begin
 
   SizeCheck;
 
-  MaxLeft := Msg.Width - Width;
-  MaxTop := Msg.Height - Height;
+  MaxLeft := Monitor.Width - Width;
+  MaxTop := Monitor.Height - Height;
   if MaxLeft < 0 then
     MaxLeft := 0;
   if MaxTop < 0 then
@@ -2634,8 +2647,8 @@ begin
   if (spTop in StickPositions) or (NTop < 0) then
     NTop := 0;
 
-  Left := NLeft;
-  Top := NTop;
+  Left := Monitor.Left + NLeft;
+  Top := Monitor.Top + NTop;
 
   with FfrmPadTab do
   begin
@@ -4844,6 +4857,7 @@ begin
   if Result and ShowWarning then
     MessageBox(Handle, 'パッドの設定は禁止されています。', '確認', MB_ICONWARNING);
 end;
+
 
 end.
 

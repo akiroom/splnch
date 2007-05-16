@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLXGetMenu</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>SLXGetMenu</h2>
+<p>
+	プラグインに含まれるメニューを返します。
+</p>
+
+<h3>構文</h3>
+<pre>
+function <strong>SLXGetMenu</strong>(<strong>No</strong>: Integer; <strong>MenuInfo</strong>: PSLXMenuInfo): BOOL; stdcall;
+</pre>
+
+<h3>引数</h3>
+<table>
+	<tr>
+		<th>No</th>
+		<td>メニュー番号</td>
+	</tr>
+	<tr>
+		<th>MenuInfo</th>
+		<td>メニュー情報を入れる構造体 <a href="TSLXMenuInfo.html"><strong>TSLXMenuInfo</strong></a> へのポインタ</td>
+	</tr>
+</table>
+
+<h3>戻り値</h3>
+<p>
+	引数 <strong>No</strong> の番号のメニューがある場合には TURE 、ない場合には FALSE を返します。
+</p>
+
+<h3>解説</h3>
+<p>
+	プラグインの起動時に呼ばれます。
+</p>
+
+<p>
+	SL4 は引数 <strong>No</strong> を 0 から順に、この関数が FALSE を返すまで繰り返し実行します。
+</p>
+
+<p>
+	引数 <strong>MenuInfo</strong> が指す構造体 <a href="TSLXMenuInfo.html"><strong>TSLXMenuInfo</strong></a> にメニューの情報を返してください。
+</p>
+
+
+
+
+
+
+<h3>SL4 の対応</h3>
+<p>
+	4.0.0 Build 191 2000/2/2 以降
+</p>
+
+<div class="related">
+	<a href="TSLXMenuInfo.html"><IMG src="arrow.gif">TSLXMenuInfo</strong></a>
+</div>
+
+</body>
+</html>

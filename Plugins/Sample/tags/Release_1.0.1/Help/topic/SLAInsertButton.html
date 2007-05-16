@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLAInsertButton</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>SLAInsertButton</h2>
+<p>
+	ボタンを挿入します。
+</p>
+
+<h3>構文</h3>
+<pre>
+function <strong>SLAInsertButton</strong>(<strong>ID</strong>, <strong>GroupIndex</strong>, <strong>ButtonIndex</strong>: Integer; <strong>Button</strong>: PSLAButton): BOOL; stdcall;
+</pre>
+
+<h3>引数</h3>
+<table>
+	<tr>
+		<th>ID</th>
+		<td>ボタンを挿入するパッドの ID</td>
+	</tr>
+	<tr>
+		<th>GroupIndex</th>
+		<td>ボタンを挿入するボタングループのインデックス</td>
+	</tr>
+	<tr>
+		<th>ButtonIndex</th>
+		<td>ボタンを挿入する位置のインデックス</td>
+	</tr>
+	<tr>
+		<th>Button</th>
+		<td>ボタンの情報が入る構造体 <a href="TSLAButton.html"><strong>TSLAButton</strong></a> へのポインタ</td>
+	</tr>
+</table>
+
+<h3>戻り値</h3>
+<p>
+	関数が成功したら TRUE 、失敗したら FALSE を返します。
+</p>
+
+<h3>解説</h3>
+<p>
+	新しいボタンを作成し、引数 ButtonIndex が示すインデックスの位置へ挿入します。
+</p>
+
+
+
+
+<h3>SL4 の対応</h3>
+<p>
+	4.0.0 Build 225 2000/12/22 以降
+</p>
+
+<div class="related">
+	<A href="SLAGetButton.html"><IMG src="arrow.gif">SLAGetButton</A><BR>
+	<A href="SLAChangeButton.html"><IMG src="arrow.gif">SLAChangeButton</A><BR>
+	<A href="SLADeleteButton.html"><IMG src="arrow.gif">SLADeleteButton</A><BR>
+	<A href="TSLAButton.html"><IMG src="arrow.gif">TSLAButton</A><BR>
+</div>
+
+</body>
+</html>

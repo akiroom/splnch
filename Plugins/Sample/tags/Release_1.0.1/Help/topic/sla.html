@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>Special Launch API</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+<style>
+<!--
+	.h3 {
+		background-color: transparent;
+	}
+-->
+</style>
+</head>
+<body>
+
+<h2>Special Launch API</h2>
+<p>
+	プラグインは SpLnch.exe から Special Launch API をマップすることで Special Launch を操作することができます。
+</p>
+<p>
+	Special Launch API をマップする際は Win32API の <strong>LoadLibrary</strong> は使わずに <strong>GetModuleHandle</strong> を使ってマップする必要があります。
+</p>
+
+<table>
+<tr>
+	<td class="h3" colspan="2"><h3>パッド関係</h3></td>
+</tr>
+<tr>
+	<th><a href="SLAGetPadCount.html">SLAGetPadCount</a></th>
+	<td>パッドの数を取得します。</td>
+</tr>
+<tr>
+	<th><a href="SLAGetPadID.html">SLAGetPadID</a></th>
+	<td>パッドのウィンドウハンドルからパッドの ID を取得します。</td>
+</tr>
+<tr>
+	<th><a href="SLAGetNextPadID.html">SLAGetNextPadID</a></th>
+	<td>指定したパッドの次のパッドを取得します。</td>
+</tr>
+<tr>
+	<th><a href="SLAGetPadWnd.html">SLAGetPadWnd</a></th>
+	<td>パッドの ID からパッドのウィンドウハンドルを取得します。</td>
+</tr>
+<tr>
+	<th><a href="SLAGetPadTabWnd.html">SLAGetPadTabWnd</a></th>
+	<td>パッドの ID から隠れている状態のパッドのウィンドウハンドルを取得します。</td>
+</tr>
+<tr>
+	<th><a href="SLAGetPadInit.html">SLAGetPadInit</a></th>
+	<td>パッドのプロパティを 1 つ取得します。</td>
+</tr>
+<tr>
+	<th><a href="SLASetPadInit.html">SLASetPadInit</a></th>
+	<td>パッドのプロパティを 1 つセットします。</td>
+</tr>
+
+
+
+<tr>
+	<td class="h3" colspan="2"><h3>プラグイン関係</h3></td>
+</tr>
+<tr>
+	<th><a href="SLAChangePluginButtons.html">SLAChangePluginButtons</a></th>
+	<td>プラグインボタンを取得しなおします。
+</tr>
+<tr>
+	<th><a href="SLAChangePluginMenus.html">SLAChangePluginMenus</a></th>
+	<td>プラグインメニューを取得しなおします。
+</tr>
+<tr>
+	<th><a href="SLARedrawPluginButtons.html">SLARedrawPluginButtons</a></th>
+	<td>プラグインボタンを再描画します。
+</tr>
+
+
+
+
+<tr>
+	<td class="h3" colspan="2"><h3>ボタングループ関係</h3></td>
+</tr>
+<tr>
+	<th><a href="SLAGetGroupCount.html">SLAGetGroupCount</a></th>
+	<td>ボタングループの数を取得します。</td>
+</tr>
+<tr>
+	<th><a href="SLAGetGroup.html">SLAGetGroup</a></th>
+	<td>ボタングループの情報を取得します。</td>
+</tr>
+<tr>
+	<th><a href="SLAInsertGroup.html">SLAInsertGroup</a></th>
+	<td>新しいボタングループを挿入します。</td>
+</tr>
+<tr>
+	<th><a href="SLARenameGroup.html">SLARenameGroup</a></th>
+	<td>ボタングループの名前を変更します。</td>
+</tr>
+<tr>
+	<th><a href="SLACopyGroup.html">SLACopyGroup</a></th>
+	<td>ボタングループを複製を作成します。</td>
+</tr>
+<tr>
+	<th><a href="SLADeleteGroup.html">SLADeleteGroup</a></th>
+	<td>ボタングループを削除します。</td>
+</tr>
+
+
+
+
+
+
+<tr>
+	<td class="h3" colspan="2"><h3>ボタン関係</h3></td>
+</tr>
+<tr>
+	<th><a href="SLAGetButton.html">SLAGetButton</a></th>
+	<td>ボタンの情報を取得します。</td>
+</tr>
+<tr>
+	<th><a href="SLAInsertButton.html">SLAInsertButton</a></th>
+	<td>ボタンを挿入します。</td>
+</tr>
+<tr>
+	<th><a href="SLAChangeButton.html">SLAChangeButton</a></th>
+	<td>ボタンを変更します。</td>
+</tr>
+<tr>
+	<th><a href="SLADeleteButton.html">SLADeleteButton</a></th>
+	<td>ボタンを削除します。</td>
+</tr>
+<tr>
+	<th><a href="SLACopyButton.html">SLACopyButton</a></th>
+	<td>ボタンをクリップボードにコピーします。</td>
+</tr>
+<tr>
+	<th><a href="SLAPasteButton.html">SLAPasteButton</a></th>
+	<td>ボタンをクリップボードから貼り付けます。</td>
+</tr>
+<tr>
+	<th><a href="SLAButtonInClipbord.html">SLAButtonInClipbord</a></th>
+	<td>クリップボードにボタンで貼り付けられるデータがあるかを返します。</td>
+</tr>
+<tr>
+	<th><a href="SLARunButton.html">SLARunButton</a></th>
+	<td>ボタンを実行します。</td>
+</tr>
+<tr>
+	<th><a href="SLAGetIcon.html">SLAGetIcon</a></th>
+	<td>アイコンを取得します。</td>
+</tr>
+
+
+
+
+
+<tr>
+	<td class="h3" colspan="2"><h3>Special Launch API で使用する構造体</h3></td>
+</tr>
+<tr>
+	<th><a href="TSLAGroup.html">TSLAGroup</a></th>
+	<td>ボタングループの情報を定義する構造体です。</td>
+</tr>
+<tr>
+	<th><a href="TSLAButton.html">TSLAButton</a></th>
+	<td>ボタンの情報を定義する構造体です。</td>
+</tr>
+</table>
+
+
+
+</body>
+</html>

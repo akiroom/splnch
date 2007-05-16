@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLAChangePluginMenus</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>SLAChangePluginMenus</h2>
+<p>
+	プラグインメニューを取得しなおします。
+</p>
+
+<h3>構文</h3>
+<pre>
+function <strong>SLAChangePluginMenus</strong>(<strong>Name</strong>: PChar): BOOL; stdcall;
+</pre>
+
+<h3>引数</h3>
+<table>
+	<tr>
+		<th>Name</th>
+		<td>プラグインの名前へのポインタ</td>
+	</tr>
+</table>
+
+<h3>戻り値</h3>
+<p>
+	関数が成功したら TRUE 、失敗したら FALSE を返します。
+</p>
+
+<h3>解説</h3>
+<p>
+	プラグインメニューを取得しなおします。
+</p>
+
+<p>
+	通常、プラグインの起動時にしか行われないプラグインのメニューの取得を、強制的に行わせることができます。
+</p>
+
+<p>
+	動的にプラグインのメニューを変化させたい場合に使用します。
+</p>
+
+
+
+<h3>SL4 の対応</h3>
+<p>
+	4.0.0 Build 225 2000/12/22 以降
+</p>
+
+<div class="related">
+	<A href="SLAChangePluginButtons.html"><IMG src="arrow.gif">SLAChangePluginButtons</A><BR>
+	<A href="SLXGetMenu.html"><IMG src="arrow.gif">SLXGetMenu</A><BR>
+</div>
+
+</body>
+</html>

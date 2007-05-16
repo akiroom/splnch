@@ -1,0 +1,21 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>実装時の注意</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>実装時の注意</h2>
+<ul>
+	<li>プラグインはすべての<a href="slx.html">コールバック関数</a>を実装する必要はありませんが、関数 <a href="SLXGetName.html"><strong>SLXGetName</strong></a> だけは実装する必要があります。プラグインで実装されていないコールバック関数は SL4 で無視します。</li>
+	<li>関数 <a href="SLXGetName.html"><strong>SLXGetName</strong></a> で返すプラグインの名前は、他のプラグインと重複することはできません。ユニークな名前を返すようにしてください。日本語の名前（Shift-JIS）も使えます。</li>
+	<li><a href="sla.html">Special Launch API</a> をマップする際は Win32API の関数 <strong>LoadLibrary</strong> は使わずに関数 <strong>GetModuleHandle</strong> を使ってマップする必要があります。</li>
+</ul>
+
+
+
+</body>
+</html>

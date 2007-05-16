@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>TSLXButtonInfo</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>TSLXButtonInfo</h2>
+
+<p>
+	SL4 に追加するプラグインボタンの種類を定義する構造体です。
+</p>
+
+<h3>構文</h3>
+<pre>
+type
+  <strong>PSLXButtonInfo</strong> = ^<strong>TSLXButtonInfo</strong>;
+  <strong>TSLXButtonInfo</strong> = packed record
+    <strong>Name</strong>: array[0..63] of Char;
+    <strong>IconIndex</strong>: Integer;
+    <strong>OwnerDraw</strong>: BOOL;
+    <strong>UpdateInterval</strong>: Integer;
+    <strong>OwnerChip</strong>: BOOL;
+  end;
+</pre>
+
+<h3>メンバ</h3>
+<table>
+	<tr>
+		<th>Name</th>
+		<td>ボタン名</td>
+	</tr>
+	<tr>
+		<th>IconIndex</th>
+		<td>描画機能がない場合に使うアイコンの 0 から始まるインデックス</td>
+	</tr>
+	<tr>
+		<th>OwnerDraw</th>
+		<td>描画機能がある=True</td>
+	</tr>
+	<tr>
+		<th>UpdateInterval</th>
+		<td>データの更新までの間隔（×0.1秒）</td>
+	</tr>
+	<tr>
+		<th>OwnerChip</th>
+		<td>独自チップ機能がある=True</td>
+	</tr>
+</table>
+
+
+<div class="related">
+	<A href="SLXGetButton.html"><IMG src="arrow.gif">SLXGetButton</A><BR>
+</div>
+
+
+</body>
+</html>

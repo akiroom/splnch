@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>独自メニューを追加する</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>独自メニューを追加する</h2>
+<p>
+	プラグインは、 SL4 のパッドを右クリックした際に表示するメニューに、プラグイン独自のメニューを追加することができます。
+</p>
+
+<h3>SL4 にプラグインが持っているメニューを通知する</h3>
+<ul>
+	<li>SL4 はプラグインの起動時に、関数 <a href="SLXGetMenu.html"><strong>SLXGetMenu</strong></a> を、引数 <strong>No</strong> を 0 から順に +1 しながら呼び出してプラグインが持っているメニューの項目を 1 つずつ問い合わせます。</li>
+	<li>独自メニューを持つプラグインは、関数 <a href="SLXGetMenu.html"><strong>SLXGetMenu</strong></a> を実装してください。</li>
+	<li>引数 <strong>No</strong> は、0 の場合がメニューの第 1 階層目の項目になり、1 以降がそれぞれ 0 のサブメニューになります。
+	<li>引数 <strong>MenuInfo</strong> が指す構造体 <a href="TSLXMenuInfo.html"><strong>TSLXMenuInfo</strong></a> に、メニューの項目をセットします。</li>
+	<li>引数 <strong>No</strong> が、プラグインの持つメニュー項目の個数以上になったら、戻り値に <strong>False</strong> を返して、SL4 にメニューの項目が終わったことを通知してください。</li>
+</ul>
+
+<h3>メニューが選択されたときの処理</h3>
+<p>
+	関数 <a href="SLXMenuClick.html"><strong>SLXMenuClick</strong></a> を実装して、引数 <strong>No</strong> で選択されたメニュー項目を判断し、処理してください。
+</p>
+
+<h3>セパレータ</h3>
+<p>
+	関数 <a href="SLXGetMenu.html"><strong>SLXGetMenu</strong></a> でセットする構造体 <a href="TSLXMenuInfo.html"><strong>TSLXMenuInfo</strong></a> のメンバ <strong>Name</strong> に <strong>-</strong>（ハイフン）をセットすることでセパレータを表現することができます。
+</p>
+
+<h3>ショートカットキー</h3>
+<p>
+	関数 <a href="SLXGetMenu.html"><strong>SLXGetMenu</strong></a> でセットする構造体 <a href="TSLXMenuInfo.html"><strong>TSLXMenuInfo</strong></a> のメンバ <strong>SCut</strong> で指定するショートカットキーは文字列で指定します。たとえば <strong>Ctrl+L</strong> や <strong>Ctrl+Alt+J</strong> といった感じです。
+</p>
+
+
+<h3>プラグイン動作中にメニュー項目を変更する</h3>
+<p>
+	Special Launch API の <a href="SLAChangePluginMenus.html"><strong>SLAChangePluginMenus</strong></a> を実行することで、SL4 はそのプラグインに含まれるメニューを破棄し、再度関数 <a href="SLXGetMenu.html"><strong>SLXGetMenu</strong></a> を呼び出してメニュー項目を問い合わせます。
+</p>
+
+
+<div class="related">
+	<A href="SLAChangePluginMenus.html"><IMG src="arrow.gif">SLAChangePluginMenus</A><BR>
+	<A href="TSLXMenuInfo.html"><IMG src="arrow.gif">TSLXMenuInfo</A><BR>
+	<A href="SLAChangePluginMenus.html"><IMG src="arrow.gif">SLAChangePluginMenus</A><BR>
+</div>
+
+
+</body>
+</html>

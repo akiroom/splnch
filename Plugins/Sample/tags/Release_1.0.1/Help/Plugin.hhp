@@ -1,0 +1,86 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=Plugin.chm
+Contents file=Plugin.hhc
+Default Window=Main
+Default topic=topic\title.html
+Display compile notes=No
+Display compile progress=No
+Full-text search=Yes
+Index file=Plugin.hhk
+Language=0x411 日本語
+Title=Special Launch 4 用プラグイン開発ドキュメント
+
+[WINDOWS]
+Main="Special Launch 4 用プラグイン開発ドキュメント","Plugin.hhc","Plugin.hhk",,,,,,,0x2520,,0x10300e,,,,,,,,0
+
+
+[FILES]
+topic\title.html
+topic\info-readme.html
+topic\info-attention.html
+topic\info-runorder.html
+topic\info-compatibility.html
+topic\slx.html
+topic\SLXGetName.html
+topic\SLXGetExplanation.html
+topic\SLXSetInitFile.html
+topic\SLXBeginPlugin.html
+topic\SLXEndPlugin.html
+topic\SLXChangeOptions.html
+topic\SLXGetButton.html
+topic\SLXButtonCreate.html
+topic\SLXButtonDestroy.html
+topic\SLXButtonClick.html
+topic\SLXButtonDropFiles.html
+topic\SLXButtonDraw.html
+topic\SLXButtonDrawEx.html
+topic\SLXButtonUpdate.html
+topic\SLXButtonChip.html
+topic\SLXButtonOptions.html
+topic\SLXGetMenu.html
+topic\SLXMenuClick.html
+topic\SLXMenuCheck.html
+topic\TSLXButtonInfo.html
+topic\TSLXMenuInfo.html
+topic\sla.html
+topic\SLAGetPadCount.html
+topic\SLAGetPadID.html
+topic\SLAGetNextPadID.html
+topic\SLAGetPadWnd.html
+topic\SLAGetPadTabWnd.html
+topic\SLAGetPadInit.html
+topic\SLASetPadInit.html
+topic\PadInitKey.html
+topic\SLAChangePluginButtons.html
+topic\SLAChangePluginMenus.html
+topic\SLARedrawPluginButtons.html
+topic\SLAGetGroupCount.html
+topic\SLAGetGroup.html
+topic\SLAInsertGroup.html
+topic\SLARenameGroup.html
+topic\SLACopyGroup.html
+topic\SLADeleteGroup.html
+topic\SLAGetButton.html
+topic\SLAInsertButton.html
+topic\SLAChangeButton.html
+topic\SLADeleteButton.html
+topic\SLACopyButton.html
+topic\SLAPasteButton.html
+topic\SLAButtonInClipbord.html
+topic\SLARunButton.html
+topic\SLAGetIcon.html
+topic\TSLAGroup.html
+topic\TSLAButton.html
+topic\tips.html
+topic\tips-simplest.html
+topic\tips-delphi.html
+topic\tips-menu.html
+topic\tips-usesla.html
+topic\tips-padinit.html
+
+[TEXT POPUPS]
+Compatibility=1.1 or later
+
+[INFOTYPES]
+

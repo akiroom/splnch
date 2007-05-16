@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLAGetIcon</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</style>
+</head>
+<body>
+
+<h2>SLAGetIcon</h2>
+<p>
+	アイコンを取得します。
+</p>
+
+<h3>構文</h3>
+<pre>
+function <strong>SLAGetIcon</strong>(<strong>FilePoint</strong>: Pointer; <strong>FileType</strong>, <strong>IconIndex</strong>: Integer; <strong>SmallIcon</strong>, <strong>UseCache</strong>: BOOL): HIcon; stdcall;
+</pre>
+
+<h3>引数</h3>
+<table>
+	<tr>
+		<th>FilePoint</th>
+		<td>アイコンを持つファイルを指すファイル名や PIDL へのポインタ</td>
+	</tr>
+	<tr>
+		<th>FileType</th>
+		<td>FilePoint の種類</td>
+	</tr>
+	<tr>
+		<th>IconIndex</th>
+		<td>アイコンのインデックス</td>
+	</tr>
+	<tr>
+		<th>SmallIcon</th>
+		<td>小さいアイコンを取得するかの指定</td>
+	</tr>
+	<tr>
+		<th>UseCache</th>
+		<td>アイコンキャッシュを使う</td>
+	</tr>
+
+
+
+
+</table>
+
+<h3>戻り値</h3>
+<p>
+	関数が成功したら TRUE 、失敗したら FALSE を返します。
+</p>
+
+<h3>解説</h3>
+<p>
+	SL4 のルーチンを利用してアイコンを取得します。
+</p>
+
+<p>
+	SL4 のアイコンキャッシュに対応していますので、アイコンキャッシュが有効の場合、高速にアイコンを取得できます。
+</p>
+
+<p>
+	引数 <strong>FileType</strong> には次の値を指定できます。
+	<table>
+		<tr>
+			<th>FT_ICONPATH</th>
+			<th>0</th>
+			<td>アイコンが含まれるファイルへのパス</td>
+		</tr>
+		<tr>
+			<th>FT_FILEPATH</th>
+			<th>1</th>
+			<td>通常のファイルへのパス</td>
+		</tr>
+		<tr>
+			<th>FT_PIDL</th>
+			<th>2</th>
+			<td>PIDL</td>
+		</tr>
+	</table>
+</p>
+
+
+
+
+<h3>SL4 の対応</h3>
+<p>
+	4.0.0 Build 226 2001/2/1 以降
+</p>
+
+</body>
+</html>

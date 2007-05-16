@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLAGetPadInit と SLASetPadInit で引数 Key に指定できる文字とその意味</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>SLAGetPadInit と SLASetPadInit で引数 Key に指定できる文字とその意味</h2>
+
+<table>
+	<tr>
+		<th>Left</th>
+		<td>パッドの左端 x 座標</td>
+	</tr>
+	<tr>
+		<th>Top</th>
+		<td>パッドの左端 y 座標</td>
+	</tr>
+	<tr>
+		<th>Cols</th>
+		<td>ボタンの桁数</td>
+	</tr>
+	<tr>
+		<th>Rows</th>
+		<td>ボタンの行数</td>
+	</tr>
+	<tr>
+		<th>GroupIndex</th>
+		<td>現在のボタングループのインデックス</td>
+	</tr>
+	<tr>
+		<th>ScrollBar</th>
+		<td>スクロールバーの位置</td>
+	</tr>
+	<tr>
+		<th>ScrollBtn</th>
+		<td>スクロールボタンの有無</td>
+	</tr>
+	<tr>
+		<th>GroupBtn</th>
+		<td>ボタングループ変更ボタンの有無</td>
+	</tr>
+	<tr>
+		<th>ScrollSize</th>
+		<td>スクロールバーのサイズ</td>
+	</tr>
+	<tr>
+		<th>BtnVertical</th>
+		<td>ボタンの配置</td>
+	</tr>
+	<tr>
+		<th>BtnFocusColor</th>
+		<td>カレントボタンの色</td>
+	</tr>
+	<tr>
+		<th>BtnTransparent</th>
+		<td>透明ボタンか</td>
+	</tr>
+	<tr>
+		<th>BtnSelTransparent</th>
+		<td>カレントボタンが指定の色で覆うか</td>
+	</tr>
+	<tr>
+		<th>BtnSmallIcon</th>
+		<td>小さいアイコンか</td>
+	</tr>
+	<tr>
+		<th>BtnSquare</th>
+		<td>ボタンの幅と高さが統一されているか</td>
+	</tr>
+	<tr>
+		<th>BtnWidth</th>
+		<td>ボタンの幅</td>
+	</tr>
+	<tr>
+		<th>BtnHeight</th>
+		<td>ボタンの高さ</td>
+	</tr>
+	<tr>
+		<th>BtnCaption</th>
+		<td>ボタン名の表示の有無</td>
+	</tr>
+	<tr>
+		<th>BtnColor</th>
+		<td>ボタンの色</td>
+	</tr>
+	<tr>
+		<th>TopLineIndex</th>
+		<td>現在表示中の一番上の行</td>
+	</tr>
+	<tr>
+		<th>ButtonIndex</th>
+		<td>カレントボタンのインデックス</td>
+	</tr>
+	<tr>
+		<th>TopMost</th>
+		<td>常に手前に表示か</td>
+	</tr>
+	<tr>
+		<th>SmoothScroll</th>
+		<td>スクロールを滑らかか</td>
+	</tr>
+	<tr>
+		<th>Hotkey</th>
+		<td>ホットキー</td>
+	</tr>
+	<tr>
+		<th>DropAction</th>
+		<td>ファイルドロップの動作</td>
+	</tr>
+	<tr>
+		<th>DblClickAction</th>
+		<td>ダブルクリックの動作</td>
+	</tr>
+	<tr>
+		<th>BackColor</th>
+		<td>ワークスペースの色</td>
+	</tr>
+	<tr>
+		<th>WallPaper</th>
+		<td>壁紙</td>
+	</tr>
+	<tr>
+		<th>DragBar</th>
+		<td>ドラッグバーの位置</td>
+	</tr>
+	<tr>
+		<th>GroupName</th>
+		<td>ドラッグバーのボタングループの表示の有無</td>
+	</tr>
+	<tr>
+		<th>DragBarSize</th>
+		<td>ドラッグバーのサイズ</td>
+	</tr>
+	<tr>
+		<th>HideAuto</th>
+		<td>自動的に隠すか</td>
+	</tr>
+	<tr>
+		<th>HideSmooth</th>
+		<td>滑らかに隠すか</td>
+	</tr>
+	<tr>
+		<th>HideMouseCheck</th>
+		<td>マウスポインタの通過で現れるか</td>
+	</tr>
+	<tr>
+		<th>HideVertical</th>
+		<td>縦方向優先か</td>
+	</tr>
+	<tr>
+		<th>HideGroupName</th>
+		<td>隠れているときにボタングループを表示するか</td>
+	</tr>
+	<tr>
+		<th>HideSize</th>
+		<td>隠れているときのサイズ</td>
+	</tr>
+	<tr>
+		<th>ShowDelay</th>
+		<td>現れるまでの時間</td>
+	</tr>
+	<tr>
+		<th>HideDelay</th>
+		<td>隠れるまでの時間</td>
+	</tr>
+	<tr>
+		<th>HideColor</th>
+		<td>隠れてるときの色</td>
+	</tr>
+</table>
+
+
+<div class="related">
+	<A href="SLAGetPadInit.html"><IMG src="arrow.gif">SLAGetPadInit</A><BR>
+	<A href="SLASetPadInit.html"><IMG src="arrow.gif">SLASetPadInit</A><BR>
+</div>
+
+</body>
+</html>

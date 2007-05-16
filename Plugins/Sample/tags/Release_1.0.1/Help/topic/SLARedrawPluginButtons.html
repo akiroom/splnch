@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLARedrawPluginButtons</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>SLARedrawPluginButtons</h2>
+<p>
+	プラグインボタンを再描画します。
+</p>
+
+<h3>構文</h3>
+<pre>
+function <strong>SLARedrawPluginButtons</strong>(<strong>Name</strong>: PChar; <strong>No</strong>: Integer): BOOL; stdcall;
+</pre>
+
+<h3>引数</h3>
+<table>
+	<tr>
+		<th>Name</th>
+		<td>プラグインの名前へのポインタ</td>
+	</tr>
+	<tr>
+		<th>No</th>
+		<td>ボタン番号</td>
+	</tr>
+</table>
+
+<h3>戻り値</h3>
+<p>
+	関数が成功したら TRUE 、失敗したら FALSE を返します。
+</p>
+
+<h3>解説</h3>
+<p>
+	プラグインボタンを再描画します。
+</p>
+
+<p>
+	通常、関数 <a href="SLXButtonUpdate.html"><strong>SLXButtonUpdate</strong></a> が呼ばれて TRUE を返さないと行われないプラグインボタンの再描画を、強制的に行わせることができます。
+</p>
+
+<p>
+	独自のタイミングでボタンの再描画を行いたいときに使用します。
+</p>
+
+
+
+<h3>SL4 の対応</h3>
+<p>
+	4.0.0 Build 225 2000/12/22 以降
+</p>
+
+<div class="related">
+	<A href="SLXButtonDraw.html"><IMG src="arrow.gif">SLXButtonDraw</A><BR>
+	<A href="SLXButtonDrawEx.html"><IMG src="arrow.gif">SLXButtonDrawEx</A><BR>
+	<A href="SLXButtonUpdate.html"><IMG src="arrow.gif">SLXButtonUpdate</A><BR>
+</div>
+
+</body>
+</html>

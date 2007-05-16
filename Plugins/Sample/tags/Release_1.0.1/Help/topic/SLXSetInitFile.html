@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLXSetInitFile</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>SLXSetInitFile</h2>
+<p>
+	プラグインが使用できる設定ファイルを受け取ります。
+</p>
+
+<h3>構文</h3>
+<pre>
+function <strong>SLXSetInitFile</strong>(<strong>InitFile</strong>: PChar): BOOL; stdcall;
+</pre>
+
+<h3>引数</h3>
+<table>
+	<tr>
+		<th>InitFile</th>
+		<td>設定ファイルの名前が入ったバッファを指すポインタ</td>
+	</tr>
+</table>
+
+<h3>戻り値</h3>
+<p>
+	関数が成功したら TRUE 、失敗したら FALSE を返します。
+</p>
+
+<h3>解説</h3>
+<p>
+	プラグインの起動時に呼ばれます。
+</p>
+
+<p>
+	引数 <strong>InitFile</strong> が指すバッファに、設定ファイルの名前が入っています。
+</p>
+
+<p>
+	通常は SL4 のデータフォルダに、プラグインの拡張子を .ini に変更したファイル名を受け取ります。
+</p>
+
+<p>
+	プラグインはこの設定ファイルの名前を記憶し、プラグインの起動時に呼ばれる関数 <a href="SLXBeginPlugin.html"><strong>SLXBeginPlugin</strong></a> や、プラグインの終了時に呼ばれる関数 <a href="SLXEndPlugin.html"><strong>SLXEndPlugin</strong></a> などで適時設定を保存してください。
+</p>
+
+
+
+
+<h3>SL4 の対応</h3>
+<p>
+	4.0.0 Build 191 2000/2/2 以降
+</p>
+
+<div class="related">
+	<A href="SLXBeginPlugin.html"><IMG src="arrow.gif">SLXBeginPlugin</A><BR>
+	<A href="SLXEndPlugin.html"><IMG src="arrow.gif">SLXEndPlugin</A><BR>
+</div>
+
+</body>
+</html>

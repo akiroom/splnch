@@ -1,0 +1,155 @@
+
+BODY {
+	font-size: 10pt;
+	background: white;
+	color: black;
+	line-height: 1.2em;
+}
+
+
+IMG {
+	border: 0;
+}
+
+H1 {
+	font-size: 10pt;
+	font-weight: bold;
+	text-align: center;
+	color: navy;
+	background: #ddffff;
+	border: solid;
+	border-width: 1px 2px 2px 1px;
+	border-color: navy;
+	padding: 2pt;
+}
+
+H2 {
+	font-size: 10pt;
+	font-weight: bold;
+	color: navy;
+	border-top: solid;
+	border-left: solid;
+	border-width: 1px 3px;
+	border-color: navy;
+	padding: 2pt;
+}
+
+H3 {
+	font-size: 10pt;
+	font-weight: bold;
+	margin: 2em 0em 0em 0em;
+}
+
+
+H4 {
+	font-size: 10pt;
+	font-weight: bold;
+	margin: 1em 0em 0em 0em;
+}
+
+
+P {
+	margin: 0.5em 0em;
+}
+
+
+TABLE {
+	font-size: 10pt;
+	background: #ffffff;
+	margin-top: 0; 
+	margin-bottom: 0; 
+	padding: "2"; 
+}
+
+TH {
+	font-weight: bold;
+	text-align: left;
+	background: #dddddd;
+	vertical-align: top;
+	white-space: nowrap;
+}
+
+TR {
+	vertical-align: top;
+}
+
+TD {
+	background: #eeeeee;
+	vertical-align: top; 
+}
+
+
+OL {
+	margin: 0.5em 0em 1em 2.1em;
+	padding-left: "0em";
+}
+
+UL {
+	margin: 0.5em 0em 1em 1.5em;
+	list-style-type: disc;
+	padding-left: "0em";
+}
+
+LI {
+	margin-bottom: 0.5em;
+	clear: both;
+}
+
+DT {
+	margin: 0.5em 0em 0em 0em;
+	font-weight: bold;
+}
+
+DD {
+	margin: 0em;
+}
+
+PRE {
+	font-size: "100%";
+	margin: 0.5em 0em;
+	background: #eeeeee;
+}
+
+
+A {color: blue; text-decoration: none}
+A:hover {text-decoration: underline}
+
+
+
+/* ヒント */
+DIV.hint {
+	background: #eeeeee;
+	border: solid;
+	border-width: 1px;
+	border-color: silver;
+	padding: 2pt;
+	margin: 1em 1em;
+}
+
+DIV H4 {
+	color: blue;
+	margin: 0pt;
+}
+
+/* フッタ */
+DIV.footer {
+	text-align: right;
+	border-top: solid;
+	border-width: 1px 0px 0px 0px;
+	border-color: navy;
+	padding: 2pt;
+	margin: 2em 0pt;
+	line-height: 1em;
+}
+
+/* 関連文書 */
+DIV.related {
+	border-top: solid;
+	border-width: 1px 0px 0px 0px;
+	border-color: navy;
+	padding: 2pt;
+	margin: 2em 0pt;
+}
+.related IMG {
+	margin-right: 3pt;
+}

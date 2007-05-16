@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>Special Launch API を使う</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Special Launch API を使う</h2>
+<p>
+	<a href="sla.html">Special Launch API</a> は SpLnch.exe でエクスポートされた関数群です。
+</p>
+<p>
+	プラグインは SpLnch.exe から Special Launch API をマップすることで Special Launch を操作することができます。
+</p>
+
+<h3>Delphi で使う</h3>
+<p>
+	Delphi の場合、プラグインサンプルの SLAPI.pas を uses 節に追加するだけで <a href="sla.html">Special Launch API</a> をすべて使用できる状態になります。
+</p>
+
+<h3>Delphi 以外の言語で使う</h3>
+<p>
+	Win32API の GetModuleHandle に NULL を指定してモジュールハンドルを取得し、GetProcAddress で各関数のアドレスを取得します。
+</p>
+
+
+<h3>SpLnch.exe が古い場合があることを想定する</h3>
+<p>
+	ユーザーは常に最新バージョンの SpLnch.exe を使っているとは限りません。必ず GetProcAddress で取得したアドレスが NULL でないことを確認してください。
+</p>
+<p>
+	Delphi で SLAPI.pas を使う場合、グローバル変数 <strong>ExistsSLAPI</strong> の真偽で、正常に Special Launch API をマップできたかを確認することができます。
+</p>
+
+<div class="related">
+	<A href="sla.html"><IMG src="arrow.gif">Special Launch API</A><BR>
+</div>
+
+
+</body>
+</html>

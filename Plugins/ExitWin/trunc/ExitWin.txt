@@ -1,14 +1,13 @@
 
-【ソフト名    】    Windows の終了プラグイン
-【バージョン  】    1.0.0 Build 11
-【対応システム】    Windows 95 / 98 / Me / NT 4.0 / 2000
-【種別        】    フリーソフトウェア
-【開発マシン  】    ABIT BP6 / Celeron 366 x 2 / 256 MB
-【開発言語    】    Borland Delphi 5
-【転載・条件  】    要連絡
-【著作者      】    沢田茂
-【連絡先      】    sawada@os.rim.or.jp
-【最新版の場所】    http://www.os.rim.or.jp/~sawada/
+【ソフト名    】 Windows の終了プラグイン
+【バージョン  】 1.0.0 Build 13
+【対応システム】 Windows 95 / 98 / Me / NT 4.0 / 2000 / XP
+【種別        】 フリーソフトウェア
+【開発マシン  】 TOSHIBA dynabook SS/S8
+【開発言語    】 Borland Delphi 7
+【転載・条件  】 要連絡
+【著作者      】 沢田茂
+【最新版の場所】 http://sl.himatsubu.com/
 
 
 【配布ファイルの構成】
@@ -48,27 +47,31 @@
 
 
 【更新履歴】
-1.0.0 Build 7 2000/1/27
-・ Special Launch 4.0.0 Build 189 以降に対応しました。
+1.0.0 Build 13 2007/5/16
+・ 開発環境を Delphi 7 に変更しました。
 
-1.0.0 Build 8 2000/2/2
-・ Special Launch 4.0.0 Build 191 以降に対応しました。
-
-1.0.0 Build 9 2000/2/22
-・ 言葉を少し変更しました。
-
-1.0.0 Build 10 2000/4/15
-・ Special Launch 4.0.0 Build 194 以降に対応しました。
+1.0.0 Build 12 2000/7/19
+・ Special Launch 4.0.0 Build 204 以降に対応しました。
 
 1.0.0 Build 11 2000/5/18
 ・ Windows NT/2000 でシャットダウンした場合、電源遮断まで行
    う設定を追加しました。
 
-1.0.0 Build 12 2000/7/19
-・ Special Launch 4.0.0 Build 204 以降に対応しました。
+1.0.0 Build 10 2000/4/15
+・ Special Launch 4.0.0 Build 194 以降に対応しました。
+
+1.0.0 Build 9 2000/2/22
+・ 言葉を少し変更しました。
+
+1.0.0 Build 8 2000/2/2
+・ Special Launch 4.0.0 Build 191 以降に対応しました。
+
+1.0.0 Build 7 2000/1/27
+・ Special Launch 4.0.0 Build 189 以降に対応しました。
+
 
 
 __________________________________________________________
-                                     Copyright(C)1995-2001
-                        SAWADA Shigeru All rights reserved.
+                                     Copyright(C)1996-2007
+                        SAWADA Shigeru all rights reserved.
                                        制作・著作 : 沢田茂

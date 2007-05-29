@@ -1,6 +1,7 @@
 object frmCal: TfrmCal
   Left = 371
   Top = 463
+  AutoScroll = False
   Caption = #12459#12524#12531#12480#12540
   ClientHeight = 245
   ClientWidth = 357
@@ -38,8 +39,8 @@ object frmCal: TfrmCal
     object pbCalendar: TPaintBox
       Left = 8
       Top = 36
-      Width = 332
-      Height = 193
+      Width = 336
+      Height = 197
       Anchors = [akLeft, akTop, akRight, akBottom]
       Font.Charset = SHIFTJIS_CHARSET
       Font.Color = clBlack
@@ -52,13 +53,11 @@ object frmCal: TfrmCal
       OnMouseMove = pbCalendarMouseMove
       OnMouseUp = pbCalendarMouseUp
       OnPaint = pbCalendarPaint
-      ExplicitWidth = 336
-      ExplicitHeight = 197
     end
     object pbMonth: TPaintBox
       Left = 8
       Top = 4
-      Width = 332
+      Width = 336
       Height = 29
       Anchors = [akLeft, akTop, akRight]
       Font.Charset = SHIFTJIS_CHARSET
@@ -68,51 +67,42 @@ object frmCal: TfrmCal
       Font.Style = [fsBold]
       ParentFont = False
       OnPaint = pbMonthPaint
-      ExplicitWidth = 336
     end
     object btnToday: TSpeedButton
-      Left = 145
-      Top = 205
+      Left = 149
+      Top = 209
       Width = 45
       Height = 22
       Anchors = [akRight, akBottom]
       Caption = #20170#26085
       OnClick = btnTodayClick
-      ExplicitLeft = 149
-      ExplicitTop = 209
     end
     object btnPrev: TSpeedButton
-      Left = 193
-      Top = 205
+      Left = 197
+      Top = 209
       Width = 45
       Height = 22
       Anchors = [akRight, akBottom]
       Caption = #21069#26376
       OnClick = btnPrevClick
-      ExplicitLeft = 197
-      ExplicitTop = 209
     end
     object btnNext: TSpeedButton
-      Left = 241
-      Top = 205
+      Left = 245
+      Top = 209
       Width = 45
       Height = 22
       Anchors = [akRight, akBottom]
       Caption = #27425#26376
       OnClick = btnNextClick
-      ExplicitLeft = 245
-      ExplicitTop = 209
     end
     object btnClose: TSpeedButton
-      Left = 289
-      Top = 205
+      Left = 293
+      Top = 209
       Width = 45
       Height = 22
       Anchors = [akRight, akBottom]
       Caption = #38281#12376#12427
       OnClick = mnuCloseClick
-      ExplicitLeft = 293
-      ExplicitTop = 209
     end
   end
   object PopupMenu1: TPopupMenu

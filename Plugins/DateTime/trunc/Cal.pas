@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   IniFiles, Buttons, ExtCtrls, StdCtrls, Julius, Holiday, Menus, BtnTitle,
-  Memo, PlugBtns, Types;
+  Memo, PlugBtns;
 
 type
   TDragType = (dtNone, dtNormal, dtMemoBegin, dtMemoEnd, dtMemo);

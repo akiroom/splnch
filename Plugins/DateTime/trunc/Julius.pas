@@ -212,7 +212,7 @@ begin
   R:=JD mod 1461;
   BaseYear:=4*Trunc(JD/1461)-4712;
 
-  for I := 1 to SizeOf(CDY) do
+  for I:=1 to 12 do
   begin
     DY[I]:=CDY[I];
   end;

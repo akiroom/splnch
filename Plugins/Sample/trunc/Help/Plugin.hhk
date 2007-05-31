@@ -54,6 +54,10 @@
 		<param name="Local" value="topic\SLXChangeOptions.html">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SLXChangePadForeground">
+		<param name="Local" value="topic\SLXChangePadForeground.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
 		<param name="Name" value="SLXGetButton">
 		<param name="Local" value="topic\SLXGetButton.html">
 		</OBJECT>

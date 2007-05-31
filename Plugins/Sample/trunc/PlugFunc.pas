@@ -40,6 +40,8 @@ function SLXBeginPlugin: BOOL; stdcall;
 function SLXEndPlugin: BOOL; stdcall;
 // 設定ダイアログを呼び出す
 function SLXChangeOptions(hWnd: HWND): BOOL; stdcall;
+// パッドがアクティブになったときの処理
+function SLXChangePadForeground(hWnd: HWND; Foreground: BOOL): BOOL; stdcall;
 
 
 // ボタン用関数 ----------------------------------------------------------------
@@ -391,6 +393,14 @@ begin
       ButtonInfo^ := ADD_BUTTON_INFO;
     end;
   end;
+end;
+
+// パッドがアクティブになったときの処理
+function SLXChangePadForeground(hWnd: HWND; Foreground: BOOL): BOOL; stdcall;
+begin
+  Result := True;
+  Windows.Beep(660, 50);
+  Windows.Beep(880, 50);
 end;
 
 // ボタンがパッドに作成される

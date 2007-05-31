@@ -28,6 +28,7 @@ topic\SLXSetInitFile.html
 topic\SLXBeginPlugin.html
 topic\SLXEndPlugin.html
 topic\SLXChangeOptions.html
+topic\SLXChangePadForeground.html
 topic\SLXGetButton.html
 topic\SLXButtonCreate.html
 topic\SLXButtonDestroy.html

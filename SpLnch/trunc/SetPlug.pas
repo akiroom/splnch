@@ -85,6 +85,8 @@ type
     SLXBeginPlugin: function: BOOL; stdcall;
     SLXEndPlugin: function: BOOL; stdcall;
     SLXChangeOptions: function(hWnd: HWND): BOOL; stdcall;
+    SLXChangePadActive: function(hWnd: HWND): BOOL; stdcall;
+    SLXChangePadForeground: function(Wnd: HWND; Foreground: BOOL): BOOL; stdcall;
 
     // É{É^Éìópä÷êî
     SLXGetButton: function(No: Integer; ButtonInfo: PSLXButtonInfo): BOOL; stdcall;
@@ -293,6 +295,7 @@ begin
     @SLXBeginPlugin := nil;
     @SLXEndPlugin := nil;
     @SLXChangeOptions := nil;
+    @SLXChangePadForeground := nil;
     @SLXGetButton := nil;
     @SLXButtonCreate := nil;
     @SLXButtonDestroy := nil;
@@ -336,6 +339,7 @@ begin
     @SLXBeginPlugin := GetProcAddress(Handle, 'SLXBeginPlugin');
     @SLXEndPlugin := GetProcAddress(Handle, 'SLXEndPlugin');
     @SLXChangeOptions := GetProcAddress(Handle, 'SLXChangeOptions');
+    @SLXChangePadForeground := GetProcAddress(Handle, 'SLXChangePadForeground');
     @SLXBeginSkin := GetProcAddress(Handle, 'SLXBeginSkin');
     @SLXDrawDragBar := GetProcAddress(Handle, 'SLXDrawDragBar');
     @SLXDrawWorkspace := GetProcAddress(Handle, 'SLXDrawWorkspace');
@@ -389,6 +393,7 @@ begin
       @SLXBeginPlugin := nil;
       @SLXEndPlugin := nil;
       @SLXChangeOptions := nil;
+      @SLXChangePadForeground := nil;
       @SLXGetButton := nil;
       @SLXButtonCreate := nil;
       @SLXButtonDestroy := nil;

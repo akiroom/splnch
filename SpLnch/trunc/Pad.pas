@@ -2713,6 +2713,9 @@ end;
 
 // フォーカスをセット
 procedure TfrmPad.SetForeground(Value: Boolean);
+var
+  i: Integer;
+  Plugin: TPlugin;
 begin
   if (Pads = nil) or Pads.Destroying then
     Exit;
@@ -2738,6 +2741,17 @@ begin
   else
     tmHideScreen.Interval := FHideDelay;
   tmHideScreen.Enabled := True;
+
+  // プラグインに通知
+  for i := 0 to Plugins.Count - 1 do
+  begin
+    Plugin := TPlugin(Plugins.Objects[i]);
+    if @Plugin.SLXChangePadForeground <> nil then
+    begin
+      Plugin.SLXChangePadForeground(Handle, FForeground);
+    end;
+
+  end;
 end;
 
 

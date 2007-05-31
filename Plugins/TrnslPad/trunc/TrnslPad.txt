@@ -1,12 +1,12 @@
 
 【ソフト名    】 半透明パッドプラグイン
-【バージョン  】 1.0.1 Build 15
+【バージョン  】 1.0.2 Build 16
 【対応システム】 Windows 2000 / XP
 【種別        】 フリーソフト
 【開発言語    】 Borland Delphi 7
 【転載・条件  】 自由
 【著作者      】 沢田茂
-【最新版の場所】 http://sl.himatsubu.com/
+【最新版の場所】 http://splnch.sourceforge.jp/
                  http://sourceforge.jp/projects/splnch/
 
 
@@ -58,6 +58,10 @@
 
 1.0.1 Build 15 2007/5/24
 ・ 開発環境を Delphi 7 にしました。
+
+1.0.2 Build 16 2007/5/31
+・ Special Launch 4.1.2 Build 263 以降に対応しました。
+・ パッドがアクティブ時は半透明化をやめるようにしました。
 
 __________________________________________________________
                                      Copyright(C)1996-2007

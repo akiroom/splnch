@@ -19,6 +19,7 @@ exports
   SLXBeginPlugin,
   SLXEndPlugin,
   SLXChangeOptions,
+  SLXChangePadForeground,
   SLXGetMenu,
   SLXMenuClick;
 begin

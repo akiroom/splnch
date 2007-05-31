@@ -30,7 +30,8 @@ function SLXBeginPlugin: BOOL; stdcall;
 function SLXEndPlugin: BOOL; stdcall;
 // 設定ダイアログを呼び出す
 function SLXChangeOptions(hWnd: HWND): BOOL; stdcall;
-
+// パッドがアクティブになったときの処理
+function SLXChangePadForeground(Wnd: HWND; Foreground: BOOL): BOOL; stdcall;
 
 // メニュー用関数 --------------------------------------------------------------
 
@@ -50,7 +51,7 @@ const
       #13#10
     + '半透明パッドプラグイン' + #13#10
     + '________________________________________________' + #13#10
-    + '                           Copyright(C)1996-2002' + #13#10
+    + '                           Copyright(C)1996-2007' + #13#10
     + '              SAWADA Shigeru All rights reserved.' + #13#10
     + '                             制作・著作 : 沢田茂';
 
@@ -192,6 +193,37 @@ begin
     end;
   else
     Result := False;
+  end;
+end;
+
+// パッドがアクティブになったときの処理
+function SLXChangePadForeground(Wnd: HWND; Foreground: BOOL): BOOL; stdcall;
+var
+  ID, Alpha: Integer;
+  i: Integer;
+  PadWnd, PadTabWnd: HWND;
+begin
+  Result := True;
+
+  ID := SLAGetPadID(Wnd);
+  for i := 0 to LayerdPads.Count - 1 do
+  begin
+    if TLayerdPad(LayerdPads[i]).ID = ID then
+    begin
+      Alpha := TLayerdPad(LayerdPads[i]).Alpha;
+      PadWnd := SLAGetPadWnd(ID);
+      PadTabWnd := SLAGetPadTabWnd(ID);
+      if Foreground then
+      begin
+        MySetLayeredWindowAttributes(PadWnd, 0, Byte(255), LWA_ALPHA);
+        MySetLayeredWindowAttributes(PadTabWnd, 0, Byte(255), LWA_ALPHA);
+      end
+      else
+      begin
+        MySetLayeredWindowAttributes(PadWnd, 0, Byte(Alpha), LWA_ALPHA);
+        MySetLayeredWindowAttributes(PadTabWnd, 0, Byte(Alpha), LWA_ALPHA);
+      end;
+    end;
   end;
 end;
 

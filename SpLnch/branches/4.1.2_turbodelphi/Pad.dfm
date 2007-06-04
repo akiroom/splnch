@@ -3,8 +3,8 @@ object frmPad: TfrmPad
   Top = 353
   BorderStyle = bsNone
   Caption = 'Special Launch'
-  ClientHeight = 129
-  ClientWidth = 234
+  ClientHeight = 122
+  ClientWidth = 225
   Color = clGray
   Font.Charset = SHIFTJIS_CHARSET
   Font.Color = clWindowText
@@ -29,8 +29,8 @@ object frmPad: TfrmPad
   object pnlMain: TPanel
     Left = 17
     Top = 0
-    Width = 217
-    Height = 129
+    Width = 208
+    Height = 122
     Align = alClient
     BevelOuter = bvNone
     FullRepaint = False
@@ -39,33 +39,38 @@ object frmPad: TfrmPad
     OnDblClick = pnlDragBarDblClick
     OnMouseMove = pnlDragBarMouseMove
     OnMouseUp = pnlDragBarMouseUp
+    ExplicitWidth = 217
+    ExplicitHeight = 129
     object pnlScrollBar: TPanel
-      Left = 199
+      Left = 190
       Top = 0
       Width = 18
-      Height = 129
+      Height = 122
       Align = alRight
       BevelOuter = bvNone
       FullRepaint = False
       ParentColor = True
       TabOrder = 0
       OnResize = pnlScrollBarResize
+      ExplicitLeft = 199
+      ExplicitHeight = 129
       object pbWallPaper2: TPaintBox
         Left = 0
         Top = 0
         Width = 18
-        Height = 129
+        Height = 122
         Align = alClient
         Enabled = False
         Visible = False
         OnPaint = pbWallPaper1Paint
+        ExplicitHeight = 129
       end
     end
     object pnlWorkSpace: TPanel
       Left = 0
       Top = 0
-      Width = 199
-      Height = 129
+      Width = 190
+      Height = 122
       Align = alClient
       BevelOuter = bvNone
       FullRepaint = False
@@ -74,6 +79,8 @@ object frmPad: TfrmPad
       OnDblClick = pnlDragBarDblClick
       OnMouseMove = pnlDragBarMouseMove
       OnMouseUp = pnlDragBarMouseUp
+      ExplicitWidth = 199
+      ExplicitHeight = 129
       object pnlButtons: TPanel
         Left = 0
         Top = 0
@@ -103,7 +110,7 @@ object frmPad: TfrmPad
     Left = 0
     Top = 0
     Width = 17
-    Height = 129
+    Height = 122
     Align = alLeft
     BevelOuter = bvNone
     FullRepaint = False
@@ -112,14 +119,16 @@ object frmPad: TfrmPad
     OnDblClick = pnlDragBarDblClick
     OnMouseMove = pnlDragBarMouseMove
     OnMouseUp = pnlDragBarMouseUp
+    ExplicitHeight = 129
     object pbDragBar: TPaintBox
       Left = 0
       Top = 0
       Width = 17
-      Height = 129
+      Height = 122
       Align = alClient
       Enabled = False
       OnPaint = pbDragBarPaint
+      ExplicitHeight = 129
     end
   end
   object popMain: TPopupMenu

@@ -4,7 +4,7 @@
 【対応システム】 Windows 95 / 98 / Me / NT 4.0 / 2000 / XP
 【種別        】 フリーソフト（寄付歓迎）
 【開発マシン  】 TOSHIBA dynabook SS/S8
-【開発言語    】 Borland Delphi 7
+【開発言語    】 Borland Turbo Delphi 2006
 【転載・条件  】 自由
 【著作者      】 沢田茂
 【最新版の場所】 http://splnch.sourceforge.jp/
@@ -89,6 +89,7 @@
 ・ プラグイン関数に SLXChangePadForeground を追加しました。
    プラグインはパッドのアクティブ状態の変更を知ることが可能
    になります。
+・ 開発環境を Borland Turbo Delphi 2006 にしました。
 
 
 __________________________________________________________

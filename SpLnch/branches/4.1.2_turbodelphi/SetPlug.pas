@@ -225,7 +225,7 @@ var
   i: Integer;
 begin
   for i := 0 to UpdateButtons.Count - 1 do
-    TSLPluginButton(UpdateButtons[i]).Invalidate;
+    TSLPluginButton(UpdateButtons[i]).Refresh;
 end;
 
 { TMenuInfo }

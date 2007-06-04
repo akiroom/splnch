@@ -1134,10 +1134,10 @@ begin
       Inc(i);
   end;
 
-  pbDragBar.Invalidate;
-  pbScrollBar.Invalidate;
-  pbWorkSpace.Invalidate;
-  pbHide.Invalidate;
+  pbDragBar.Refresh;
+  pbScrollBar.Refresh;
+  pbWorkSpace.Refresh;
+  pbHide.Refresh;
 end;
 
 // ドラッグバー描画

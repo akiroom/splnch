@@ -4,8 +4,8 @@ object dlgPadProperty: TdlgPadProperty
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = #12497#12483#12489#12398#35373#23450
-  ClientHeight = 430
-  ClientWidth = 477
+  ClientHeight = 428
+  ClientWidth = 475
   Color = clBtnFace
   Font.Charset = SHIFTJIS_CHARSET
   Font.Color = clWindowText
@@ -263,7 +263,7 @@ object dlgPadProperty: TdlgPadProperty
         Width = 133
         Height = 20
         Style = csDropDownList
-        ItemHeight = 0
+        ItemHeight = 12
         TabOrder = 1
         OnChange = cmbPartsChange
       end

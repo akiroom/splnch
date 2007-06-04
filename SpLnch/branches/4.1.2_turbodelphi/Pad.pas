@@ -954,8 +954,8 @@ begin
   end;
   pbWallPaper1.Visible := (FWallPaperBitmap <> nil) or (FSkinPlugin <> nil);
   pbWallPaper2.Visible := pbWallPaper1.Visible;
-  pbWallPaper1.Invalidate;
-  pbWallPaper2.Invalidate;
+  pbWallPaper1.Refresh;
+  pbWallPaper2.Refresh;
 end;
 
 // スキンプラグイン
@@ -966,8 +966,8 @@ begin
     FSkinPlugin.SLXBeginSkin(Handle);
   pbWallPaper1.Visible := (FWallPaperBitmap <> nil) or (FSkinPlugin <> nil);
   pbWallPaper2.Visible := pbWallPaper1.Visible;
-  pbWallPaper1.Invalidate;
-  pbWallPaper2.Invalidate;
+  pbWallPaper1.Refresh;
+  pbWallPaper2.Refresh;
 
   ArrangeScrolls;
   ArrangeButtons;
@@ -1035,7 +1035,7 @@ begin
     ResizeDragBar;
     pnlDragBar.Visible := True;
   end;
-  pnlDragBar.Invalidate;
+  pnlDragBar.Refresh;
 
   SizeCheck;
 end;
@@ -2716,6 +2716,7 @@ procedure TfrmPad.SetForeground(Value: Boolean);
 var
   i: Integer;
   Plugin: TPlugin;
+//  ms :Cardinal;
 begin
   if (Pads = nil) or Pads.Destroying then
     Exit;
@@ -2724,6 +2725,8 @@ begin
     Exit;
   FForeground := Value;
 
+//ms :=GetTickCount;
+
   FButtonArrangement.Active := Value;
 
   ArrangeGroupMenu;
@@ -2731,9 +2734,9 @@ begin
   if not FForeground then
     HideTitle;
 
-  pbDragBar.Invalidate;
-  pbWallPaper1.Invalidate;
-  pbWallPaper2.Invalidate;
+  pbDragBar.Refresh;
+  pbWallPaper1.Refresh;
+  pbWallPaper2.Refresh;
 
   tmHideScreen.Enabled := False;
   if FForeground then
@@ -2741,6 +2744,7 @@ begin
   else
     tmHideScreen.Interval := FHideDelay;
   tmHideScreen.Enabled := True;
+
 
   // プラグインに通知
   for i := 0 to Plugins.Count - 1 do
@@ -2752,6 +2756,8 @@ begin
     end;
 
   end;
+//OutputDebugString(PChar(IntToStr(GetTickCount - ms)));
+
 end;
 
 

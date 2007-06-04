@@ -470,7 +470,7 @@ end;
 
 procedure TSLButton.CMTextChanged(var Msg: TMessage);
 begin
-  Invalidate;
+  Refresh;
 end;
 
 procedure TSLButton.Paint;
@@ -509,7 +509,7 @@ begin
     FDarkColor := RGB(R div 4, G div 4, B div 4);
   end;
 
-  Invalidate;
+  Refresh;
 end;
 
 procedure TSLButton.SetActive(Value: Boolean);
@@ -592,7 +592,7 @@ begin
   if FFocusEnter <> NewFocusEnter then
   begin
     FFocusEnter := NewFocusEnter;
-    Invalidate;
+    Refresh;
   end;
 end;
 
@@ -602,7 +602,7 @@ begin
   if FFocusColor = Value then
     Exit;
   FFocusColor := Value;
-  Invalidate;
+  Refresh;
 end;
 
 procedure TSLButton.SetSelTransparent(Value: Boolean);
@@ -610,7 +610,7 @@ begin
   if FSelTransparent = Value then
     Exit;
   FSelTransparent := Value;
-  Invalidate;
+  Refresh;
 end;
 
 procedure TSLButton.SetTransparent(Value: Boolean);
@@ -618,7 +618,7 @@ begin
   if FTransparent = Value then
     Exit;
   FTransparent := Value;
-  Invalidate;
+  Refresh;
 end;
 
 procedure TSLButton.SetRepeatTimer(Value: Boolean);
@@ -681,7 +681,7 @@ begin
     if FState <> bsUp then
     begin
       FState := bsUp;
-      Invalidate;
+      Refresh;
     end;
   end;
 end;
@@ -709,7 +709,7 @@ begin
       if FState <> bsUp then
       begin
         FState := bsUp;
-        Invalidate;
+        Refresh;
       end;
       FOnStartDrag(Self);
       Exit;
@@ -727,7 +727,7 @@ begin
     if NewState <> FState then
     begin
       FState := NewState;
-      Invalidate;
+      Refresh;
     end;
   end;
 end;
@@ -743,7 +743,7 @@ begin
     if FState <> bsUp then
     begin
       FState := bsUp;
-      Invalidate;
+      Refresh;
     end;
     if PtInRect(ClientRect, Point(X, Y)) and not FRepeating then
       Click;
@@ -922,7 +922,7 @@ begin
   if FKind = Value then
     Exit;
   FKind := Value;
-  Invalidate;
+  Refresh;
 end;
 
 procedure TSLScrollButton.SetVertical(Value: Boolean);
@@ -930,7 +930,7 @@ begin
   if FVertical = Value then
     Exit;
   FVertical := Value;
-  Invalidate;
+  Refresh;
 end;
 
 
@@ -962,7 +962,7 @@ begin
   if FIconHandle <> 0 then
     DestroyIcon(FIconHandle);
   FIconHandle := Value;
-  Invalidate;
+  Refresh;
 end;
 
 function TSLNormalButton.GetIconSize: Integer;
@@ -995,7 +995,7 @@ begin
   if FSpacing = Value then
     Exit;
   FSpacing := Value;
-  Invalidate;
+  Refresh;
 end;
 
 procedure TSLNormalButton.SetCaptionPosition(Value: TSLBtnCaptionPosition);
@@ -1003,7 +1003,7 @@ begin
   if FCaptionPosition = Value then
     Exit;
   FCaptionPosition := Value;
-  Invalidate;
+  Refresh;
 end;
 
 procedure TSLNormalButton.SetSmallIcon(Value: Boolean);
@@ -1011,7 +1011,7 @@ begin
   if FSmallIcon = Value then
     Exit;
   FSmallIcon := Value;
-  Invalidate;
+  Refresh;
 end;
 
 procedure TSLNormalButton.Paint;

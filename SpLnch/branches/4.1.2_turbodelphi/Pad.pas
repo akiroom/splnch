@@ -682,8 +682,13 @@ begin
     HideColor := Ini.ReadInteger(IS_PADOPTIONS, 'HideColor', HideColor);
     SkinPlugin := Plugins.FindPlugin(Ini.ReadString(IS_PADOPTIONS, 'SkinName', ''));
 
+    // モニター番号がずれないように最小値
+    Width := 1;
+    Height := 1;
+
     Left := Ini.ReadInteger(IS_PADOPTIONS, 'Left', Left);
     Top := Ini.ReadInteger(IS_PADOPTIONS, 'Top', Top);
+
     SizeCheck;
     UserMoved;
 

@@ -268,7 +268,7 @@ var
   SLScrollButton: TSLScrollButton;
   Plugin: TPlugin;
 begin
-  //tabSkins.TabVisible := False;
+  tabSkins.TabVisible := False;
 
   // âÊëúì«Ç›çûÇ›
   imlLayout.ResInstLoad(hInstance, rtBitmap, 'LAYOUT', clFuchsia);
@@ -862,8 +862,6 @@ var
   SLNormalButton: TSLNormalButton;
   C: LongInt;
   R, G, B: Word;
-  RadioButton: TRadioButton;
-  LabelRects: TList;
 begin
   MarginSize := 2;
 

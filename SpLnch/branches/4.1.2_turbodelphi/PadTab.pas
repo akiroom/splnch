@@ -342,11 +342,11 @@ begin
   bForeground := TfrmPad(frmPad).Foreground;
 
   FHid := False;
+  ShowWindow(Handle, SW_HIDE);
   if bForeground then
     SetWindowPos(frmPad.Handle, Handle, 0, 0, 0, 0, SWP_NOSIZE or SWP_NOMOVE or SWP_SHOWWINDOW)
   else
     SetWindowPos(frmPad.Handle, Handle, 0, 0, 0, 0, SWP_NOACTIVATE or SWP_NOSIZE or SWP_NOMOVE or SWP_SHOWWINDOW);
-  ShowWindow(Handle, SW_HIDE);
 
   WinHotkey := SendMessage(Handle, WM_GETHOTKEY, 0, 0);
   SendMessage(Handle, WM_SETHOTKEY, 0, 0);
@@ -371,8 +371,8 @@ begin
 
   Color := frmPad.Color;
   pbDragBar.Visible := False;
-  SetWindowPos(Handle, frmPad.Handle, frmPad.Left, frmPad.Top, frmPad.Width, frmPad.Height, SWP_NOACTIVATE or SWP_SHOWWINDOW);
   ShowWindow(frmPad.Handle, SW_HIDE);
+  SetWindowPos(Handle, frmPad.Handle, frmPad.Left, frmPad.Top, frmPad.Width, frmPad.Height, SWP_NOACTIVATE or SWP_SHOWWINDOW);
 
   WinHotkey := SendMessage(frmPad.Handle, WM_GETHOTKEY, 0, 0);
   SendMessage(frmPad.Handle, WM_SETHOTKEY, 0, 0);

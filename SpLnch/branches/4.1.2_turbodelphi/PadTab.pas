@@ -322,7 +322,7 @@ begin
 
     Color := frmPad.Color;
 
-    Frame := 10;
+    Frame := 5;
     while True do
     begin
       MoveFrame(SLeft, Left, frmPad.Left, Frame);
@@ -335,19 +335,16 @@ begin
 
       SetBounds(Left+SLeft, Top+STop, Width+SWidth, Height+SHeight);
       Dec(Frame);
-      Sleep(5);
+      Sleep(10);
     end;
   end;
 
   bForeground := TfrmPad(frmPad).Foreground;
-
   FHid := False;
-  ShowWindow(Handle, SW_HIDE);
+  SetWindowPos(frmPad.Handle, Handle, 0, 0, 0, 0, SWP_NOACTIVATE or SWP_NOSIZE or SWP_NOMOVE or SWP_SHOWWINDOW);
   if bForeground then
-    SetWindowPos(frmPad.Handle, Handle, 0, 0, 0, 0, SWP_NOSIZE or SWP_NOMOVE or SWP_SHOWWINDOW)
-  else
-    SetWindowPos(frmPad.Handle, Handle, 0, 0, 0, 0, SWP_NOACTIVATE or SWP_NOSIZE or SWP_NOMOVE or SWP_SHOWWINDOW);
-
+    frmPad.SetFocus;
+  ShowWindow(Handle, SW_HIDE);
   WinHotkey := SendMessage(Handle, WM_GETHOTKEY, 0, 0);
   SendMessage(Handle, WM_SETHOTKEY, 0, 0);
   SendMessage(frmPad.Handle, WM_SETHOTKEY, WinHotkey, 0);
@@ -380,7 +377,7 @@ begin
 
   if TfrmPad(frmPad).HideSmooth then
   begin
-    Frame := 10;
+    Frame := 5;
     while True do
     begin
       MoveFrame(SLeft, Left, HidLeft, Frame);
@@ -393,7 +390,7 @@ begin
 
       SetBounds(Left+SLeft, Top+STop, Width+SWidth, Height+SHeight);
       Dec(Frame);
-      Sleep(5);
+      Sleep(10);
     end;
   end;
 

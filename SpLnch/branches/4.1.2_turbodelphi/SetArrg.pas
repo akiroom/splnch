@@ -277,8 +277,10 @@ begin
       begin
         Plugin := Plugins.FindPlugin(TPluginButton(Items[i].ButtonData).PluginName);
         if Plugin <> nil then
+        begin
           if @Plugin.SLXButtonCreate <> nil then
             Plugin.SLXButtonCreate(TPluginButton(Items[i].ButtonData).No, Owner.Handle, i);
+        end;
       end;
     end;
 

@@ -3014,6 +3014,7 @@ procedure TfrmPad.ArrangeButtons;
         SLPluginButton.OwnerDraw := True;
         SLPluginButton.OnDrawButton := btnPluginButtonDrawButton;
         SLPluginButton.IconHandle := 0;
+        SLPluginButton.Refresh;
       end
       // •`‰æ‚È‚µ
       else

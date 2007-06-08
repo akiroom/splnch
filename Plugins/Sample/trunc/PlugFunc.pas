@@ -40,8 +40,12 @@ function SLXBeginPlugin: BOOL; stdcall;
 function SLXEndPlugin: BOOL; stdcall;
 // 設定ダイアログを呼び出す
 function SLXChangeOptions(hWnd: HWND): BOOL; stdcall;
+
+// 状態検知用関数 --------------------------------------------------------------
 // パッドがアクティブになったときの処理
 function SLXChangePadForeground(hWnd: HWND; Foreground: BOOL): BOOL; stdcall;
+// パッドにマウスが入ったときの処理
+function SLXChangePadMouseEntered(hWnd: HWND; Entered: BOOL): BOOL; stdcall;
 
 
 // ボタン用関数 ----------------------------------------------------------------
@@ -396,7 +400,15 @@ begin
 end;
 
 // パッドがアクティブになったときの処理
-function SLXChangePadForeground(hWnd: HWND; Foreground: BOOL): BOOL; stdcall;
+function SLXChangePadForeground(hWnd: HWND; Foreground: BOOL): BOOL;
+begin
+  Result := True;
+  Windows.Beep(660, 50);
+  Windows.Beep(880, 50);
+end;
+
+// パッドにマウスが入ったときの処理
+function SLXChangePadMouseEntered(hWnd: HWND; Entered: BOOL): BOOL;
 begin
   Result := True;
   Windows.Beep(660, 50);

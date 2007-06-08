@@ -1,5 +1,7 @@
 library Sample;
 
+{$R 'Resource.res' 'Resource.rc'}
+
 uses
   Windows,
   SysUtils,
@@ -10,7 +12,6 @@ uses
 {$E slx}
 
 {$R *.RES}
-{$R DATA.RES}
 
 exports
   SLXGetName,
@@ -19,6 +20,7 @@ exports
   SLXBeginPlugin,
   SLXEndPlugin,
   SLXChangeOptions,
+  SLXChangePadMouseEntered,
   SLXChangePadForeground,
   SLXGetButton,
   SLXButtonCreate,

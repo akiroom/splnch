@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLXChangePadForeground</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>SLXChangePadForeground</h2>
+<p>
+	パッドのアクティブ状態が変更されたときに呼ばれます。
+</p>
+
+<h3>構文</h3>
+<pre>
+function <strong>SLXChangePadForeground</strong>(<strong>hWnd</strong>: HWND, <strong>Foreground</strong>: HWND): BOOL; stdcall;
+</pre>
+
+<h3>引数</h3>
+<table>
+	<tr>
+		<th>hWnd</th>
+		<td>アクティブ状態が変更されたパッドのウィンドウハンドル</td>
+	</tr>
+	<tr>
+		<th>Foreground</th>
+		<td>アクティブ状態のとき TRUE、非アクティブ状態のとき FALSE</td>
+	</tr>
+</table>
+
+<h3>戻り値</h3>
+<p>
+	関数が成功したら TRUE 、失敗したら FALSE を返します。
+</p>
+
+<h3>解説</h3>
+<p>
+	パッドのアクティブ状態が変更されると呼ばれます。すべてのパッドについて呼ばれます。
+</p>
+
+
+<h3>SL4 の対応</h3>
+<p>
+	4.1.2 Build 263 2007/5/31 以降
+</p>
+
+<div class="related">
+	<a href="SLXChangePadMouseEntered.html"><IMG src="arrow.gif">SLXChangePadMouseEntered</strong></a>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="SAWADA Shigeru" content="Special Launch 4 用プラグイン開発マニュアル">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+<title>SLXChangePadMouseEntered</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>SLXChangePadMouseEntered</h2>
+<p>
+	パッドにマウスポインタが入ったときと出たときに呼ばれます。
+</p>
+
+<h3>構文</h3>
+<pre>
+function <strong>SLXChangePadMouseEntered</strong>(<strong>hWnd</strong>: HWND, <strong>Entered</strong>: HWND): BOOL; stdcall;
+</pre>
+
+<h3>引数</h3>
+<table>
+	<tr>
+		<th>hWnd</th>
+		<td>マウスが通過したパッドのウィンドウハンドル</td>
+	</tr>
+	<tr>
+		<th>Entered</th>
+		<td>マウスが入ったときに TRUE、出たときに FALSE</td>
+	</tr>
+</table>
+
+<h3>戻り値</h3>
+<p>
+	関数が成功したら TRUE 、失敗したら FALSE を返します。
+</p>
+
+<h3>解説</h3>
+<p>
+	パッドにマウスポインタが入ったときと出たときに呼ばれます。すべてのパッドについて呼ばれます。
+</p>
+
+
+
+
+
+<h3>SL4 の対応</h3>
+<p>
+	4.1.2 Build 264 2007/6/8 以降
+</p>
+
+
+<div class="related">
+	<a href="SLXChangePadForeground.html"><IMG src="arrow.gif">SLXChangePadForeground</strong></a>
+</div>
+
+</body>
+</html>

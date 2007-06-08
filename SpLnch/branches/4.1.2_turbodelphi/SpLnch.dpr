@@ -1,5 +1,6 @@
 program SpLnch;
 
+{$R 'Resource.res' 'Resource.rc'}
 {%ToDo 'SpLnch.todo'}
 {%TogetherDiagram 'ModelSupport_SpLnch\default.txaPackage'}
 {%TogetherDiagram 'ModelSupport_SpLnch\SetArrg\default.txaPackage'}
@@ -29,7 +30,6 @@ program SpLnch;
 {%TogetherDiagram 'ModelSupport_SpLnch\PadTab\default.txaPackage'}
 {%TogetherDiagram 'ModelSupport_SpLnch\Pad\default.txaPackage'}
 {%TogetherDiagram 'ModelSupport_SpLnch\default.txvpck'}
-{$R 'Resource.res' 'Resource.rc'}
 
 uses
   Forms,

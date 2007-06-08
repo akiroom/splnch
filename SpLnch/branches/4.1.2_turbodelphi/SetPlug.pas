@@ -85,8 +85,10 @@ type
     SLXBeginPlugin: function: BOOL; stdcall;
     SLXEndPlugin: function: BOOL; stdcall;
     SLXChangeOptions: function(hWnd: HWND): BOOL; stdcall;
-    SLXChangePadActive: function(hWnd: HWND): BOOL; stdcall;
+
+    // 状態検知用関数
     SLXChangePadForeground: function(Wnd: HWND; Foreground: BOOL): BOOL; stdcall;
+    SLXChangePadMouseEntered: function(Wnd: HWND; Entered: BOOL): BOOL; stdcall;
 
     // ボタン用関数
     SLXGetButton: function(No: Integer; ButtonInfo: PSLXButtonInfo): BOOL; stdcall;
@@ -296,6 +298,7 @@ begin
     @SLXEndPlugin := nil;
     @SLXChangeOptions := nil;
     @SLXChangePadForeground := nil;
+    @SLXChangePadMouseEntered := nil;
     @SLXGetButton := nil;
     @SLXButtonCreate := nil;
     @SLXButtonDestroy := nil;
@@ -340,6 +343,7 @@ begin
     @SLXEndPlugin := GetProcAddress(Handle, 'SLXEndPlugin');
     @SLXChangeOptions := GetProcAddress(Handle, 'SLXChangeOptions');
     @SLXChangePadForeground := GetProcAddress(Handle, 'SLXChangePadForeground');
+    @SLXChangePadMouseEntered := GetProcAddress(Handle, 'SLXChangePadMouseEntered');
     @SLXBeginSkin := GetProcAddress(Handle, 'SLXBeginSkin');
     @SLXDrawDragBar := GetProcAddress(Handle, 'SLXDrawDragBar');
     @SLXDrawWorkspace := GetProcAddress(Handle, 'SLXDrawWorkspace');
@@ -394,6 +398,7 @@ begin
       @SLXEndPlugin := nil;
       @SLXChangeOptions := nil;
       @SLXChangePadForeground := nil;
+      @SLXChangePadMouseEntered := nil;
       @SLXGetButton := nil;
       @SLXButtonCreate := nil;
       @SLXButtonDestroy := nil;

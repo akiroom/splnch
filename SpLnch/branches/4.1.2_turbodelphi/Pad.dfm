@@ -39,8 +39,6 @@ object frmPad: TfrmPad
     OnDblClick = pnlDragBarDblClick
     OnMouseMove = pnlDragBarMouseMove
     OnMouseUp = pnlDragBarMouseUp
-    ExplicitWidth = 208
-    ExplicitHeight = 122
     object pnlScrollBar: TPanel
       Left = 165
       Top = 0
@@ -52,8 +50,6 @@ object frmPad: TfrmPad
       ParentColor = True
       TabOrder = 0
       OnResize = pnlScrollBarResize
-      ExplicitLeft = 190
-      ExplicitHeight = 122
       object pbWallPaper2: TPaintBox
         Left = 0
         Top = 0
@@ -79,8 +75,6 @@ object frmPad: TfrmPad
       OnDblClick = pnlDragBarDblClick
       OnMouseMove = pnlDragBarMouseMove
       OnMouseUp = pnlDragBarMouseUp
-      ExplicitWidth = 190
-      ExplicitHeight = 122
       object pnlButtons: TPanel
         Left = 0
         Top = 0
@@ -119,7 +113,6 @@ object frmPad: TfrmPad
     OnDblClick = pnlDragBarDblClick
     OnMouseMove = pnlDragBarMouseMove
     OnMouseUp = pnlDragBarMouseUp
-    ExplicitHeight = 122
     object pbDragBar: TPaintBox
       Left = 0
       Top = 0

@@ -2759,7 +2759,6 @@ begin
     begin
       Plugin.SLXChangePadForeground(Handle, FForeground);
     end;
-
   end;
 //OutputDebugString(PChar(IntToStr(GetTickCount - ms)));
 
@@ -2770,6 +2769,9 @@ end;
 
 // マウスポインタがくる
 procedure TfrmPad.SetMouseEntered(Value: Boolean);
+var
+  i: Integer;
+  Plugin: TPlugin;
 begin
   if FMouseEntered = Value then
     Exit;
@@ -2777,10 +2779,25 @@ begin
   FMouseEntered := Value;
 
   tmHideScreen.Enabled := False;
+
+  // プラグインに通知
+  for i := 0 to Plugins.Count - 1 do
+  begin
+    Plugin := TPlugin(Plugins.Objects[i]);
+    if @Plugin.SLXChangePadMouseEntered <> nil then
+    begin
+      Plugin.SLXChangePadMouseEntered(Handle, FMouseEntered);
+    end;
+  end;
+
   if FMouseEntered then
-    tmHideScreen.Interval := FShowDelay
+  begin
+    tmHideScreen.Interval := FShowDelay;
+  end
   else
+  begin
     tmHideScreen.Interval := FHideDelay;
+  end;
   tmHideScreen.Enabled := True;
 end;
 

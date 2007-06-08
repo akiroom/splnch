@@ -3,7 +3,8 @@ unit PlugFunc;
 interface
 
 uses
-  Windows, Messages, SysUtils, Graphics, Classes, IniFiles, W2k, SLAPI, InAlpha;
+  Windows, Messages, SysUtils, ExtCtrls, Graphics, Classes, IniFiles, W2k,
+  SLAPI, InAlpha, Forms;
 
 // 構造体 ----------------------------------------------------------------------
 type
@@ -32,6 +33,8 @@ function SLXEndPlugin: BOOL; stdcall;
 function SLXChangeOptions(hWnd: HWND): BOOL; stdcall;
 // パッドがアクティブになったときの処理
 function SLXChangePadForeground(Wnd: HWND; Foreground: BOOL): BOOL; stdcall;
+// パッドにマウスが入ったときの処理
+function SLXChangePadMouseEntered(Wnd: HWND; Entered: BOOL): BOOL; stdcall;
 
 // メニュー用関数 --------------------------------------------------------------
 
@@ -71,13 +74,27 @@ type
   TLayerdPad = class(TObject)
     ID: Integer;
     Alpha: Integer;
+    LastAlpha: Integer;
+    NowAlpha: Integer;
+    Foreground: Boolean;
+    Entered: Boolean;
+  end;
+
+
+  TDummyControl = class(TObject)
+    Timer: TTimer;
+    constructor Create;
+    destructor Destroy; override;
+  private
+    procedure TimerTimer(Sender: TObject);
   end;
 
 var
   InitFileName: string; // 設定ファイル名
   LayerdPads: TList;
+  DummyControl: TDummyControl;
 
-procedure SetLayerdPad(ID, Alpha: Integer);
+procedure SetLayerdPad(ID, Alpha, LastAlpha: Integer);
 
 implementation
 
@@ -135,7 +152,7 @@ begin
       if ID = 0 then
         Break;
 
-      SetLayerdPad(ID, Alpha);
+      SetLayerdPad(ID, Alpha, Alpha);
       Inc(i);
     end;
   finally
@@ -196,36 +213,80 @@ begin
   end;
 end;
 
+// パッドのマウス状態とフォーカス状態をチェック
+function PadActive(Pad: TLayerdPad): Boolean;
+var
+  Active: Boolean;
+  PadWnd, PadTabWnd: HWND;
+begin
+  Active := Pad.Foreground or Pad.Entered;
+  if Active then
+  begin
+    Pad.LastAlpha := 255;
+    Pad.NowAlpha := 255;
+    PadWnd := SLAGetPadWnd(Pad.ID);
+    PadTabWnd := SLAGetPadTabWnd(Pad.ID);
+    MySetLayeredWindowAttributes(PadWnd, 0, Byte(255), LWA_ALPHA);
+    MySetLayeredWindowAttributes(PadTabWnd, 0, Byte(255), LWA_ALPHA);
+  end
+  else
+  begin
+    Pad.LastAlpha := Pad.Alpha;
+  end;
+  Result := Active;
+end;
+
 // パッドがアクティブになったときの処理
 function SLXChangePadForeground(Wnd: HWND; Foreground: BOOL): BOOL; stdcall;
 var
-  ID, Alpha: Integer;
+  ID: Integer;
   i: Integer;
+  TimerEnabled: Boolean;
   PadWnd, PadTabWnd: HWND;
 begin
   Result := True;
 
+  TimerEnabled := False;
   ID := SLAGetPadID(Wnd);
   for i := 0 to LayerdPads.Count - 1 do
   begin
     if TLayerdPad(LayerdPads[i]).ID = ID then
     begin
-      Alpha := TLayerdPad(LayerdPads[i]).Alpha;
-      PadWnd := SLAGetPadWnd(ID);
-      PadTabWnd := SLAGetPadTabWnd(ID);
-      if Foreground then
-      begin
-        MySetLayeredWindowAttributes(PadWnd, 0, Byte(255), LWA_ALPHA);
-        MySetLayeredWindowAttributes(PadTabWnd, 0, Byte(255), LWA_ALPHA);
-      end
-      else
-      begin
-        MySetLayeredWindowAttributes(PadWnd, 0, Byte(Alpha), LWA_ALPHA);
-        MySetLayeredWindowAttributes(PadTabWnd, 0, Byte(Alpha), LWA_ALPHA);
-      end;
+      TLayerdPad(LayerdPads[i]).Foreground := Foreground;
+      PadActive(TLayerdPad(LayerdPads[i]));
     end;
+    if TLayerdPad(LayerdPads[i]).NowAlpha <> TLayerdPad(LayerdPads[i]).LastAlpha then
+      TimerEnabled := True;
   end;
+  DummyControl.Timer.Enabled := TimerEnabled;
 end;
+
+// パッドにマウスが入ったときの処理
+function SLXChangePadMouseEntered(Wnd: HWND; Entered: BOOL): BOOL;
+var
+  ID: Integer;
+  i: Integer;
+  TimerEnabled: Boolean;
+  PadWnd, PadTabWnd: HWND;
+begin
+  Result := True;
+
+  TimerEnabled := False;
+  ID := SLAGetPadID(Wnd);
+  for i := 0 to LayerdPads.Count - 1 do
+  begin
+    if TLayerdPad(LayerdPads[i]).ID = ID then
+    begin
+      TLayerdPad(LayerdPads[i]).Entered := Entered;
+      PadActive(TLayerdPad(LayerdPads[i]));
+    end;
+    if TLayerdPad(LayerdPads[i]).NowAlpha <> TLayerdPad(LayerdPads[i]).LastAlpha then
+      TimerEnabled := True;
+  end;
+  DummyControl.Timer.Enabled := TimerEnabled;
+end;
+
+
 
 // メニューが選択されたときの処理
 function SLXMenuClick(No: Integer; hWnd: HWND): BOOL;
@@ -263,11 +324,11 @@ begin
     dlgInAlpha := nil;
   end;
 
-  SetLayerdPad(ID, Alpha);
+  SetLayerdPad(ID, Alpha, 255);
 end;
 
 // 半透明化
-procedure SetLayerdPad(ID, Alpha: Integer);
+procedure SetLayerdPad(ID, Alpha, LastAlpha: Integer);
 var
   LayerdPad: TLayerdPad;
   PadWnd, PadTabWnd: HWND;
@@ -285,17 +346,87 @@ begin
   LayerdPad := TLayerdPad.Create;
   LayerdPad.ID := ID;
   LayerdPad.Alpha := Alpha;
+  LayerdPad.LastAlpha := LastAlpha;
+  LayerdPad.NowAlpha := Alpha;
   LayerdPads.Add(LayerdPad);
 
   SetWindowLong(PadWnd, GWL_EXSTYLE, GetWindowLong(PadWnd, GWL_EXSTYLE) or WS_EX_LAYERED);
-  MySetLayeredWindowAttributes(PadWnd, 0, Byte(Alpha), LWA_ALPHA);
   SetWindowLong(PadTabWnd, GWL_EXSTYLE, GetWindowLong(PadTabWnd, GWL_EXSTYLE) or WS_EX_LAYERED);
+  MySetLayeredWindowAttributes(PadWnd, 0, Byte(Alpha), LWA_ALPHA);
   MySetLayeredWindowAttributes(PadTabWnd, 0, Byte(Alpha), LWA_ALPHA);
+  DummyControl.Timer.Enabled := True;
+end;
+
+// タイマー
+constructor TDummyControl.Create;
+begin
+  Timer := TTimer.Create(nil);
+  Timer.Enabled := False;
+  Timer.OnTimer := TimerTimer;
+  Timer.Interval := 50;
+end;
+
+destructor TDummyControl.Destroy;
+begin
+  Timer.Free;
+  inherited;
+end;
+
+procedure TDummyControl.TimerTimer(Sender: TObject);
+var
+  ID, Alpha, NowAlpha, LastAlpha: Integer;
+  AlphaDiff: Integer;
+  i: Integer;
+  PadWnd, PadTabWnd: HWND;
+  TimerEnabled: Boolean;
+begin
+//      OutputDebugString(PChar(IntToStr(ID) + ':' + IntToStr(NowAlpha)));
+
+  TimerEnabled := False;
+  for i := 0 to LayerdPads.Count - 1 do
+  begin
+    ID := TLayerdPad(LayerdPads[i]).ID;
+    Alpha := TLayerdPad(LayerdPads[i]).Alpha;
+    LastAlpha := TLayerdPad(LayerdPads[i]).LastAlpha;
+    NowAlpha := TLayerdPad(LayerdPads[i]).NowAlpha;
+    if NowAlpha < LastAlpha  then
+    begin
+      AlphaDiff := Abs(Alpha - LastAlpha) div 2 + 1;
+      NowAlpha := NowAlpha + AlphaDiff;
+      if NowAlpha > LastAlpha then
+        NowAlpha := LastAlpha;
+    end
+    else
+    if NowAlpha > LastAlpha  then
+    begin
+      AlphaDiff := Abs(NowAlpha - LastAlpha) div 10 + 1;
+      NowAlpha := NowAlpha - AlphaDiff;
+      if NowAlpha < LastAlpha then
+        NowAlpha := LastAlpha;
+    end;
+
+    if NowAlpha <> TLayerdPad(LayerdPads[i]).NowAlpha then
+    begin
+      PadWnd := SLAGetPadWnd(ID);
+      PadTabWnd := SLAGetPadTabWnd(ID);
+      MySetLayeredWindowAttributes(PadWnd, 0, Byte(NowAlpha), LWA_ALPHA);
+      MySetLayeredWindowAttributes(PadTabWnd, 0, Byte(NowAlpha), LWA_ALPHA);
+      TLayerdPad(LayerdPads[i]).NowAlpha := NowAlpha;
+    end;
+
+    if NowAlpha <> LastAlpha then
+    begin
+      TimerEnabled := True;
+    end;
+
+  end;
+  TTimer(Sender).Enabled := TimerEnabled;
 end;
 
 procedure Init;
 begin
   LayerdPads := TList.Create;
+  DummyControl := TDummyControl.Create;
 end;
 
 procedure Fin;
@@ -305,6 +436,7 @@ begin
   for i := 0 to LayerdPads.Count - 1 do
     TLayerdPad(LayerdPads[i]).Free;
   LayerdPads.Free;
+  DummyControl.Free;
 end;
 
 

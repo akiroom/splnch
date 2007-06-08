@@ -20,6 +20,7 @@ exports
   SLXEndPlugin,
   SLXChangeOptions,
   SLXChangePadForeground,
+  SLXChangePadMouseEntered,
   SLXGetMenu,
   SLXMenuClick;
 begin

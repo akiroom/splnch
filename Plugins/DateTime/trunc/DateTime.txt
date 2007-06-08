@@ -3,10 +3,10 @@
 【バージョン  】 1.0.2 Build 30
 【対応システム】 Windows 95 / 98 / Me / NT 4.0 / 2000 / XP
 【種別        】 フリーソフト
-【開発言語    】 Borland Delphi 7
+【開発言語    】 Borland Turbo Delphi 2006
 【転載・条件  】 自由
 【著作者      】 沢田茂
-【最新版の場所】 http://sl.himatsubu.com/
+【最新版の場所】 http://splnch.sourceforge.jp/
                  http://sourceforge.jp/projects/splnch/
 
 
@@ -103,6 +103,9 @@
 1.0.2 Build 30 2007/5/29
 ・ バージョン 1.0.1 でカレンダーが開けなくなっていたので修正
    しました。
+
+1.0.3 Build 31 2007/6/1
+・ 開発環境を Borland Turbo Delphi 2006 にしました。
 __________________________________________________________
                                      Copyright(C)1996-2007
                         SAWADA Shigeru All rights reserved.

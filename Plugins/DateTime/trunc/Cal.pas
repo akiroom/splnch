@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   IniFiles, Buttons, ExtCtrls, StdCtrls, Julius, Holiday, Menus, BtnTitle,
-  Memo, PlugBtns;
+  Memo, PlugBtns, Types;
 
 type
   TDragType = (dtNone, dtNormal, dtMemoBegin, dtMemoEnd, dtMemo);
@@ -319,7 +319,7 @@ begin
          '確認', MB_ICONINFORMATION);
     MemoStream.MemoList.Add(NewMemo);
     MemoUpdate;
-    pbCalendar.Invalidate;
+    pbCalendar.Refresh;
 
   finally
     MemoFilterEnd;
@@ -360,7 +360,7 @@ begin
         MessageBox(Handle, PChar('フィルタが有効になっているため、変更されたメモ "'
            + FFocusMemo.TopLine + '" は表示されませんが、登録はされています。'), '確認', MB_ICONINFORMATION);
       MemoUpdate;
-      pbCalendar.Invalidate;
+      pbCalendar.Refresh;
     finally
       MemoFilterEnd;
     end;
@@ -395,7 +395,7 @@ begin
       MemoStream.MemoList.Remove(FFocusMemo);
       FocusMemo := nil;
       MemoUpdate;
-      pbCalendar.Invalidate;
+      pbCalendar.Refresh;
     end;
   end;
 end;
@@ -413,7 +413,7 @@ end;
 procedure TfrmCal.MemoListApply(Sender: TObject);
 begin
   MemoUpdate;
-  pbCalendar.Invalidate;
+  pbCalendar.Refresh;
 end;
 
 procedure TfrmCal.FilterApply(Sender: TObject);
@@ -423,7 +423,7 @@ begin
     MemoFilter.Assign(TdlgFilter(Sender).MemoFilter);
     MemoUpdate;
   finally
-    pbCalendar.Invalidate;
+    pbCalendar.Refresh;
     MemoFilterEnd;
   end;
 end;
@@ -452,7 +452,7 @@ begin
     MemoUpdate;
   finally
     MemoFilterEnd;
-    pbCalendar.Invalidate;
+    pbCalendar.Refresh;
   end;
 end;
 
@@ -883,8 +883,8 @@ begin
     FSelBeginDate := Value;
   FSelEndDate := Value;
 
-  pbMonth.Invalidate;
-  pbCalendar.Invalidate;
+  pbMonth.Refresh;
+  pbCalendar.Refresh;
 end;
 
 
@@ -960,8 +960,8 @@ begin
 
   FFocusMemo := Value;
 
-  pbMonth.Invalidate;
-  pbCalendar.Invalidate;
+  pbMonth.Refresh;
+  pbCalendar.Refresh;
 end;
 
 // 日の幅
@@ -1747,8 +1747,8 @@ begin
   pbCalendar.SetBounds(pbMonth.Left, pbMonth.Top + pbMonth.Height + 8, pbMonth.Width,
     ClientHeight - (pbMonth.Top + pbMonth.Height + 8) - 8);
 
-  pbMonth.Invalidate;
-  pbCalendar.Invalidate;
+  pbMonth.Refresh;
+  pbCalendar.Refresh;
 end;
 
 procedure TfrmCal.mnuOptionClick(Sender: TObject);

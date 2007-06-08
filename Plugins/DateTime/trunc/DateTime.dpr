@@ -1,5 +1,27 @@
 library DateTime;
 
+{$R 'Resource.res' 'Resource.rc'}
+{%TogetherDiagram 'ModelSupport_DateTime\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_DateTime\Memo\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_DateTime\Option\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_DateTime\MemoList\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_DateTime\EditKind\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_DateTime\PlugFunc\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_DateTime\PlugBtns\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_DateTime\DateTime\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_DateTime\Julius\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_DateTime\Output\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_DateTime\EditMemo\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_DateTime\Kind\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_DateTime\Holiday\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_DateTime\Cal\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_DateTime\BtnTitle\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_DateTime\Filter\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_DateTime\default.txvpck'}
+{%TogetherDiagram 'ModelSupport_DateTime\BtnTitle\default.txvpck'}
+{%TogetherDiagram 'ModelSupport_DateTime\DateTime\default.txvpck'}
+{%TogetherDiagram 'ModelSupport_DateTime\Cal\default.txvpck'}
+
 uses
   SysUtils,
   Classes,
@@ -21,7 +43,6 @@ uses
 {$E slx}
 
 {$R *.RES}
-{$R DATA.RES}
 
 exports
   SLXGetName,

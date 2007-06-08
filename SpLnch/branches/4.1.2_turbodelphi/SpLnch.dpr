@@ -29,6 +29,7 @@ program SpLnch;
 {%TogetherDiagram 'ModelSupport_SpLnch\PadTab\default.txaPackage'}
 {%TogetherDiagram 'ModelSupport_SpLnch\Pad\default.txaPackage'}
 {%TogetherDiagram 'ModelSupport_SpLnch\default.txvpck'}
+{$R 'Resource.res' 'Resource.rc'}
 
 uses
   Forms,
@@ -61,7 +62,6 @@ uses
   ShlObjAdditional in 'ShlObjAdditional.pas';
 
 {$R *.RES}
-{$R DATA.RES}
 
 exports
   SLAGetPadCount,

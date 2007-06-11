@@ -3,8 +3,8 @@ object frmPad: TfrmPad
   Top = 353
   BorderStyle = bsNone
   Caption = 'Special Launch'
-  ClientHeight = 129
-  ClientWidth = 234
+  ClientHeight = 150
+  ClientWidth = 200
   Color = clGray
   Font.Charset = SHIFTJIS_CHARSET
   Font.Color = clWindowText
@@ -29,8 +29,8 @@ object frmPad: TfrmPad
   object pnlMain: TPanel
     Left = 17
     Top = 0
-    Width = 217
-    Height = 129
+    Width = 183
+    Height = 150
     Align = alClient
     BevelOuter = bvNone
     FullRepaint = False
@@ -40,10 +40,10 @@ object frmPad: TfrmPad
     OnMouseMove = pnlDragBarMouseMove
     OnMouseUp = pnlDragBarMouseUp
     object pnlScrollBar: TPanel
-      Left = 199
+      Left = 165
       Top = 0
       Width = 18
-      Height = 129
+      Height = 150
       Align = alRight
       BevelOuter = bvNone
       FullRepaint = False
@@ -54,18 +54,19 @@ object frmPad: TfrmPad
         Left = 0
         Top = 0
         Width = 18
-        Height = 129
+        Height = 150
         Align = alClient
         Enabled = False
         Visible = False
         OnPaint = pbWallPaper1Paint
+        ExplicitHeight = 129
       end
     end
     object pnlWorkSpace: TPanel
       Left = 0
       Top = 0
-      Width = 199
-      Height = 129
+      Width = 165
+      Height = 150
       Align = alClient
       BevelOuter = bvNone
       FullRepaint = False
@@ -103,7 +104,7 @@ object frmPad: TfrmPad
     Left = 0
     Top = 0
     Width = 17
-    Height = 129
+    Height = 150
     Align = alLeft
     BevelOuter = bvNone
     FullRepaint = False
@@ -116,10 +117,11 @@ object frmPad: TfrmPad
       Left = 0
       Top = 0
       Width = 17
-      Height = 129
+      Height = 150
       Align = alClient
       Enabled = False
       OnPaint = pbDragBarPaint
+      ExplicitHeight = 129
     end
   end
   object popMain: TPopupMenu

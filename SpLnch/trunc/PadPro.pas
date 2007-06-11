@@ -268,7 +268,7 @@ var
   SLScrollButton: TSLScrollButton;
   Plugin: TPlugin;
 begin
-  //tabSkins.TabVisible := False;
+  tabSkins.TabVisible := False;
 
   // 画像読み込み
   imlLayout.ResInstLoad(hInstance, rtBitmap, 'LAYOUT', clFuchsia);
@@ -862,8 +862,6 @@ var
   SLNormalButton: TSLNormalButton;
   C: LongInt;
   R, G, B: Word;
-  RadioButton: TRadioButton;
-  LabelRects: TList;
 begin
   MarginSize := 2;
 
@@ -1134,10 +1132,10 @@ begin
       Inc(i);
   end;
 
-  pbDragBar.Invalidate;
-  pbScrollBar.Invalidate;
-  pbWorkSpace.Invalidate;
-  pbHide.Invalidate;
+  pbDragBar.Refresh;
+  pbScrollBar.Refresh;
+  pbWorkSpace.Refresh;
+  pbHide.Refresh;
 end;
 
 // ドラッグバー描画

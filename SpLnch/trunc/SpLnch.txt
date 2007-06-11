@@ -1,10 +1,10 @@
 
 【ソフト名    】 Special Launch
-【バージョン  】 4.1.2 Build 263 
+【バージョン  】 4.1.2 Build 264 
 【対応システム】 Windows 95 / 98 / Me / NT 4.0 / 2000 / XP
 【種別        】 フリーソフト（寄付歓迎）
 【開発マシン  】 TOSHIBA dynabook SS/S8
-【開発言語    】 Borland Delphi 7
+【開発言語    】 Borland Turbo Delphi 2006
 【転載・条件  】 自由
 【著作者      】 沢田茂
 【最新版の場所】 http://splnch.sourceforge.jp/
@@ -84,11 +84,15 @@
    目的に適合することを保証しません。
 
 
-【4.1.1 Build 261 → 4.1.2 Build 263】
+【4.1.1 Build 261 → 4.1.2 Build 264】
+・ 開発環境を Borland Turbo Delphi 2006 にしました。
 ・ マルチディスプレイ環境での動作に対応しました。
 ・ プラグイン関数に SLXChangePadForeground を追加しました。
    プラグインはパッドのアクティブ状態の変更を知ることが可能
    になります。
+・ プラグイン関数に SLXChangePadMouseEntered を追加しました。
+   プラグインはパッドにマウスが入ったときと出たときを知るこ
+   とが可能になります。
 
 
 __________________________________________________________

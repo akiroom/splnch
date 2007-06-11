@@ -682,8 +682,13 @@ begin
     HideColor := Ini.ReadInteger(IS_PADOPTIONS, 'HideColor', HideColor);
     SkinPlugin := Plugins.FindPlugin(Ini.ReadString(IS_PADOPTIONS, 'SkinName', ''));
 
+    // モニター番号がずれないように最小値
+    Width := 1;
+    Height := 1;
+
     Left := Ini.ReadInteger(IS_PADOPTIONS, 'Left', Left);
     Top := Ini.ReadInteger(IS_PADOPTIONS, 'Top', Top);
+
     SizeCheck;
     UserMoved;
 
@@ -954,8 +959,8 @@ begin
   end;
   pbWallPaper1.Visible := (FWallPaperBitmap <> nil) or (FSkinPlugin <> nil);
   pbWallPaper2.Visible := pbWallPaper1.Visible;
-  pbWallPaper1.Invalidate;
-  pbWallPaper2.Invalidate;
+  pbWallPaper1.Refresh;
+  pbWallPaper2.Refresh;
 end;
 
 // スキンプラグイン
@@ -966,8 +971,8 @@ begin
     FSkinPlugin.SLXBeginSkin(Handle);
   pbWallPaper1.Visible := (FWallPaperBitmap <> nil) or (FSkinPlugin <> nil);
   pbWallPaper2.Visible := pbWallPaper1.Visible;
-  pbWallPaper1.Invalidate;
-  pbWallPaper2.Invalidate;
+  pbWallPaper1.Refresh;
+  pbWallPaper2.Refresh;
 
   ArrangeScrolls;
   ArrangeButtons;
@@ -1035,7 +1040,7 @@ begin
     ResizeDragBar;
     pnlDragBar.Visible := True;
   end;
-  pnlDragBar.Invalidate;
+  pnlDragBar.Refresh;
 
   SizeCheck;
 end;
@@ -2716,6 +2721,7 @@ procedure TfrmPad.SetForeground(Value: Boolean);
 var
   i: Integer;
   Plugin: TPlugin;
+//  ms :Cardinal;
 begin
   if (Pads = nil) or Pads.Destroying then
     Exit;
@@ -2724,6 +2730,8 @@ begin
     Exit;
   FForeground := Value;
 
+//ms :=GetTickCount;
+
   FButtonArrangement.Active := Value;
 
   ArrangeGroupMenu;
@@ -2731,9 +2739,9 @@ begin
   if not FForeground then
     HideTitle;
 
-  pbDragBar.Invalidate;
-  pbWallPaper1.Invalidate;
-  pbWallPaper2.Invalidate;
+  pbDragBar.Refresh;
+  pbWallPaper1.Refresh;
+  pbWallPaper2.Refresh;
 
   tmHideScreen.Enabled := False;
   if FForeground then
@@ -2741,6 +2749,7 @@ begin
   else
     tmHideScreen.Interval := FHideDelay;
   tmHideScreen.Enabled := True;
+
 
   // プラグインに通知
   for i := 0 to Plugins.Count - 1 do
@@ -2750,8 +2759,9 @@ begin
     begin
       Plugin.SLXChangePadForeground(Handle, FForeground);
     end;
-
   end;
+//OutputDebugString(PChar(IntToStr(GetTickCount - ms)));
+
 end;
 
 
@@ -2759,6 +2769,9 @@ end;
 
 // マウスポインタがくる
 procedure TfrmPad.SetMouseEntered(Value: Boolean);
+var
+  i: Integer;
+  Plugin: TPlugin;
 begin
   if FMouseEntered = Value then
     Exit;
@@ -2766,10 +2779,25 @@ begin
   FMouseEntered := Value;
 
   tmHideScreen.Enabled := False;
+
+  // プラグインに通知
+  for i := 0 to Plugins.Count - 1 do
+  begin
+    Plugin := TPlugin(Plugins.Objects[i]);
+    if @Plugin.SLXChangePadMouseEntered <> nil then
+    begin
+      Plugin.SLXChangePadMouseEntered(Handle, FMouseEntered);
+    end;
+  end;
+
   if FMouseEntered then
-    tmHideScreen.Interval := FShowDelay
+  begin
+    tmHideScreen.Interval := FShowDelay;
+  end
   else
+  begin
     tmHideScreen.Interval := FHideDelay;
+  end;
   tmHideScreen.Enabled := True;
 end;
 
@@ -3003,6 +3031,7 @@ procedure TfrmPad.ArrangeButtons;
         SLPluginButton.OwnerDraw := True;
         SLPluginButton.OnDrawButton := btnPluginButtonDrawButton;
         SLPluginButton.IconHandle := 0;
+        SLPluginButton.Refresh;
       end
       // 描画なし
       else

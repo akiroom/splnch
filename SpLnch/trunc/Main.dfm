@@ -1,9 +1,9 @@
 object frmMain: TfrmMain
   Left = 436
   Top = 586
-  Width = 234
-  Height = 191
   Caption = 'Special Launch'
+  ClientHeight = 157
+  ClientWidth = 226
   Color = clBtnFace
   Font.Charset = SHIFTJIS_CHARSET
   Font.Color = clWindowText

@@ -1,6 +1,35 @@
 program SpLnch;
 
+{$R 'Resource.res' 'Resource.rc'}
 {%ToDo 'SpLnch.todo'}
+{%TogetherDiagram 'ModelSupport_SpLnch\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\SetArrg\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\PadPro\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\SetInit\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\SpLnch\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\Option\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\About\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\SetBtn\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\Main\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\SLBtns\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\BtnEdit\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\pidl\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\ShlObjAdditional\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\OleData\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\SetPlug\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\InitFld\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\OleBtn\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\SetIcons\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\SetPads\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\SLAPI\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\Password\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\BtnPro\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\BtnTitle\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\IconChg\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\ComLine\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\PadTab\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\Pad\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_SpLnch\default.txvpck'}
 
 uses
   Forms,
@@ -33,7 +62,6 @@ uses
   ShlObjAdditional in 'ShlObjAdditional.pas';
 
 {$R *.RES}
-{$R DATA.RES}
 
 exports
   SLAGetPadCount,

@@ -928,7 +928,7 @@ begin
 
       if rdoInstall.Checked then
       begin
-        SL4Unlock;
+        SetupUnlock;
         if Application.MessageBox('Special Launch ‚ð‚·‚®‚É‹N“®‚µ‚Ü‚·‚©?', 'Šm”F', MB_ICONQUESTION or MB_YESNO) = idYes then
           WinExec(PChar(GetTargetFolder + 'SpLnch.exe'), SW_SHOW);
         if not FUpdateInstall then

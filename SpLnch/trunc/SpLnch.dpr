@@ -34,6 +34,7 @@ program SpLnch;
 uses
   Forms,
   Windows,
+  Messages,
   Main in 'Main.pas' {frmMain},
   Pad in 'Pad.pas' {frmPad},
   SetInit in 'SetInit.pas',
@@ -93,20 +94,63 @@ exports
 
 const
   MUTEX_NAME = 'Special Launch Mutex';
+  SETUP_MUTEX_NAME = 'Special Launch Setup Mutex';
 var
   hMutex: THandle;
   Msg: String;
+  Wnd: hWnd;
 begin
 
   hMutex := OpenMutex(MUTEX_ALL_ACCESS, False, MUTEX_NAME);
   if hMutex <> 0 then
   begin
-    Msg := 'Special Launch が起動しているか、関連のツールがロックしています。'
-        + '該当するプログラムを終了して再度実行してください。';
-    MessageBox(GetDesktopWindow, PChar(Msg),
-      '確認', MB_ICONINFORMATION);
+    Wnd := FindWindow('TApplication', 'Special Launch');
+    if Wnd <> 0 then
+    begin
+      try
+        SetForegroundWindow(Wnd);
+      except
+        // 初期化が終わってないと例外発生
+        Wnd := 0;
+      end;
+      SendMessage(Wnd, WM_CLOSE, 0, 0);
+    end;
+    if Wnd = 0 then
+    begin
+      Msg := 'Special Launch 関連のツールがロックしています。'
+          + '該当するプログラムを終了して再度実行してください。';
+      MessageBox(GetDesktopWindow, PChar(Msg),
+        '確認', MB_ICONINFORMATION);
+    end;
+
     Exit;
   end;
+
+  // セットアップを確認
+  hMutex := OpenMutex(MUTEX_ALL_ACCESS, False, SETUP_MUTEX_NAME);
+  if hMutex <> 0 then
+  begin
+    Wnd := FindWindow('TApplication', 'Special Launch セットアップ');
+    if Wnd <> 0 then
+    begin
+      try
+        SetForegroundWindow(Wnd);
+      except
+        // 初期化が終わってないと例外発生
+        Wnd := 0;
+      end;
+    end;
+    if Wnd = 0 then
+    begin
+      Msg := 'Special Launch セットアップがロックしています。'
+          + 'プログラムを終了して再度実行してください。';
+      MessageBox(GetDesktopWindow, PChar(Msg),
+        '確認', MB_ICONINFORMATION);
+    end;
+
+    Exit;
+  end;
+
 
   hMutex := CreateMutex(nil, False, MUTEX_NAME);
 

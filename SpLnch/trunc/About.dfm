@@ -29,9 +29,7 @@ object dlgAbout: TdlgAbout
     Height = 12
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
-    BiDiMode = bdRightToLeft
     Caption = #12496#12540#12472#12519#12531#30058#21495
-    ParentBiDiMode = False
     Transparent = True
     IsControl = True
   end

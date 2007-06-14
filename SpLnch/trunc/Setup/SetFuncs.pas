@@ -6,9 +6,7 @@ uses
   Windows, SysUtils, Classes, SetBtn, IniFiles, ShellAPI, Forms, Dialogs,
   Registry, ShlObj, ActiveX, ComObj, pidl;
 
-function SL4Locked: Boolean;
-procedure SL4Lock;
-procedure SL4Unlock;
+procedure SetupUnlock;
 
 function GetFileVersionNo(FileName: string; var Mj, Mn, Rl, Bl: Cardinal): Boolean;
 function UnknownFileExists(Folder: String): Boolean;
@@ -24,29 +22,23 @@ function SetDesktop(TargetFolder: String): Boolean;
 function UninstallTemp(DeleteData, DeletePlugins: Boolean): Boolean;
 function SL4FileDelete: Boolean;
 
-implementation
-
 const
   MUTEX_NAME = 'Special Launch Mutex';
-  UNINSTALLMUTEX = 'Special Launch Uninstall Mutex';
+  SETUP_MUTEX_NAME = 'Special Launch Setup Mutex';
 var
-  hMutex: THandle;
+  hSetupMutex: THandle;
 
-function SL4Locked: Boolean;
-begin
-  Result := OpenMutex(MUTEX_ALL_ACCESS, False, MUTEX_NAME) <> 0;
-end;
+implementation
 
-procedure SL4Lock;
-begin
-  hMutex := CreateMutex(nil, False, MUTEX_NAME);
-end;
 
-procedure SL4Unlock;
+procedure SetupUnlock;
 begin
-  if hMutex <> 0 then
-    CloseHandle(hMutex);
-  hMutex := 0;
+  if hSetupMutex <> 0 then
+  begin
+    ReleaseMutex(hSetupMutex);
+    CloseHandle(hSetupMutex);
+  end;
+  hSetupMutex := 0;
 end;
 
 
@@ -472,7 +464,6 @@ begin
 
   if Result then
   begin
-    CreateMutex(nil, False, UNINSTALLMUTEX);
     WinExec(PChar('"' + Folder + 'Setup.exe" -deletefile'), SW_SHOW);
   end;
 end;

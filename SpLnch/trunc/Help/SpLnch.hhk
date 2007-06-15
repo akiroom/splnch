@@ -333,6 +333,13 @@
 		<param name="Local" value="topic\reference-option.html">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ソフトウェアの更新を確認">
+		<param name="Name" value="メニュー">
+		<param name="Local" value="topic\reference-menu.html">
+		<param name="Name" value="全体の設定">
+		<param name="Local" value="topic\reference-option.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
 		<param name="Name" value="アイコンキャッシュ">
 		<param name="Name" value="全体の設定">
 		<param name="Local" value="topic\reference-option.html">

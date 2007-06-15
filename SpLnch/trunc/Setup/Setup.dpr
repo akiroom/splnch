@@ -39,6 +39,8 @@ begin
         end;
 
         try
+          ReleaseMutex(hMutex);
+          CloseHandle(hMutex);
           SendMessage(Wnd, WM_CLOSE, 0, 0);
         except
           // ‰Šú‰»‚ªI‚í‚Á‚Ä‚È‚¢‚Æ—áŠO”­¶

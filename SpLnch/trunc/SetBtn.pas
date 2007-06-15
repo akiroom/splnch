@@ -914,9 +914,6 @@ begin
   end;
 
   Result := ShellExecuteEx(@ExecInfo);
-{  MessageBox(AWnd, PChar(IntToStr(ExecInfo.hInstApp)), nil, 0);
-  if not Result then
-    MessageBox(AWnd, 'Ç¶ÇÁÅ`', nil, 0);}
 end;
 
 function OpenNormalButtonFolder(AWnd: HWND; AButton: TNormalButton): Boolean;

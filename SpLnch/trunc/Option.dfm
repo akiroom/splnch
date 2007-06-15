@@ -4,7 +4,7 @@ object dlgOption: TdlgOption
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = #20840#20307#12398#35373#23450
-  ClientHeight = 319
+  ClientHeight = 359
   ClientWidth = 482
   Color = clBtnFace
   Font.Charset = SHIFTJIS_CHARSET
@@ -23,7 +23,7 @@ object dlgOption: TdlgOption
   TextHeight = 12
   object btnOk: TButton
     Left = 236
-    Top = 284
+    Top = 326
     Width = 75
     Height = 25
     Caption = 'OK'
@@ -34,7 +34,7 @@ object dlgOption: TdlgOption
   end
   object btnCancel: TButton
     Left = 316
-    Top = 284
+    Top = 326
     Width = 75
     Height = 25
     Cancel = True
@@ -45,7 +45,7 @@ object dlgOption: TdlgOption
   end
   object btnApply: TButton
     Left = 396
-    Top = 284
+    Top = 326
     Width = 75
     Height = 25
     Caption = #36969#29992'(&A)'
@@ -57,21 +57,22 @@ object dlgOption: TdlgOption
     Left = 8
     Top = 8
     Width = 465
-    Height = 265
-    ActivePage = tabPlugins
+    Height = 305
+    ActivePage = tabGeneral
     TabOrder = 0
     OnChange = PageControlChange
     OnChanging = PageControlChanging
     object tabGeneral: TTabSheet
       Caption = #20840#33324
       ImageIndex = 1
+      ExplicitHeight = 238
       object grpIconCache: TGroupBox
         Left = 16
-        Top = 164
+        Top = 188
         Width = 377
         Height = 57
         Caption = #12450#12452#12467#12531#12461#12515#12483#12471#12517
-        TabOrder = 2
+        TabOrder = 3
         object lblIconCache: TLabel
           Left = 12
           Top = 28
@@ -118,20 +119,20 @@ object dlgOption: TdlgOption
       end
       object chkTaskTray: TCheckBox
         Left = 16
-        Top = 16
+        Top = 40
         Width = 205
         Height = 17
         Caption = #12479#12473#12463#12488#12524#12452#12395#12450#12452#12467#12531#12434#34920#31034#12377#12427'(&I)'
-        TabOrder = 0
+        TabOrder = 1
         OnClick = chkTaskTrayClick
       end
       object gbSound: TGroupBox
         Left = 16
-        Top = 40
+        Top = 64
         Width = 377
         Height = 113
         Caption = #12469#12454#12531#12489
-        TabOrder = 1
+        TabOrder = 2
         object lblSounds: TLabel
           Left = 16
           Top = 24
@@ -199,10 +200,20 @@ object dlgOption: TdlgOption
           OnClick = btnSoundBrowseClick
         end
       end
+      object chkVerCheck: TCheckBox
+        Left = 16
+        Top = 17
+        Width = 265
+        Height = 17
+        Caption = #23450#26399#30340#12395' Special Launch '#12398#26356#26032#12434#30906#35469#12377#12427'(&O)'
+        TabOrder = 0
+        OnClick = chkVerCheckClick
+      end
     end
     object tabUserFolder: TTabSheet
       Caption = #12487#12540#12479#12501#12457#12523#12480
       ImageIndex = 3
+      ExplicitHeight = 238
       object Label2: TLabel
         Left = 24
         Top = 16
@@ -242,6 +253,7 @@ object dlgOption: TdlgOption
     object tabPlugins: TTabSheet
       Caption = #12503#12521#12464#12452#12531
       ImageIndex = 2
+      ExplicitHeight = 238
       object lblPlugins: TLabel
         Left = 12
         Top = 8
@@ -335,6 +347,7 @@ object dlgOption: TdlgOption
     object tabRestrictions: TTabSheet
       Caption = #27231#33021#21046#38480
       ImageIndex = 2
+      ExplicitHeight = 238
       object grpRestrictions: TGroupBox
         Left = 16
         Top = 16
@@ -419,7 +432,7 @@ object dlgOption: TdlgOption
   end
   object btnHelp: TButton
     Left = 12
-    Top = 284
+    Top = 326
     Width = 75
     Height = 25
     Caption = #12504#12523#12503'(&H)'
@@ -430,11 +443,11 @@ object dlgOption: TdlgOption
     Height = 32
     Width = 32
     Left = 88
-    Top = 283
+    Top = 325
   end
   object dlgOpen: TOpenDialog
     Options = [ofHideReadOnly, ofPathMustExist, ofEnableSizing]
     Left = 148
-    Top = 283
+    Top = 325
   end
 end

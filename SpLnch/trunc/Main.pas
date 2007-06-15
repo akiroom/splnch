@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ShellAPI, Pad, PadTab, SetPads, SetBtn, SetInit, ExtCtrls, Menus,
   ImgList, SetIcons, Buttons, SetPlug, PadPro, BtnPro, BtnEdit, OleBtn, ActiveX,
-  HTMLHelps, About, XPMan;
+  HTMLHelps, About, XPMan, VerCheck;
 
 const
   UWM_TASKTRAYEVENT = WM_USER + 0;
@@ -80,11 +80,9 @@ end;
 // アプリケーションの準備タイマー
 procedure TfrmMain.tmAppStartTimer(Sender: TObject);
 var
-  Msg: String;
-{
-  RegName, RegCode: String;
-  Count: Integer;
-}
+  Msg: string;
+  NextVerCheck: string;
+  NowVerCheck: string;
 begin
   TTimer(Sender).Free;
 
@@ -125,25 +123,20 @@ begin
   Plugins.BeginPlugins;
   Pads.BeginPads;
 
-{
-  RegName := UserIniFile.ReadString('Registration', 'Name', '');
-  RegCode := UserIniFile.ReadString('Registration', 'Code', '');
-  Count := UserIniFile.ReadInteger('Registration', 'Count', 0);
-  if Count < 10000 then
-    Inc(Count);
-  UserIniFile.WriteInteger('Registration', 'Count', Count);
-
-  if Count in [3, 30, 100] then
+  // 更新チェック
+  if UserIniFile.ReadBool(IS_OPTIONS, 'VerCheck', True) then
   begin
-    if CheckRegistration(RegName, RegCode) < 0 then
+    NextVerCheck := UserIniFile.ReadString(IS_OPTIONS, 'NextVerCheck', '');
+    DateTimeToString(NowVerCheck, 'yyyymmdd', Now);
+    if NowVerCheck >= NextVerCheck then
     begin
-      if dlgRegistration = nil then
-        dlgRegistration := TdlgRegistration.Create(nil);
-      dlgRegistration.Show;
+      if dlgVerCheck = nil then
+        dlgVerCheck := TdlgVerCheck.Create(nil);
     end;
-  end;
-}
+    
 
+  end;
+  
 end;
 
 // フォーム破棄
@@ -179,7 +172,7 @@ end;
 // 閉じる
 procedure TfrmMain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 var
-  Msg: String;
+  Msg: string;
 begin
   // OnCloseだとWindows終了時に呼ばれないのでここに書く
   if Tag = 0 then
@@ -225,10 +218,6 @@ begin
   if not FileExists(FileName) then
     Exit;
 
-// パッドの前面に来るとうっとうしいのでコメントアウト
-//  if Screen.ActiveForm <> nil then
-//    Wnd := Screen.ActiveForm.Handle
-//  else
     Wnd := Application.Handle;
 
   case Command of
@@ -405,28 +394,6 @@ end;
 
 
 // バージョン情報
-{
-procedure TfrmMain.popAboutClick(Sender: TObject);
-var
-  lstReadme: TStringList;
-  ReadmeFile: string;
-begin
-  lstReadme := TStringList.Create;
-  try
-    ReadmeFile := ChangeFileExt(ParamStr(0), '.txt');
-    if FileExists(ReadmeFile) then
-    begin
-      lstReadme.LoadFromFile(ReadmeFile);
-      lstReadme.Insert(0, '');
-      lstReadme.Insert(1, '以下は ' + ReadmeFile +' を表示しています。');
-    end;
-    lstReadme.Insert(0, 'Copyright (C) SAWADA Shigeru');
-    ShowAbout('Special Launch', ParamStr(0), lstReadme.Text);
-  finally
-    lstReadme.Free;
-  end;
-end;
-}
 procedure TfrmMain.popAboutClick(Sender: TObject);
 var
   lstReadme: TStringList;

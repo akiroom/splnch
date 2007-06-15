@@ -56,6 +56,7 @@ type
     btnHelp: TButton;
     chkLockPlugin: TCheckBox;
     chkLockBtnFolder: TCheckBox;
+    chkVerCheck: TCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnCancelClick(Sender: TObject);
     procedure btnOkClick(Sender: TObject);
@@ -92,6 +93,7 @@ type
     procedure btnUserFolderResetClick(Sender: TObject);
     procedure btnUserFolderOpenClick(Sender: TObject);
     procedure btnHelpClick(Sender: TObject);
+    procedure chkVerCheckClick(Sender: TObject);
   private
     FRestrictionsPassword: String;
     FEnabledApplyBk: Boolean;
@@ -138,18 +140,14 @@ begin
 
   with UserIniFile do
   begin
-{
-    i := ReadInteger('Windows', 'LastOptionPage', 0);
-    if i < PageControl.PageCount then
-      PageControl.ActivePage := PageControl.Pages[i]
-    else
-      PageControl.ActivePage := PageControl.Pages[0];
-}
     PageControl.ActivePage := PageControl.Pages[0];
 
     for i := 0 to lvPlugins.Columns.Count - 1 do
       lvPlugins.Columns[i].Width := ReadInteger('Windows',
         Format('OptionPluginColumns%d', [i]), lvPlugins.Columns[i].Width);
+
+    // 更新チェック
+    chkVerCheck.Checked := ReadBool(IS_OPTIONS, 'VerCheck', True);
 
     // タスクトレイ
     chkTaskTray.Checked := ReadBool(IS_OPTIONS, 'TaskTray', True);
@@ -250,6 +248,9 @@ begin
   try
     with UserIniFile do
     begin
+      // 更新チェック
+      WriteBool(IS_OPTIONS, 'VerCheck', chkVerCheck.Checked);
+
       // タスクトレイ
       WriteBool(IS_OPTIONS, 'TaskTray', chkTaskTray.Checked);
 
@@ -387,6 +388,12 @@ end;
 procedure TdlgOption.PageControlChange(Sender: TObject);
 begin
   btnApply.Enabled := FEnabledApplyBk;
+end;
+
+// 定期的に Special Launch の更新を確認する
+procedure TdlgOption.chkVerCheckClick(Sender: TObject);
+begin
+  btnApply.Enabled := True;
 end;
 
 // タスクトレイにアイコンを表示する

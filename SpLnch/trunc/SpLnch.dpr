@@ -60,7 +60,8 @@ uses
   HTMLHelps in 'HTMLHelps.pas',
   Password in 'Password.pas' {dlgPassword},
   SLAPI in 'SLAPI.pas',
-  ShlObjAdditional in 'ShlObjAdditional.pas';
+  ShlObjAdditional in 'ShlObjAdditional.pas',
+  VerCheck in 'VerCheck.pas' {dlgVerCheck};
 
 {$R *.RES}
 
@@ -113,7 +114,6 @@ begin
         // ‰Šú‰»‚ªI‚í‚Á‚Ä‚È‚¢‚Æ—áŠO”­¶
         Wnd := 0;
       end;
-      SendMessage(Wnd, WM_CLOSE, 0, 0);
     end;
     if Wnd = 0 then
     begin

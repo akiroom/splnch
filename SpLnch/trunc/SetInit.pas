@@ -188,7 +188,7 @@ begin
     finally
       Ini.Free;
     end;
-    
+
   end;
 
   if not Result then

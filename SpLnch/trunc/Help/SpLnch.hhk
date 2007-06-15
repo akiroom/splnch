@@ -418,11 +418,6 @@
 		<param name="Local" value="topic\info-copyright.html">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="禁止事項">
-		<param name="Name" value="ライセンスについて">
-		<param name="Local" value="topic\info-copyright.html">
-		</OBJECT>
-	<LI> <OBJECT type="text/sitemap">
 		<param name="Name" value="免責">
 		<param name="Name" value="ライセンスについて">
 		<param name="Local" value="topic\info-copyright.html">
@@ -436,26 +431,6 @@
 		<param name="Name" value="掲示板">
 		<param name="Name" value="サポートについて">
 		<param name="Local" value="topic\info-support.html">
-		</OBJECT>
-	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="寄付">
-		<param name="Name" value="寄付について">
-		<param name="Local" value="topic\info-remittance.html">
-		</OBJECT>
-	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="送金">
-		<param name="Name" value="寄付について">
-		<param name="Local" value="topic\info-remittance.html">
-		</OBJECT>
-	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="ベクター">
-		<param name="Name" value="寄付について">
-		<param name="Local" value="topic\info-remittance.html">
-		</OBJECT>
-	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="銀行振込">
-		<param name="Name" value="寄付について">
-		<param name="Local" value="topic\info-remittance.html">
 		</OBJECT>
 </UL>
 </BODY></HTML>

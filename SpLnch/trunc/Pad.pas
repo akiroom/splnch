@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ExtCtrls, StdCtrls, Menus, PadTab, PadPro, SetInit, SetBtn, Buttons, SLBtns,
   SetArrg, SetIcons, ImgList, SetPlug, BtnPro, OleBtn, ActiveX, ShlObj, Clipbrd,
-  MMSystem, IniFiles, ComCtrls;
+  MMSystem, IniFiles, ComCtrls, VerCheck;
 
 type
   TStickPosition = (spLeft, spTop, spRight, spBottom);
@@ -74,10 +74,10 @@ type
     popPadHide: TMenuItem;
     popButtonFolder: TMenuItem;
     N3: TMenuItem;
-    popRegistration: TMenuItem;
     N4: TMenuItem;
     N13: TMenuItem;
     N14: TMenuItem;
+    popVerCheck: TMenuItem;
     procedure FormShow(Sender: TObject);
     procedure pnlDragBarMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
@@ -129,7 +129,7 @@ type
     procedure popRightDropPopup(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormResize(Sender: TObject);
-    procedure popRegistrationClick(Sender: TObject);
+    procedure popVerCheckClick(Sender: TObject);
   private
     FUpdateCount: Integer;
     ArrangeScrollsWaited: Boolean;
@@ -2176,6 +2176,14 @@ begin
   TopMost := not TopMost;
 end;
 
+// ソフトウェアの更新を確認
+procedure TfrmPad.popVerCheckClick(Sender: TObject);
+begin
+  if dlgVerCheck = nil then
+    dlgVerCheck := TdlgVerCheck.Create(nil);
+  dlgVerCheck.Show;
+end;
+
 // 自動的に隠れる
 procedure TfrmPad.popHideAutoClick(Sender: TObject);
 begin
@@ -2899,16 +2907,6 @@ end;
 procedure TfrmPad.popAboutClick(Sender: TObject);
 begin
   frmMain.popAbout.Click;
-end;
-
-// ユーザー登録
-procedure TfrmPad.popRegistrationClick(Sender: TObject);
-begin
-{
-  if dlgRegistration = nil then
-    dlgRegistration := TdlgRegistration.Create(nil);
-  dlgRegistration.Show;
-}
 end;
 
 // ドラッグバーの描画

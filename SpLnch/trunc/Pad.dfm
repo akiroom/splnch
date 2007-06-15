@@ -276,10 +276,9 @@ object frmPad: TfrmPad
       object N4: TMenuItem
         Caption = '-'
       end
-      object popRegistration: TMenuItem
-        Caption = #12518#12540#12470#12540#30331#37682'(&R)...'
-        Visible = False
-        OnClick = popRegistrationClick
+      object popVerCheck: TMenuItem
+        Caption = #12477#12501#12488#12454#12455#12450#12398#26356#26032#12434#30906#35469'(&O)...'
+        OnClick = popVerCheckClick
       end
       object N13: TMenuItem
         Caption = '-'

@@ -140,6 +140,7 @@ begin
 
 
     Brush.Style := bsClear;
+    Font.Name := '‚l‚r ‚oƒSƒVƒbƒN';
 
     if IsHoliday or (ww = 1) then
       Font.Color := clRed
@@ -275,6 +276,7 @@ begin
                 ARect.Top + 1,
                 ARect.Right + 1,
                 ARect.Top + (ARect.Bottom - ARect.Top) div 2  + 1);
+      Font.Name := '‚l‚r ‚oƒSƒVƒbƒN';
       Font.Height := - (CRect.Bottom - CRect.Top) * 5 div 6;
       Font.Color := clBtnHighLight;
       DrawText(Handle, PChar(Work), Length(Work), CRect, DT_SINGLELINE or DT_CENTER or DT_BOTTOM);

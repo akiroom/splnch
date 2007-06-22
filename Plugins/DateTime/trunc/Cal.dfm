@@ -37,9 +37,9 @@ object frmCal: TfrmCal
       241)
     object pbCalendar: TPaintBox
       Left = 8
-      Top = 36
-      Width = 328
-      Height = 189
+      Top = 39
+      Width = 320
+      Height = 181
       Anchors = [akLeft, akTop, akRight, akBottom]
       Font.Charset = SHIFTJIS_CHARSET
       Font.Color = clBlack
@@ -52,13 +52,11 @@ object frmCal: TfrmCal
       OnMouseMove = pbCalendarMouseMove
       OnMouseUp = pbCalendarMouseUp
       OnPaint = pbCalendarPaint
-      ExplicitWidth = 336
-      ExplicitHeight = 197
     end
     object pbMonth: TPaintBox
       Left = 8
       Top = 4
-      Width = 328
+      Width = 320
       Height = 29
       Anchors = [akLeft, akTop, akRight]
       Font.Charset = SHIFTJIS_CHARSET
@@ -71,8 +69,8 @@ object frmCal: TfrmCal
       ExplicitWidth = 336
     end
     object btnToday: TSpeedButton
-      Left = 141
-      Top = 201
+      Left = 133
+      Top = 193
       Width = 45
       Height = 22
       Anchors = [akRight, akBottom]
@@ -82,8 +80,8 @@ object frmCal: TfrmCal
       ExplicitTop = 209
     end
     object btnPrev: TSpeedButton
-      Left = 189
-      Top = 201
+      Left = 181
+      Top = 193
       Width = 45
       Height = 22
       Anchors = [akRight, akBottom]
@@ -93,8 +91,8 @@ object frmCal: TfrmCal
       ExplicitTop = 209
     end
     object btnNext: TSpeedButton
-      Left = 237
-      Top = 201
+      Left = 229
+      Top = 193
       Width = 45
       Height = 22
       Anchors = [akRight, akBottom]
@@ -104,8 +102,8 @@ object frmCal: TfrmCal
       ExplicitTop = 209
     end
     object btnClose: TSpeedButton
-      Left = 285
-      Top = 201
+      Left = 277
+      Top = 193
       Width = 45
       Height = 22
       Anchors = [akRight, akBottom]

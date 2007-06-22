@@ -819,12 +819,20 @@ var
   OldYear, OldMonth, OldDay: Word;
   NewYear, NewMonth, NewDay: Word;
   MemoDays: TDateTime;
+  MonthChange, RefreshCal: Boolean;
+  OldSelDate: TDateTime;
 begin
   if (Value < EncodeDate(1, 1, 1)) or (Value > EncodeDate(2999, 12, 31)) then
   begin
     Exit;
   end;
+  if FFocusDate = Value then
+  begin
+    Exit;
+  end;
 
+  MonthChange := False;
+  RefreshCal := False;
   if FFocusDate <> Value then
   begin
 
@@ -838,6 +846,7 @@ begin
     // 月が変わった
     if (OldYear <> NewYear) or (OldMonth <> NewMonth) then
     begin
+      MonthChange := True;
       MonthMemoListUpdate;
     end;
 
@@ -853,26 +862,37 @@ begin
         FocusMemo.BeginDate := Value - FDragMemoOffset;
         FocusMemo.EndDate := FocusMemo.BeginDate + MemoDays;
         MemoUpdate;
+        RefreshCal := True;
       end
 
       // メモの最初をドラッグ中
       else if FDragType = dtMemoBegin then
       begin
+        OldSelDate := FocusMemo.BeginDate;
         if FocusMemo.EndDate >= Value then
           FocusMemo.BeginDate := Value
         else
           FocusMemo.BeginDate := FocusMemo.EndDate;
-        MemoUpdate;
+        if OldSelDate <> FocusMemo.BeginDate then
+        begin
+          MemoUpdate;
+          RefreshCal := True;
+        end;
       end
 
       // メモの最後をドラッグ中
       else if FDragType = dtMemoEnd then
       begin
+        OldSelDate := FocusMemo.EndDate;
         if FocusMemo.BeginDate <= Value then
           FocusMemo.EndDate := Value
         else
           FocusMemo.EndDate := FocusMemo.BeginDate;
-        MemoUpdate;
+        if OldSelDate <> FocusMemo.EndDate then
+        begin
+          MemoUpdate;
+          RefreshCal := True;
+        end;
       end;
     end;
 
@@ -883,8 +903,21 @@ begin
     FSelBeginDate := Value;
   FSelEndDate := Value;
 
-  pbMonth.Refresh;
-  pbCalendar.Refresh;
+  // 月が変わった
+  if MonthChange then
+  begin
+    pbMonth.Refresh;
+    pbCalendar.Refresh
+  end
+  else if RefreshCal then
+  begin
+    pbCalendar.Refresh;
+  end
+  else
+  begin
+    DrawCalendar;
+  end;
+
 end;
 
 
@@ -960,8 +993,9 @@ begin
 
   FFocusMemo := Value;
 
-  pbMonth.Refresh;
-  pbCalendar.Refresh;
+//  pbMonth.Refresh;
+//  pbCalendar.Refresh;
+  DrawCalendar;
 end;
 
 // 日の幅
@@ -1102,6 +1136,8 @@ begin
 
   with pbCalendar do
   begin
+    Canvas.Brush.Color := FBackGroundColor;
+
     // 曜日を描画
     x := 0;
     y := 0;
@@ -1190,10 +1226,7 @@ begin
       HolidayRect := DayLabelRect;
       HolidayRect.Left := HolidayRect.Left + Canvas.TextWidth('88') + 3;
       FocusRect := DayLabelRect;
-      InflateRect(FocusRect, 1, 1);
-//      FocusRect := DayRect;
-//      FocusRect.Right := FocusRect.Right - 1;
-//      FocusRect.Bottom := FocusRect.Bottom - 1;
+//      InflateRect(FocusRect, 1, 1);
 
       Canvas.FillRect(DayLabelRect);
       DrawText(Canvas.Handle, PChar(DayStr), Length(DayStr), DayLabelRect, DT_SINGLELINE or DT_TOP);

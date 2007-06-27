@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ExtCtrls, StdCtrls, Menus, PadTab, PadPro, SetInit, SetBtn, Buttons, SLBtns,
   SetArrg, SetIcons, ImgList, SetPlug, BtnPro, OleBtn, ActiveX, ShlObj, Clipbrd,
-  MMSystem, IniFiles, ComCtrls, VerCheck;
+  MMSystem, IniFiles, ComCtrls, VerCheck, ShellAPI;
 
 type
   TStickPosition = (spLeft, spTop, spRight, spBottom);
@@ -257,6 +257,7 @@ type
     procedure OleDragDrop(var DataObject: IDataObject; KeyState: Longint;
       Point: TPoint; var dwEffect: Longint);
     procedure DoDropAction(Action: Integer);
+    procedure DropPluginFile(PluginFileList: TStringList);
   protected
     procedure SetDialogBox(Value: TForm);
     procedure SetButtonGroup(Value: TButtonGroup);
@@ -4471,11 +4472,13 @@ var
   Col, Row: Integer;
   Item: TButtonItem;
 
-  i, j: Integer;
+  I, J: Integer;
   RemoveIndex: Integer;
   SameLine: Boolean;
   IsButtonGroup: Boolean;
   TargetButtonData: TButtonData;
+  PluginFileList: TStringList;
+  PluginFile: string;
 begin
   SetForegroundWindow(Handle);
 
@@ -4620,10 +4623,33 @@ begin
     // エクスプローラからドロップ
     begin
       dwEffect := DROPEFFECT_COPY or DROPEFFECT_LINK;
-      if FDropRButton then
-        popRightDrop.Popup(Point.x, Point.y)
-      else
-        DoDropAction(DropAction);
+
+      // プラグインがドロップされたかをチェック
+      PluginFileList := TStringList.Create;
+      try
+        for I := 0 to FDropButtons.Count - 1 do
+        begin
+          if FDropButtons[i] is TNormalButton then
+          begin
+            PluginFile := TNormalButton(FDropButtons[i]).FileName;
+            if LowerCase(ExtractFileExt(PluginFile)) = '.slx' then
+            begin
+              PluginFileList.Add(PluginFile);
+            end;
+          end;
+
+        end;
+
+        if PluginFileList.Count > 0 then
+          DropPluginFile(PluginFileList)
+        else if FDropRButton then
+          popRightDrop.Popup(Point.x, Point.y)
+        else
+          DoDropAction(DropAction);
+
+      finally
+        PluginFileList.Free;
+      end;
     end;
   except
     FDropButtons.Free;
@@ -4642,7 +4668,7 @@ begin
   popDropAddHere.Visible := not LockBtnEdit;
   popDropAddLast.Enabled := not LockBtnEdit;
   popDropAddLast.Visible := not LockBtnEdit;
-  
+
   for i := 0 to popRightDrop.Items.Count - 1 do
     popRightDrop.Items[i].Default := (popRightDrop.Items[i].Tag = DropAction) and
       (popRightDrop.Items[i].Caption <> '-');
@@ -4808,11 +4834,135 @@ begin
   FDropButtons := nil;
 end;
 
+// プラグインをドロップ
+procedure TfrmPad.DropPluginFile(PluginFileList: TStringList);
+var
+  Msg: String;
+  PluginList: TList;
+  Plugin: TPlugin;
+  Success: Boolean;
+  PluginPath: string;
+  CopyFiles: string;
+  I: Integer;
+  LpFileOp: TSHFILEOPSTRUCT;
+begin
+  PluginPath := ExtractFilePath(ParamStr(0)) + 'Plugins\';
+  PluginList := TList.Create;
+  try
+    // DLL チェック
+    for I := 0 to PluginFileList.Count - 1 do
+    begin
+      Plugin := TPlugin.Create;
+      try
+        Plugin.FileName := PluginFileList[i];
+        PluginList.Add(Plugin);
+      except
+        on E: Exception do
+        begin
+          Application.MessageBox(PChar(E.Message), '警告', MB_ICONWARNING);
+        end;
+      end;
+    end;
+
+    Success := PluginList.Count > 0;
+
+    if Success then
+    begin
+      // 確認
+      Msg := '次のプラグインをインストールします。';
+      for I := 0 to PluginList.Count - 1 do
+        Msg := Msg + #13#10 + '・ ' + TPlugin(PluginList[I]).Name;
+      Success := MessageBox(Handle, PChar(Msg), '確認', MB_ICONINFORMATION or MB_OKCANCEL) = idOk
+    end;
+
+    if Success then
+    begin
+      // 既存のプラグインを停止
+      for I := 0 to PluginList.Count - 1 do
+      begin
+        Plugin := Plugins.FindPlugin(TPlugin(PluginList[I]).Name);
+        if Plugin <> nil then
+        begin
+          Plugin.Enabled := False;
+          if Plugin.Enabled then
+          begin
+            Success := False;
+            MessageBox(Handle, 'プラグインが停止できませんでした。', '確認', MB_ICONWARNING);
+            Break;
+          end;
+        end;
+      end;
+      Pads.AllArrange;
+    end;
+
+    if Success then
+    begin
+      // コピー
+      CopyFiles := '';
+      for I := 0 to FDropButtons.Count - 1 do
+      begin
+        if FDropButtons[i] is TNormalButton then
+        begin
+          CopyFiles := CopyFiles + TNormalButton(FDropButtons[i]).FileName + #0;
+        end;
+      end;
+      CopyFiles := CopyFiles + #0;
+
+      with LpFileOp do
+      begin
+        Wnd := Application.Handle;
+        wFunc := FO_COPY;
+        pFrom := PChar(CopyFiles);
+        pTo:= PChar(PluginPath);
+        fFlags := FOF_NOCONFIRMATION;
+        hNameMappings := nil;
+        lpszProgressTitle := nil;
+      end;
+      Success := SHFileOperation(LpFileOp) = 0;
+    end;
+
+    if Success then
+    begin
+      // 既存のプラグインを削除して新しいプラグインをインサート
+      for I := 0 to PluginList.Count - 1 do
+      begin
+        Plugin := TPlugin.Create;
+        Plugin.FileName := PluginPath + ExtractFileName(TPlugin(PluginList[I]).FileName);
+        Plugins.DeletePlugin(TPlugin(PluginList[I]).Name);
+        Plugins.AddObject(Plugin.Name, Plugin);
+      end;
+      Plugins.Sort;
+    end;
+    
+    if Success then
+    begin
+      Msg := '次のプラグインをインストールしました。すぐに起動して使用しますか？';
+      for I := 0 to PluginList.Count - 1 do
+        Msg := Msg + #13#10 + '・ ' + TPlugin(PluginList[I]).Name;
+      if MessageBox(Handle, PChar(Msg), '確認', MB_ICONQUESTION or MB_YESNO) = idYes then
+      begin
+        for I := 0 to PluginList.Count - 1 do
+        begin
+          Plugin := Plugins.FindPlugin(TPlugin(PluginList[I]).Name);
+          if Plugin <> nil then
+            Plugin.Enabled := True;
+        end;
+      end;
+    end;
+
+    Pads.AllArrange;
+    Plugins.SaveEnabled;
+  finally
+    for I := 0 to PluginList.Count - 1 do
+      TPlugin(PluginList[I]).Free;
+    PluginList.Free;
+  end;
+end;
+
 // ドラッグバーダブルクリック
 procedure TfrmPad.pnlDragBarDblClick(Sender: TObject);
 begin
   FDblClicked := True;
-
 end;
 
 // ドラッグバーマウスアップ

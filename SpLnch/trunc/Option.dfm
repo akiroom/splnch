@@ -1,6 +1,7 @@
 object dlgOption: TdlgOption
   Left = 443
   Top = 291
+  ActiveControl = edtSoundName
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = #20840#20307#12398#35373#23450
@@ -65,7 +66,6 @@ object dlgOption: TdlgOption
     object tabGeneral: TTabSheet
       Caption = #20840#33324
       ImageIndex = 1
-      ExplicitHeight = 238
       object grpIconCache: TGroupBox
         Left = 16
         Top = 188
@@ -213,7 +213,6 @@ object dlgOption: TdlgOption
     object tabUserFolder: TTabSheet
       Caption = #12487#12540#12479#12501#12457#12523#12480
       ImageIndex = 3
-      ExplicitHeight = 238
       object Label2: TLabel
         Left = 24
         Top = 16
@@ -253,7 +252,6 @@ object dlgOption: TdlgOption
     object tabPlugins: TTabSheet
       Caption = #12503#12521#12464#12452#12531
       ImageIndex = 2
-      ExplicitHeight = 238
       object lblPlugins: TLabel
         Left = 12
         Top = 8
@@ -347,7 +345,6 @@ object dlgOption: TdlgOption
     object tabRestrictions: TTabSheet
       Caption = #27231#33021#21046#38480
       ImageIndex = 2
-      ExplicitHeight = 238
       object grpRestrictions: TGroupBox
         Left = 16
         Top = 16

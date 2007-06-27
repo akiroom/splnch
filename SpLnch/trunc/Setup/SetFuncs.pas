@@ -260,22 +260,22 @@ begin
       Ini.Free;
     end;
 
-  s := '';
-  for i := 0 to FileList.Count - 1 do
-    s := s + FileList[i] + #0;
-  s := s + #0;
+    s := '';
+    for i := 0 to FileList.Count - 1 do
+      s := s + FileList[i] + #0;
+    s := s + #0;
 
-  with LpFileOp do
-  begin
-    Wnd := Application.Handle;
-    wFunc := FO_COPY;
-    pFrom := PChar(s);
-    pTo:= PChar(Folder);
-    fFlags := FOF_NOCONFIRMATION;
-    hNameMappings := nil;
-    lpszProgressTitle := nil;
-  end;
-  Result := SHFileOperation(LpFileOp) = 0;
+    with LpFileOp do
+    begin
+      Wnd := Application.Handle;
+      wFunc := FO_COPY;
+      pFrom := PChar(s);
+      pTo:= PChar(Folder);
+      fFlags := FOF_NOCONFIRMATION;
+      hNameMappings := nil;
+      lpszProgressTitle := nil;
+    end;
+    Result := SHFileOperation(LpFileOp) = 0;
 
 
 

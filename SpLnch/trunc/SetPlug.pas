@@ -146,6 +146,7 @@ type
     function FindPlugin(Name: string): TPlugin;
     function FindButtonInfo(Name: string; No: Integer): TButtonInfo;
     function FindMenuInfo(Name: string; No: Integer): TMenuInfo;
+    procedure DeletePlugin(Name: string);
   end;
 
 var
@@ -761,6 +762,18 @@ begin
 
   if (No >= 0) and (No < Plugin.Menus.Count) then
     Result := Plugin.Menus[No];
+end;
+
+procedure TPlugins.DeletePlugin(Name: string);
+var
+  Index: integer;
+begin
+  Index := IndexOf(Name);
+  if Index >= 0 then
+  begin
+    TPlugin(Objects[Index]).Free;
+    Delete(Index);
+  end;
 end;
 
 end.

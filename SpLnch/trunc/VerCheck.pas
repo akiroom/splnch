@@ -54,21 +54,15 @@ end;
 // OK ƒ{ƒ^ƒ“
 procedure TdlgVerCheck.btnOkClick(Sender: TObject);
 var
-  Success: Boolean;
   NormalButton: TNormalButton;
 begin
-  Success := False;
   NormalButton := TNormalButton.Create;
   try
     NormalButton.FileName := 'http://splnch.sourceforge.jp/download.php';
-    Success := OpenNormalButton(GetDesktopWindow, NormalButton);
+    OpenNormalButton(GetDesktopWindow, NormalButton);
   finally
     NormalButton.Free;
   end;
-//  if Success then
-//  begin
-//    Close;
-//  end;
 end;
 
 // CreateParams

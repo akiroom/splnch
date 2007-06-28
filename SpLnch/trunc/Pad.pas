@@ -4869,9 +4869,16 @@ begin
     if Success then
     begin
       // 確認
-      Msg := '次のプラグインをインストールします。';
-      for I := 0 to PluginList.Count - 1 do
-        Msg := Msg + #13#10 + '・ ' + TPlugin(PluginList[I]).Name;
+      if PluginList.Count = 1 then
+      begin
+        Msg := 'プラグイン "' + TPlugin(PluginList[0]).Name + '" をインストールします。';
+      end
+      else
+      begin
+        Msg := '次のプラグインをインストールします。';
+        for I := 0 to PluginList.Count - 1 do
+          Msg := Msg + #13#10 + '・ ' + TPlugin(PluginList[I]).Name;
+      end;
       Success := MessageBox(Handle, PChar(Msg), '確認', MB_ICONINFORMATION or MB_OKCANCEL) = idOk
     end;
 
@@ -4936,9 +4943,18 @@ begin
     
     if Success then
     begin
-      Msg := '次のプラグインをインストールしました。すぐに起動して使用しますか？';
-      for I := 0 to PluginList.Count - 1 do
-        Msg := Msg + #13#10 + '・ ' + TPlugin(PluginList[I]).Name;
+      if PluginList.Count = 1 then
+      begin
+        Msg := 'プラグイン "' + TPlugin(PluginList[0]).Name + '" をインストールしました。' +
+               'すぐに起動して使用しますか？';
+      end
+      else
+      begin
+        Msg := '次のプラグインをインストールしました。すぐに起動して使用しますか？';
+        for I := 0 to PluginList.Count - 1 do
+          Msg := Msg + #13#10 + '・ ' + TPlugin(PluginList[I]).Name;
+      end;
+
       if MessageBox(Handle, PChar(Msg), '確認', MB_ICONQUESTION or MB_YESNO) = idYes then
       begin
         for I := 0 to PluginList.Count - 1 do

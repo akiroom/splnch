@@ -1,0 +1,192 @@
+<HTML>
+<HEAD>
+	<META http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+	<META http-equiv="Content-Script-Type" content="text/javascript">
+	<META http-equiv="Content-Style-Type" content="text/css">
+	<LINK rel="stylesheet" type="text/css" href="main.css">
+	<STYLE>
+		<!--
+		BODY {
+			white-space: nowrap;
+		}
+		A {
+			color: black;
+			text-decoration: none;
+		}
+		A:active {
+			color: blue;
+			text-decoration: underline;
+		}
+
+		A:hover {
+			color: blue;
+			text-decoration: underline;
+		}
+
+		IMG {
+			margin-right: 3pt;
+		}
+		-->
+	</STYLE>
+
+	<SCRIPT language="JavaScript" src="main.js"></SCRIPT>
+	<SCRIPT type="text/javascript">
+		<!--
+		function CheckWindow()
+		{
+			var i;
+			if (window.name == "contents") {
+				for (i = 0; i < document.links.length; i++) {
+					if (document.links[i].hash != "#nowhere") {
+						document.links[i].target = "topic";
+					}
+				}
+
+				doExpand(use, usebtn, usefld);
+				doExpand(advance, advancebtn, advancefld);
+				doExpand(option, optionbtn, optionfld);
+				doExpand(reference, referencebtn, referencefld);
+				doExpand(hint, hintbtn, hintfld);
+				doExpand(faq, faqbtn, faqfld);
+				doExpand(info, infobtn, infofld);
+			}
+		}
+		-->
+	</SCRIPT>
+
+	<TITLE>目次</TITLE>
+</HEAD>
+
+<BODY onload="CheckWindow()">
+
+<NOBR>
+
+<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="title.html"><IMG src="title.gif" width="16" height="16"  border="0">表紙</A><BR>
+
+<IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="setup.html"><IMG src="setup.gif" width="16" height="16"  border="0">セットアップ方法</A><BR>
+
+
+
+<A onclick="doExpand(use, usebtn, usefld)" href="#nowhere"><IMG src="collapse.gif" id="usebtn" width="16" height="16" border="0"><IMG src="openbook.gif" id="usefld" width="16" height="16" border="0">使ってみよう</A><BR>
+<DIV id="use">
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="use-addbuttons.html"><IMG src="topic.gif" width="16" height="16" border="0">プログラムを登録する</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="use-runapplications.html"><IMG src="topic.gif" width="16" height="16" border="0">プログラムを実行する</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="use-addpads.html"><IMG src="topic.gif" width="16" height="16" border="0">新しいパッドを作成する</A><BR>
+</DIV>
+
+
+
+
+
+
+<A onclick="doExpand(advance, advancebtn, advancefld)" href="#nowhere"><IMG src="collapse.gif" id="advancebtn" width="16" height="16" border="0"><IMG src="openbook.gif" id="advancefld" width="16" height="16"  border="0">高度な使い方</A><BR>
+<DIV id="advance">
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="advance-group.html"><IMG src="topic.gif" width="16" height="16" border="0">ボタンをグループ分けする</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="advance-plugins.html"><IMG src="topic.gif" width="16" height="16" border="0">プラグインを使う</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="advance-hotkey.html"><IMG src="topic.gif" width="16" height="16" border="0">ホットキーを使う</A><BR>
+</DIV>
+
+
+
+
+
+
+<A onclick="doExpand(option, optionbtn, optionfld)" href="#nowhere"><IMG src="collapse.gif" id="optionbtn" width="16" height="16" border="0"><IMG src="openbook.gif" id="optionfld" width="16" height="16" border="0">設定を変更する</A><BR>
+<DIV id="option">
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="option-color.html"><IMG src="topic.gif" width="16" height="16" border="0">色や壁紙を指定する</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="option-button.html"><IMG src="topic.gif" width="16" height="16" border="0">ボタンの表示を変更する</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="option-arrange.html"><IMG src="topic.gif" width="16" height="16" border="0">配置を変更する</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="option-movement.html"><IMG src="topic.gif" width="16" height="16" border="0">様々な動作を変更する</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="option-hide.html"><IMG src="topic.gif" width="16" height="16" border="0">画面の四辺に隠す</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="option-sound.html"><IMG src="topic.gif" width="16" height="16" border="0">音を鳴らす</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="option-userfolder.html"><IMG src="topic.gif" width="16" height="16" border="0">データフォルダを変更する</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="option-restrictions.html"><IMG src="topic.gif" width="16" height="16" border="0">機能を制限する</A><BR>
+</DIV>
+
+
+
+
+
+
+
+
+
+<A onclick="doExpand(reference, referencebtn, referencefld)" href="#nowhere"><IMG src="collapse.gif" id="referencebtn" width="16" height="16" border="0"><IMG src="openbook.gif" id="referencefld" width="16" height="16" border="0">リファレンス</A><BR>
+<DIV id="reference">
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="reference-menu.html"><IMG src="topic.gif" width="16" height="16" border="0">メニュー</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="reference-key.html"><IMG src="topic.gif" width="16" height="16" border="0">キーボードショートカット</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="reference-padpro.html"><IMG src="topic.gif" width="16" height="16" border="0">パッドの設定</A><BR>
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="reference-option.html"><IMG src="topic.gif" width="16" height="16" border="0">全体の設定</A><BR>
+</DIV>
+
+
+
+
+
+
+
+<A onclick="doExpand(hint, hintbtn, hintfld)" href="#nowhere"><IMG src="collapse.gif" id="hintbtn" width="16" height="16" border="0"><IMG src="openbook.gif" id="hintfld" width="16" height="16" border="0">ヒント</A><BR>
+<DIV id="hint">
+
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="hint-dragdrop.html"><IMG src="hint.gif" width="16" height="16" border="0">ドラッグ＆ドロップの便利な使い方</A><BR>
+
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="hint-dropterget.html"><IMG src="hint.gif" width="16" height="16" border="0">ドラッグしながらドロップする先を切り替える</A><BR>
+
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="hint-canceldrag.html"><IMG src="hint.gif" width="16" height="16" border="0">ドラッグをキャンセル</A><BR>
+
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="hint-startmenu.html"><IMG src="hint.gif" width="16" height="16" border="0">ボタンをスタートメニューから登録する</A><BR>
+
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="hint-openfolder.html"><IMG src="hint.gif" width="16" height="16" border="0">ボタンに登録されているファイルが置いてあるフォルダを開く</A><BR>
+
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="hint-buttoncolors.html"><IMG src="hint.gif" width="16" height="16" border="0">ボタン名と枠の色について</A><BR>
+
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="hint-backup.html"><IMG src="hint.gif" width="16" height="16" border="0">ボタンデータや設定情報をバックアップする</A><BR>
+
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="hint-admin.html"><IMG src="hint.gif" width="16" height="16" border="0">社内標準のランチャーに指定する場合の便利な機能</A><BR>
+
+</DIV>
+
+
+
+
+
+
+
+
+<A onclick="doExpand(faq, faqbtn, faqfld)" href="#nowhere"><IMG src="collapse.gif" id="faqbtn" width="16" height="16" border="0"><IMG src="openbook.gif" id="faqfld" width="16" height="16" border="0">よくある質問と答え</A><BR>
+<DIV id="faq">
+
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="faq-archive.html"><IMG src="faq.gif" width="16" height="16" border="0">ダウンロードしたファイルが解凍できない／解凍はできたがファイルが足りない</A><BR>
+
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="faq-changegroup.html"><IMG src="faq.gif" width="16" height="16" border="0">ボタングループをすばやく切り替えたい</A><BR>
+
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="faq-cantwheeldown.html"><IMG src="faq.gif" width="16" height="16" border="0">ホイールを押しながら回転でボタングループの切り替えができない</A><BR>
+
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="faq-hidestart.html"><IMG src="faq.gif" width="16" height="16" border="0">起動時は隠れて欲しい</A><BR>
+
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="faq-plugin.html"><IMG src="faq.gif" width="16" height="16" border="0">以前のバージョンにあったカレンダーやスクリーンセーバーの起動などの付加機能は？</A><BR>
+
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="faq-widthheight.html"><IMG src="faq.gif" width="16" height="16" border="0">以前のバージョンにあった 1 行に表示できるボタン数、1 度に表示できる行数が設定できなくなってしまいました</A><BR>
+
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="faq-ctrldrop.html"><IMG src="faq.gif" width="16" height="16" border="0">以前のバージョンにあった「Ctrl キーを押しながらファイルをドロップ」に対応して欲しい</A><BR>
+
+</DIV>
+
+
+
+
+
+<A onclick="doExpand(info, infobtn, infofld)" href="#nowhere"><IMG src="collapse.gif" id="infobtn" width="16" height="16" border="0"><IMG src="openbook.gif" id="infofld" width="16" height="16" border="0">お読みください</A><BR>
+<DIV id="info">
+
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="info-copyright.html"><IMG src="infomation.gif" width="16" height="16" border="0">ライセンスについて</A><BR>
+
+	<IMG src="expspace.gif" width="16" height="16"><IMG src="expspace.gif" width="16" height="16"><A name="topiclink" href="info-support.html"><IMG src="infomation.gif" width="16" height="16" border="0">サポートについて</A><BR>
+
+</DIV>
+
+</NOBR>
+
+</BODY>
+
+</HTML>

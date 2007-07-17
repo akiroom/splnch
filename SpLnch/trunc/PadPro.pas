@@ -286,7 +286,7 @@ begin
   FPartLabels.Add(pnlScrollBarLabel);
   FPartLabels.Add(pnlWorkspaceLabel);
   FPartLabels.Add(pnlHideLabel);
-  chkVisiblePartLabels.Checked := UserIniFile.ReadBool('Windows', 'PadOptionVisiblePartLabels', False);
+  chkVisiblePartLabels.Checked := UserIniFile.ReadBool(IS_WINDOWS, 'PadOptionVisiblePartLabels', False);
   chkVisiblePartLabelsClick(chkVisiblePartLabels);
 
   // パネル
@@ -1337,7 +1337,7 @@ begin
   begin
     TPanel(FPartLabels[i]).Visible := chkVisiblePartLabels.Checked;
   end;
-  UserIniFile.WriteBool('Windows', 'PadOptionVisiblePartLabels', chkVisiblePartLabels.Checked);
+  UserIniFile.WriteBool(IS_WINDOWS, 'PadOptionVisiblePartLabels', chkVisiblePartLabels.Checked);
 end;
 
 // スキン描画

@@ -2264,7 +2264,7 @@ begin
     1..2:
     if Button = mbLeft then
     begin
-      SoundFile := UserIniFile.ReadString('Sounds', 'ButtonClick', '');
+      SoundFile := UserIniFile.ReadString(IS_SOUNDS, 'ButtonClick', '');
       if SoundFile <> '' then
         PlaySound(PChar(SoundFile), 0, SND_ASYNC);
     end;
@@ -2854,7 +2854,7 @@ begin
     Value := FButtonGroups.Count - 1;
   if (Value >= 0) and (Value < FButtonGroups.Count) then
   begin
-    SoundFile := UserIniFile.ReadString('Sounds', 'GroupChange', '');
+    SoundFile := UserIniFile.ReadString(IS_SOUNDS, 'GroupChange', '');
     if SoundFile <> '' then
       PlaySound(PChar(SoundFile), 0, SND_ASYNC);
     ButtonGroup := FButtonGroups[Value];
@@ -3293,7 +3293,7 @@ begin
   if not DropEnabled then
     Exit;
 
-  if UserIniFile.ReadBool('Restrictions', 'LockBtnDrag', False) then
+  if UserIniFile.ReadBool(IS_RESTRICTIONS, 'LockBtnDrag', False) then
     Exit;
   if GetLockBtnEdit(False) then
     Exit;
@@ -3579,7 +3579,7 @@ begin
   if Item.ButtonData <> nil then
     Item.ButtonData.ClickCount := Item.ButtonData.ClickCount + 1;
 
-  SoundFile := UserIniFile.ReadString('Sounds', 'ButtonClick', '');
+  SoundFile := UserIniFile.ReadString(IS_SOUNDS, 'ButtonClick', '');
   if SoundFile <> '' then
     PlaySound(PChar(SoundFile), 0, SND_ASYNC);
 
@@ -5044,7 +5044,7 @@ end;
 // ボタンの編集が禁止
 function TfrmPad.GetLockBtnEdit(ShowWarning: Boolean): Boolean;
 begin
-  Result := UserIniFile.ReadBool('Restrictions', 'LockBtnEdit', False);
+  Result := UserIniFile.ReadBool(IS_RESTRICTIONS, 'LockBtnEdit', False);
   if Result and ShowWarning then
     MessageBox(Handle, 'ボタンの編集は禁止されています。', '確認', MB_ICONWARNING);
 end;
@@ -5052,7 +5052,7 @@ end;
 // 1 つ上のフォルダを開く事が禁止
 function TfrmPad.GetLockBtnFolder(ShowWarning: Boolean): Boolean;
 begin
-  Result := UserIniFile.ReadBool('Restrictions', 'LockBtnFolder', False);
+  Result := UserIniFile.ReadBool(IS_RESTRICTIONS, 'LockBtnFolder', False);
   if Result and ShowWarning then
     MessageBox(Handle, '1 つ上のフォルダを開く事は禁止されています。', '確認', MB_ICONWARNING);
 end;
@@ -5060,7 +5060,7 @@ end;
 // パッドの設定が禁止
 function TfrmPad.GetLockPadProperty(ShowWarning: Boolean): Boolean;
 begin
-  Result := UserIniFile.ReadBool('Restrictions', 'LockPadProperty', False);
+  Result := UserIniFile.ReadBool(IS_RESTRICTIONS, 'LockPadProperty', False);
   if Result and ShowWarning then
     MessageBox(Handle, 'パッドの設定は禁止されています。', '確認', MB_ICONWARNING);
 end;

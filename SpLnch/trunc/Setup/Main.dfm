@@ -24,7 +24,7 @@ object frmMain: TfrmMain
     Top = 0
     Width = 523
     Height = 293
-    ActivePage = tabInstallOptions
+    ActivePage = tabSL4UserFolder
     Align = alTop
     Style = tsButtons
     TabHeight = 10
@@ -33,10 +33,6 @@ object frmMain: TfrmMain
     object tabStart: TTabSheet
       Caption = 'tabStart'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object imgIcon: TImage
         Left = 20
         Top = 24
@@ -97,10 +93,6 @@ object frmMain: TfrmMain
     object tabTargetFolder: TTabSheet
       Caption = 'tabTargetFolder'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lblTargetFolder: TLabel
         Left = 10
         Top = 40
@@ -142,10 +134,6 @@ object frmMain: TfrmMain
     object tabInstallOptions: TTabSheet
       Caption = 'tabInstallOptions'
       ImageIndex = 5
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lblInstallOptions: TLabel
         Left = 10
         Top = 40
@@ -160,7 +148,7 @@ object frmMain: TfrmMain
         ParentFont = False
       end
       object Label1: TLabel
-        Left = 80
+        Left = 84
         Top = 196
         Width = 401
         Height = 12
@@ -168,8 +156,8 @@ object frmMain: TfrmMain
       end
       object chkProgramMenu: TCheckBox
         Left = 68
-        Top = 96
-        Width = 281
+        Top = 93
+        Width = 195
         Height = 17
         Caption = #12503#12525#12464#12521#12512#12513#12491#12517#12540#12395#30331#37682#12377#12427'(&S)'
         TabOrder = 0
@@ -177,23 +165,23 @@ object frmMain: TfrmMain
       object chkStartup: TCheckBox
         Left = 68
         Top = 116
-        Width = 401
+        Width = 293
         Height = 17
         Caption = 'Windows '#12398#36215#21205#26178#12395' Special Launch '#12418#36215#21205#12377#12427'(&R)'
         TabOrder = 1
       end
       object chkRegistry: TCheckBox
         Left = 68
-        Top = 176
-        Width = 417
+        Top = 173
+        Width = 349
         Height = 17
         Caption = #12467#12531#12488#12525#12540#12523#12497#12493#12523#12398#65339#12503#12525#12464#12521#12512#12398#36861#21152#12392#21066#38500#65341#12395#30331#37682#12377#12427'(&U)'
         TabOrder = 3
       end
       object chkDesktop: TCheckBox
         Left = 68
-        Top = 136
-        Width = 313
+        Top = 139
+        Width = 245
         Height = 17
         Caption = #12487#12473#12463#12488#12483#12503#12395#12471#12519#12540#12488#12459#12483#12488#12434#20316#25104#12377#12427'(&D)'
         TabOrder = 2
@@ -202,10 +190,6 @@ object frmMain: TfrmMain
     object tabSL4UserFolder: TTabSheet
       Caption = 'tabSL4UserFolder'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lblSL4UserFolder: TLabel
         Left = 10
         Top = 40
@@ -221,7 +205,7 @@ object frmMain: TfrmMain
       end
       object Label4: TLabel
         Left = 68
-        Top = 140
+        Top = 172
         Width = 93
         Height = 12
         Caption = #12487#12540#12479#12501#12457#12523#12480'(&F):'
@@ -238,27 +222,33 @@ object frmMain: TfrmMain
       end
       object edtSL4UserFolder: TEdit
         Left = 88
-        Top = 160
+        Top = 192
         Width = 397
         Height = 20
-        TabOrder = 0
+        TabOrder = 1
+        OnChange = edtSL4UserFolderChange
       end
       object btnSL4UserFolder: TButton
-        Left = 412
-        Top = 192
+        Left = 410
+        Top = 218
         Width = 75
         Height = 25
         Caption = #21442#29031'(&B)...'
-        TabOrder = 1
+        TabOrder = 2
         OnClick = btnSL4UserFolderClick
+      end
+      object chkSettingForAllUser: TCheckBox
+        Left = 68
+        Top = 141
+        Width = 245
+        Height = 17
+        Caption = #12377#12409#12390#12398#12518#12540#12470#12540#12391#21516#12376#35373#23450#12434#20351#12358'(&A)'
+        TabOrder = 0
+        OnClick = chkSettingForAllUserClick
       end
     end
     object tabSL3Groups: TTabSheet
       Caption = 'tabSL3Groups'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lblSL3Groups: TLabel
         Left = 10
         Top = 40
@@ -426,10 +416,6 @@ object frmMain: TfrmMain
     object tabUninstallOptions: TTabSheet
       Caption = 'tabUninstallOptions'
       ImageIndex = 6
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lblUninstallOptions: TLabel
         Left = 10
         Top = 40
@@ -464,10 +450,6 @@ object frmMain: TfrmMain
       Caption = 'tabInfo'
       ImageIndex = 2
       OnShow = tabInfoShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lblInfo: TLabel
         Left = 10
         Top = 4
@@ -494,8 +476,8 @@ object frmMain: TfrmMain
     end
   end
   object btnPrev: TButton
-    Left = 192
-    Top = 300
+    Left = 190
+    Top = 299
     Width = 75
     Height = 21
     Caption = #25147#12427'(&P)'
@@ -503,8 +485,8 @@ object frmMain: TfrmMain
     OnClick = btnPrevClick
   end
   object btnNext: TButton
-    Left = 272
-    Top = 300
+    Left = 271
+    Top = 299
     Width = 75
     Height = 21
     Caption = #27425#12408'(&N)'
@@ -512,8 +494,8 @@ object frmMain: TfrmMain
     OnClick = btnNextClick
   end
   object btnCancel: TButton
-    Left = 432
-    Top = 300
+    Left = 433
+    Top = 299
     Width = 75
     Height = 21
     Caption = #12461#12515#12531#12475#12523
@@ -522,7 +504,7 @@ object frmMain: TfrmMain
   end
   object btnRun: TButton
     Left = 352
-    Top = 300
+    Top = 299
     Width = 75
     Height = 21
     Caption = #23455#34892'(&R)'

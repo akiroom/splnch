@@ -32,7 +32,7 @@ object dlgComLine: TdlgComLine
     Top = 12
     Width = 361
     Height = 20
-    ItemHeight = 12
+    ItemHeight = 0
     TabOrder = 0
     OnChange = cmbNameChange
   end

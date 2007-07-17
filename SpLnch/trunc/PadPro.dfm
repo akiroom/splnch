@@ -25,17 +25,13 @@ object dlgPadProperty: TdlgPadProperty
     Top = 4
     Width = 465
     Height = 385
-    ActivePage = tabSkins
+    ActivePage = tabDesign
     TabOrder = 0
     OnChange = PageControlChange
     OnChanging = PageControlChanging
     object tabDesign: TTabSheet
       Caption = #12487#12470#12452#12531
       ImageIndex = 5
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lblParts: TLabel
         Left = 24
         Top = 168
@@ -267,7 +263,7 @@ object dlgPadProperty: TdlgPadProperty
         Width = 133
         Height = 20
         Style = csDropDownList
-        ItemHeight = 0
+        ItemHeight = 12
         TabOrder = 1
         OnChange = cmbPartsChange
       end
@@ -336,7 +332,7 @@ object dlgPadProperty: TdlgPadProperty
           Width = 129
           Height = 20
           Style = csDropDownList
-          ItemHeight = 0
+          ItemHeight = 12
           TabOrder = 8
           OnChange = cmbBtnCaptionChange
           Items.Strings = (
@@ -797,10 +793,6 @@ object dlgPadProperty: TdlgPadProperty
     object tabMove: TTabSheet
       Caption = #21205#20316
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lblActiveKey: TLabel
         Left = 216
         Top = 12
@@ -889,7 +881,7 @@ object dlgPadProperty: TdlgPadProperty
         Width = 253
         Height = 20
         Style = csDropDownList
-        ItemHeight = 0
+        ItemHeight = 12
         TabOrder = 3
         OnChange = cmbDropActionChange
         Items.Strings = (
@@ -904,7 +896,7 @@ object dlgPadProperty: TdlgPadProperty
         Width = 253
         Height = 20
         Style = csDropDownList
-        ItemHeight = 0
+        ItemHeight = 12
         TabOrder = 4
         OnChange = cmbDblClickActionChange
         Items.Strings = (

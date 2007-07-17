@@ -1,7 +1,7 @@
 object dlgOption: TdlgOption
   Left = 443
   Top = 291
-  ActiveControl = edtSoundName
+  ActiveControl = edtUserFolder
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = #20840#20307#12398#35373#23450
@@ -59,7 +59,7 @@ object dlgOption: TdlgOption
     Top = 8
     Width = 465
     Height = 305
-    ActivePage = tabGeneral
+    ActivePage = tabUserFolder
     TabOrder = 0
     OnChange = PageControlChange
     OnChanging = PageControlChanging
@@ -215,7 +215,7 @@ object dlgOption: TdlgOption
       ImageIndex = 3
       object Label2: TLabel
         Left = 24
-        Top = 16
+        Top = 69
         Width = 129
         Height = 12
         Caption = #29694#22312#12398#12487#12540#12479#12501#12457#12523#12480'(&F):'
@@ -223,30 +223,41 @@ object dlgOption: TdlgOption
       end
       object edtUserFolder: TEdit
         Left = 24
-        Top = 32
+        Top = 85
         Width = 313
         Height = 20
         ParentColor = True
         ReadOnly = True
-        TabOrder = 0
+        TabOrder = 1
       end
       object btnUserFolderReset: TButton
         Left = 240
-        Top = 60
+        Top = 113
         Width = 183
         Height = 25
         Caption = #27425#22238#36215#21205#26178#12395#22793#26356#12377#12427'(&C)'
-        TabOrder = 2
+        TabOrder = 3
         OnClick = btnUserFolderResetClick
       end
       object btnUserFolderOpen: TButton
         Left = 348
-        Top = 32
+        Top = 85
         Width = 73
         Height = 20
         Caption = #38283#12367'(&O)'
-        TabOrder = 1
+        TabOrder = 2
         OnClick = btnUserFolderOpenClick
+      end
+      object chkSettingForAllUser: TCheckBox
+        Left = 24
+        Top = 33
+        Width = 245
+        Height = 17
+        Caption = #12377#12409#12390#12398#12518#12540#12470#12540#12391#21516#12376#35373#23450#12434#20351#12358'(&A)'
+        Checked = True
+        Enabled = False
+        State = cbChecked
+        TabOrder = 0
       end
     end
     object tabPlugins: TTabSheet

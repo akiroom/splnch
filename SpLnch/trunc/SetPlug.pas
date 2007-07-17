@@ -632,7 +632,7 @@ begin
     i := 0;
     while True do
     begin
-      PluginName := UserIniFile.ReadString('EnablePlugins', IntToStr(i), '');
+      PluginName := UserIniFile.ReadString(IS_ENABLEPLUGINS, IntToStr(i), '');
       if PluginName = '' then
         Break;
       EnablePlugins.Add(PluginName);
@@ -641,7 +641,7 @@ begin
     i := 0;
     while True do
     begin
-      PluginName := UserIniFile.ReadString('DisablePlugins', IntToStr(i), '');
+      PluginName := UserIniFile.ReadString(IS_DISABLEPLUGINS, IntToStr(i), '');
       if PluginName = '' then
         Break;
       DisablePlugins.Add(PluginName);
@@ -659,7 +659,7 @@ begin
       begin
         Plugin.Enabled := False;
       end
-      else if UserIniFile.ReadBool('Restrictions', 'LockPlugin', False) then
+      else if UserIniFile.ReadBool(IS_RESTRICTIONS, 'LockPlugin', False) then
       begin
         Plugin.Enabled := False;
       end
@@ -694,8 +694,8 @@ var
   Plugin: TPlugin;
 begin
 
-  UserIniFile.EraseSection('EnablePlugins');
-  UserIniFile.EraseSection('DisablePlugins');
+  UserIniFile.EraseSection(IS_ENABLEPLUGINS);
+  UserIniFile.EraseSection(IS_DISABLEPLUGINS);
   UserIniFile.UpdateFile;
   Ei := 0;
   Di := 0;
@@ -704,12 +704,12 @@ begin
     Plugin := TPlugin(Objects[i]);
     if Plugin.Enabled then
     begin
-      UserIniFile.WriteString('EnablePlugins', IntToStr(Ei), Plugin.Name);
+      UserIniFile.WriteString(IS_ENABLEPLUGINS, IntToStr(Ei), Plugin.Name);
       Inc(Ei);
     end
     else
     begin
-      UserIniFile.WriteString('DisablePlugins', IntToStr(Di), Plugin.Name);
+      UserIniFile.WriteString(IS_DISABLEPLUGINS, IntToStr(Di), Plugin.Name);
       Inc(Di);
     end;
   end;

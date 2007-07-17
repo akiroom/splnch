@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ShellAPI, Pad, PadTab, SetPads, SetBtn, SetInit, ExtCtrls, Menus,
   ImgList, SetIcons, Buttons, SetPlug, PadPro, BtnPro, BtnEdit, OleBtn, ActiveX,
-  HTMLHelps, About, XPMan, VerCheck;
+  HTMLHelps, About, XPMan, VerCheck, Registry;
 
 const
   UWM_TASKTRAYEVENT = WM_USER + 0;
@@ -392,6 +392,25 @@ begin
   Application.HelpCommand(HELP_FINDER, 0);
 end;
 
+// IE のバージョン取得
+function GetIEVersion: string;
+var
+    R: TRegistry;
+begin
+    R := TRegistry.Create;
+    try
+        R.RootKey := HKEY_LOCAL_MACHINE;
+        R.OpenKey('Software\Microsoft\Internet Explorer', False);
+        try
+            Result := R.ReadString('version');
+        except
+            Result := '';
+        end;
+        R.CloseKey;
+    finally
+        R.Free;
+    end;
+end;
 
 // バージョン情報
 procedure TfrmMain.popAboutClick(Sender: TObject);
@@ -423,9 +442,8 @@ begin
     with OSVersionInfo do
       s := Format('%s %d.%d.%d %s', [s, dwMajorVersion, dwMinorVersion, dwBuildNumber, szCSDVersion]);
     lstReadme.Add(s);
-    s := 'Internet Explorer ' + GetFileVersionString('comctl32.dll', False);
+    s := 'Internet Explorer ' + GetIEVersion;
     lstReadme.Add(s);
-    lstReadme.Add(UserName);
 
 
     // プラグイン

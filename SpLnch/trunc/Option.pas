@@ -57,6 +57,7 @@ type
     chkLockPlugin: TCheckBox;
     chkLockBtnFolder: TCheckBox;
     chkVerCheck: TCheckBox;
+    chkSettingForAllUser: TCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnCancelClick(Sender: TObject);
     procedure btnOkClick(Sender: TObject);
@@ -143,7 +144,7 @@ begin
     PageControl.ActivePage := PageControl.Pages[0];
 
     for i := 0 to lvPlugins.Columns.Count - 1 do
-      lvPlugins.Columns[i].Width := ReadInteger('Windows',
+      lvPlugins.Columns[i].Width := ReadInteger(IS_WINDOWS,
         Format('OptionPluginColumns%d', [i]), lvPlugins.Columns[i].Width);
 
     // 更新チェック
@@ -171,7 +172,7 @@ begin
       end;
       if SoundAction <> '' then
       begin
-        Work := ReadString('Sounds', SoundAction, '');
+        Work := ReadString(IS_SOUNDS, SoundAction, '');
         if Work <> '' then
         begin
           SoundFile.FileName := Work;
@@ -182,18 +183,19 @@ begin
     cmbSoundsChange(cmbSounds);
 
     // 制限
-    chkLockBtnDrag.Checked := ReadBool('Restrictions', 'LockBtnDrag', False);
-    chkLockBtnEdit.Checked := ReadBool('Restrictions', 'LockBtnEdit', False);
-    chkLockBtnFolder.Checked := ReadBool('Restrictions', 'LockBtnFolder', False);
-    chkLockPadProperty.Checked := ReadBool('Restrictions', 'LockPadProperty', False);
-    chkLockOption.Checked := ReadBool('Restrictions', 'LockOption', False);
-    chkLockPlugin.Checked := ReadBool('Restrictions', 'LockPlugin', False);
-    FRestrictionsPassword :=  ReadString('Restrictions', 'Password', '');
+    chkLockBtnDrag.Checked := ReadBool(IS_RESTRICTIONS, 'LockBtnDrag', False);
+    chkLockBtnEdit.Checked := ReadBool(IS_RESTRICTIONS, 'LockBtnEdit', False);
+    chkLockBtnFolder.Checked := ReadBool(IS_RESTRICTIONS, 'LockBtnFolder', False);
+    chkLockPadProperty.Checked := ReadBool(IS_RESTRICTIONS, 'LockPadProperty', False);
+    chkLockOption.Checked := ReadBool(IS_RESTRICTIONS, 'LockOption', False);
+    chkLockPlugin.Checked := ReadBool(IS_RESTRICTIONS, 'LockPlugin', False);
+    FRestrictionsPassword :=  ReadString(IS_RESTRICTIONS, 'Password', '');
 
     // データフォルダ
     Ini := TIniFile.Create(ChangeFileExt(ParamStr(0), '.ini'));
     try
-      edtUserFolder.Text := Ini.ReadString('Users', UserName, '');
+      chkSettingForAllUser.Checked := Ini.ReadBool(IS_APPGENERAL, 'SettingForAllUser', False);
+      edtUserFolder.Text := Ini.ReadString(IS_USERS, UserName, '');
       if edtUserFolder.Text = '' then
         btnUserFolderReset.Click;
     finally
@@ -271,18 +273,18 @@ begin
 
         if SoundAction <> '' then
         begin
-          WriteString('Sounds', SoundAction, TSoundFile(cmbSounds.Items.Objects[i]).FileName);
+          WriteString(IS_SOUNDS, SoundAction, TSoundFile(cmbSounds.Items.Objects[i]).FileName);
         end;
       end;
 
       // 制限
-      WriteBool('Restrictions', 'LockBtnDrag', chkLockBtnDrag.Checked);
-      WriteBool('Restrictions', 'LockBtnEdit', chkLockBtnEdit.Checked);
-      WriteBool('Restrictions', 'LockBtnFolder', chkLockBtnFolder.Checked);
-      WriteBool('Restrictions', 'LockPadProperty', chkLockPadProperty.Checked);
-      WriteBool('Restrictions', 'LockOption', chkLockOption.Checked);
-      WriteBool('Restrictions', 'LockPlugin', chkLockPlugin.Checked);
-      WriteString('Restrictions', 'Password', FRestrictionsPassword);
+      WriteBool(IS_RESTRICTIONS, 'LockBtnDrag', chkLockBtnDrag.Checked);
+      WriteBool(IS_RESTRICTIONS, 'LockBtnEdit', chkLockBtnEdit.Checked);
+      WriteBool(IS_RESTRICTIONS, 'LockBtnFolder', chkLockBtnFolder.Checked);
+      WriteBool(IS_RESTRICTIONS, 'LockPadProperty', chkLockPadProperty.Checked);
+      WriteBool(IS_RESTRICTIONS, 'LockOption', chkLockOption.Checked);
+      WriteBool(IS_RESTRICTIONS, 'LockPlugin', chkLockPlugin.Checked);
+      WriteString(IS_RESTRICTIONS, 'Password', FRestrictionsPassword);
 
       UpdateFile;
     end;
@@ -301,7 +303,7 @@ begin
     Ini := TIniFile.Create(ChangeFileExt(ParamStr(0), '.ini'));
     try
       try
-        Ini.WriteString('Users', UserName, '');
+        Ini.WriteString(IS_USERS, UserName, '');
       except
         Result := False;
         Application.MessageBox(PChar('設定ファイル "' + Ini.FileName + '" に書き込めません。'),
@@ -328,9 +330,8 @@ begin
     TSoundFile(cmbSounds.Items.Objects[i]).Free;
 
   imlPlugins.Clear;
-//  UserIniFile.WriteInteger('Windows', 'LastOptionPage', PageControl.ActivePage.PageIndex);
   for i := 0 to lvPlugins.Columns.Count - 1 do
-    UserIniFile.WriteInteger('Windows', Format('OptionPluginColumns%d', [i]), lvPlugins.Columns[i].Width);
+    UserIniFile.WriteInteger(IS_WINDOWS, Format('OptionPluginColumns%d', [i]), lvPlugins.Columns[i].Width);
   UserIniFile.UpdateFile;
 
   dlgOption := nil;
@@ -719,8 +720,8 @@ var
   OneEnabled, OneDisabled: Boolean;
   Item: TListItem;
 begin
-  bLockOption := UserIniFile.ReadBool('Restrictions', 'LockOption', False);
-  bLockPlugin := UserIniFile.ReadBool('Restrictions', 'LockPlugin', False);
+  bLockOption := UserIniFile.ReadBool(IS_RESTRICTIONS, 'LockOption', False);
+  bLockPlugin := UserIniFile.ReadBool(IS_RESTRICTIONS, 'LockPlugin', False);
 
   tabGeneral.TabVisible := not bLockOption;
   tabUserFolder.TabVisible := not bLockOption;

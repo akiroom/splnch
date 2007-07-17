@@ -93,7 +93,7 @@ begin
   cmbName.Items.Clear;
   while cmbName.Items.Count <= 32 do
   begin
-    Hist := UserIniFile.ReadString('CommandLine', IntToStr(i), '');
+    Hist := UserIniFile.ReadString(IS_COMMANDLINE, IntToStr(i), '');
     if Hist = '' then
       Break;
     cmbName.Items.Add(Hist);
@@ -114,10 +114,10 @@ begin
   DropEnabled := False;
   dlgComLine := nil;
 
-  UserIniFile.EraseSection('CommandLine');
+  UserIniFile.EraseSection(IS_COMMANDLINE);
   UserIniFile.UpdateFile;
   for i := 0 to cmbName.Items.Count - 1 do
-    UserIniFile.WriteString('CommandLine', IntToStr(i), cmbName.Items[i]);
+    UserIniFile.WriteString(IS_COMMANDLINE, IntToStr(i), cmbName.Items[i]);
 end;
 
 // ƒtƒH[ƒ€•Â‚¶‚é

@@ -13,10 +13,25 @@ var
 function LoadAppInit: Boolean;
 
 const
-  IS_GENERAL = 'General';
-  IS_OPTIONS = 'Options';
-  IS_PADOPTIONS = 'PadOptions';
+  // アプリケーションルートの設定
+  IS_USERS = 'Users';
+  IS_APPGENERAL = 'General';
 
+  // ユーザー別の設定
+  IS_USER = 'User';
+  IS_PADS = 'Pads';
+  IS_SOUNDS = 'Sounds';
+  IS_RESTRICTIONS = 'Restrictions';
+  IS_COMMANDLINE = 'CommandLine';
+  IS_ENABLEPLUGINS = 'EnablePlugins';
+  IS_DISABLEPLUGINS = 'DisablePlugins';
+  IS_PADSZORDER = 'PadsZOrder';
+  IS_WINDOWS = 'Windows';
+  IS_OPTIONS = 'Options';
+
+  // パッドの設定
+  IS_GENERAL = 'General';
+  IS_PADOPTIONS = 'PadOptions';
 
 var
   FileNameIni: String;
@@ -30,6 +45,7 @@ uses
 
 function LoadAppInit: Boolean;
 var
+  SettingForAllUser: Boolean;
   cWork: array[0..255] of Char;
   UserSize: DWORD;
   Ini: TIniFile;
@@ -44,18 +60,21 @@ begin
   FileNameIni := ExtractFileName(ChangeFileExt(ParamStr(0), '.ini'));
 
 
-  // 現在のユーザー名を取得
-  UserSize := 255;
-  if not GetUserName(cWork, UserSize) then
-    cWork := '';
-  if cWork = '' then
-    cWork := 'Default';
-  UserName := StrPas(cWork);
-
-  // ユーザーフォルダを取得
   Ini := TIniFile.Create(ChangeFileExt(ParamStr(0), '.ini'));
   try
-    UserFolder := Ini.ReadString('Users', UserName, '');
+    SettingForAllUser := Ini.ReadBool(IS_APPGENERAL, 'SettingForAllUser', False);
+
+    UserName := 'Default';
+    if not SettingForAllUser then
+    begin
+      // 現在のユーザー名を取得
+      UserSize := 255;
+      if GetUserName(cWork, UserSize) then
+        UserName := StrPas(cWork)
+    end;
+
+    // ユーザーフォルダを取得
+    UserFolder := Ini.ReadString(IS_USERS, UserName, '');
   finally
     Ini.Free;
   end;
@@ -85,15 +104,11 @@ begin
 
     dlgInitFolder := TdlgInitFolder.Create(nil);
     try
-      UserFolder := ExtractFilePath(ParamStr(0)) + UserName;
-      if not IsPathDelimiter(UserFolder, Length(UserFolder)) then
-        UserFolder := UserFolder + '\';
-
+      UserFolder := ExtractFilePath(ParamStr(0)) + UserName + '\';
+      dlgInitFolder.edtInitFolder.Text := UserFolder;
       while True do
       begin
-
         // ダイアログの表示
-        dlgInitFolder.edtInitFolder.Text := UserFolder;
         if dlgInitFolder.ShowModal = idOk then
         begin
           UserFolder := dlgInitFolder.edtInitFolder.Text;
@@ -175,18 +190,21 @@ begin
       dlgInitFolder.Release;
     end;
 
-    // ユーザーフォルダを保存
-    Ini := TIniFile.Create(ChangeFileExt(ParamStr(0), '.ini'));
-    try
+    if Result then
+    begin
+      // ユーザーフォルダを保存
+      Ini := TIniFile.Create(ChangeFileExt(ParamStr(0), '.ini'));
       try
-        Ini.WriteString('Users', UserName, UserFolder);
-      except
-        Result := False;
-        Application.MessageBox(PChar('設定ファイル "' + Ini.FileName + '" に書き込めません。'),
-                               'エラー', MB_ICONSTOP);
+        try
+          Ini.WriteString(IS_USERS, UserName, UserFolder);
+        except
+          Result := False;
+          Application.MessageBox(PChar('設定ファイル "' + Ini.FileName + '" に書き込めません。'),
+                                 'エラー', MB_ICONSTOP);
+        end;
+      finally
+        Ini.Free;
       end;
-    finally
-      Ini.Free;
     end;
 
   end;
@@ -200,7 +218,7 @@ begin
   // ユーザー設定ファイルを作成
   UserIniFile := TIniFile.Create(UserInit);
   try
-    UserIniFile.WriteString('User', 'Name', UserName);
+    UserIniFile.WriteString(IS_USER, 'Name', UserName);
     UserIniFile.UpdateFile;
   except
     Result := False;

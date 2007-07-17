@@ -2,7 +2,7 @@ object dlgVerCheck: TdlgVerCheck
   Left = 0
   Top = 0
   BorderStyle = bsDialog
-  Caption = #12477#12501#12488#12454#12455#12450#12398#26356#26032#12434#30906#35469
+  Caption = 'Special Launch '#12398#26356#26032#12434#30906#35469
   ClientHeight = 251
   ClientWidth = 440
   Color = clBtnFace

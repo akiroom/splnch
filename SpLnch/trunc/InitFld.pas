@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ExtCtrls, FileCtrl;
+  StdCtrls, ExtCtrls, FileCtrl, IniFiles, SetInit;
 
 
 type
@@ -43,6 +43,7 @@ begin
 //  NonClientMetrics.cbSize := SizeOf(NonClientMetrics);
 //  SystemParametersInfo(SPI_GETNONCLIENTMETRICS, 0, @NonClientMetrics, 0);
 //  Font.Handle := CreateFontIndirect(NonClientMetrics.lfMessageFont);
+
 end;
 
 procedure TdlgInitFolder.FormShow(Sender: TObject);

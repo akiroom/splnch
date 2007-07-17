@@ -122,14 +122,16 @@ end;
 
 // パッドを閉じる
 procedure TPads.Close(frmPad: TfrmPad);
+var
+  IniFileName: string;
 begin
+  IniFileName := ChangeFileExt(frmPad.BtnFileName, '.ini');
   Remove(frmPad);
-  if FileExists(ChangeFileExt(frmPad.BtnFileName, '.ini')) then
-    DeleteFile(ChangeFileExt(frmPad.BtnFileName, '.ini'));
+  if FileExists(IniFileName) then
+    DeleteFile(IniFileName);
   if FileExists(frmPad.BtnFileName) then
     DeleteFile(frmPad.BtnFileName);
   frmPad.Release;
-//  Save;
   
   if Count > 0 then
   begin
@@ -170,7 +172,7 @@ var
   ButtonGroup: TButtonGroup;
   i, ID, Index: Integer;
 begin
-  FLastPadID := UserIniFile.ReadInteger('Pads', 'LastPadID', 0);
+  FLastPadID := UserIniFile.ReadInteger(IS_PADS, 'LastPadID', 0);
 
   // パッドのフォルダ
   PadsFolder := UserFolder + 'Pads\';
@@ -203,7 +205,7 @@ begin
   i := 0;
   while True do
   begin
-    ID := UserIniFile.ReadInteger('PadsZOrder', IntToStr(i), 0);
+    ID := UserIniFile.ReadInteger(IS_PADSZORDER, IntToStr(i), 0);
     if ID = 0 then
       Break;
     Index := IndexOf(PadOfID(ID));
@@ -233,13 +235,13 @@ procedure TPads.SaveIni;
 var
   i: Integer;
 begin
-  UserIniFile.WriteInteger('Pads', 'LastPadID', FLastPadID);
-  UserIniFile.EraseSection('PadsZOrder');
+  UserIniFile.WriteInteger(IS_PADS, 'LastPadID', FLastPadID);
+  UserIniFile.EraseSection(IS_PADSZORDER);
 
   // 書き込み
   for i := 0 to Count - 1 do
   begin
-    UserIniFile.WriteInteger('PadsZOrder', IntToStr(i), Items[i].ID);
+    UserIniFile.WriteInteger(IS_PADSZORDER, IntToStr(i), Items[i].ID);
     try
       Items[i].SaveIni;
     except

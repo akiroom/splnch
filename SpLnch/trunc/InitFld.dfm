@@ -3,7 +3,7 @@ object dlgInitFolder: TdlgInitFolder
   Top = 571
   BorderStyle = bsDialog
   Caption = #12487#12540#12479#12501#12457#12523#12480#12398#25351#23450
-  ClientHeight = 176
+  ClientHeight = 179
   ClientWidth = 495
   Color = clBtnFace
   Font.Charset = SHIFTJIS_CHARSET
@@ -19,7 +19,7 @@ object dlgInitFolder: TdlgInitFolder
   TextHeight = 12
   object Label2: TLabel
     Left = 28
-    Top = 68
+    Top = 76
     Width = 93
     Height = 12
     Caption = #12487#12540#12479#12501#12457#12523#12480'(&F):'
@@ -60,14 +60,14 @@ object dlgInitFolder: TdlgInitFolder
   end
   object edtInitFolder: TEdit
     Left = 28
-    Top = 84
+    Top = 92
     Width = 361
     Height = 20
     TabOrder = 0
   end
   object btnBrowse: TButton
     Left = 392
-    Top = 84
+    Top = 92
     Width = 75
     Height = 20
     Caption = #21442#29031'(&B)...'

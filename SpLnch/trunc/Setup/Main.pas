@@ -53,6 +53,7 @@ type
     chkDeleteData: TCheckBox;
     chkDeletePlugins: TCheckBox;
     XPManifest1: TXPManifest;
+    chkSettingForAllUser: TCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure PageControlChange(Sender: TObject);
@@ -66,14 +67,18 @@ type
     procedure FormShow(Sender: TObject);
     procedure btnRunClick(Sender: TObject);
     procedure btnTargetFolderClick(Sender: TObject);
+    procedure edtSL4UserFolderChange(Sender: TObject);
+    procedure chkSettingForAllUserClick(Sender: TObject);
   private
-    FUserName: String;
+    FUserName: string;
     FUpdateInstall: Boolean;
 
-    FSL4PadName: String;
+    FSL4PadName: string;
     FSL4PadCount: Integer;
-    function GetTargetFolder: String;
-    function GetSL4UserFolder: String;
+    FUserFolder: string;
+    FAllFolder: string;
+    function GetTargetFolder: string;
+    function GetSL4UserFolder: string;
     function VisiblePage(Page: TTabSheet): Boolean;
   public
   end;
@@ -86,9 +91,9 @@ implementation
 {$R *.DFM}
 
 // インストール先フォルダ
-function TfrmMain.GetTargetFolder: String;
+function TfrmMain.GetTargetFolder: string;
 var
-  Folder: String;
+  Folder: string;
 begin
   Folder := Trim(edtTargetFolder.Text);
   Folder := ExpandFileName(Folder);
@@ -98,9 +103,9 @@ begin
 end;
 
 // データフォルダ
-function TfrmMain.GetSL4UserFolder: String;
+function TfrmMain.GetSL4UserFolder: string;
 var
-  Folder: String;
+  Folder: string;
 begin
   Folder := Trim(edtSL4UserFolder.Text);
   Folder := ExpandFileName(Folder);
@@ -121,7 +126,7 @@ var
   RegIniFile: TRegIniFile;
   i: Integer;
   Title,
-  BtnFile: String;
+  BtnFile: string;
   Item: TListItem;
 
   Ini: TIniFile;
@@ -188,20 +193,7 @@ begin
   Ini := TIniFile.Create(ExtractFilePath(ParamStr(0)) + 'Setup.ini');
   try
     // インストール済み
-    if Ini.ReadBool('Install', 'Installed', False) = False then
-    begin
-      Title := 'このプログラムは Special Launch をコンピュータにインストールします。' + #13#10
-        + #13#10
-        + #13#10
-        + '準備ができましたら［次へ］をクリックしてください。' + #13#10;
-      memDescription.Text := Title;
-      rdoInstall.Checked := True;
-      rdoInstall.Visible := False;
-      rdoConvert.Visible := False;
-      rdoUninstall.Visible := False;
-    end
-    // インストール前
-    else
+    if Ini.ReadBool('Install', 'Installed', False) then
     begin
       Title := 'このプログラムは Special Launch 3 のボタンファイルを Special Launch 4 の形式にコンバートしたり、 Special Launch をコンピュータから削除します。' + #13#10
         + #13#10
@@ -213,6 +205,19 @@ begin
         rdoConvert.Checked := True
       else
         rdoUninstall.Checked := True;
+    end
+    // インストール前
+    else
+    begin
+      Title := 'このプログラムは Special Launch をコンピュータにインストールします。' + #13#10
+        + #13#10
+        + #13#10
+        + '準備ができましたら［次へ］をクリックしてください。' + #13#10;
+      memDescription.Text := Title;
+      rdoInstall.Checked := True;
+      rdoInstall.Visible := False;
+      rdoConvert.Visible := False;
+      rdoUninstall.Visible := False;
     end;
   finally
     Ini.Free;
@@ -274,7 +279,7 @@ begin
     else if PageControl.ActivePage = tabInstallOptions then
       chkProgramMenu.SetFocus
     else if PageControl.ActivePage = tabSL4UserFolder then
-      edtSL4UserFolder.SetFocus
+      chkSettingForAllUser.SetFocus
     else if PageControl.ActivePage = tabSL3Groups then
       lvSL3Groups.SetFocus
     else if PageControl.ActivePage = tabUninstallOptions then
@@ -300,8 +305,8 @@ end;
 // ページの表示チェック
 function TfrmMain.VisiblePage(Page: TTabSheet): Boolean;
 var
-  IniFileName: String;
-  UserFolder: String;
+  IniFileName: string;
+  UserFolder: string;
   Ini: TIniFile;
 begin
   Result := False;
@@ -315,7 +320,7 @@ begin
   // インストールオプション
   else if Page = tabInstallOptions then
   begin
-    Result := rdoInstall.Checked;
+    Result := rdoInstall.Checked and not FUpdateInstall;
   end
 
   // データフォルダ
@@ -381,11 +386,12 @@ var
   i: Integer;
 
   Buf: array[0..2024] of Char;
-  TargetFolder: String;
+  TargetFolder: string;
 
-  Folder, FileName: String;
+  Folder, FileName: string;
   Ini: TIniFile;
-  UserFolder: String;
+  SettingForAllUser: Boolean;
+  UserFolder: string;
   NextPage: TTabSheet;
 begin
   // 最初のページ
@@ -456,12 +462,17 @@ begin
     end;
 
     FileName := GetTargetFolder + 'SpLnch.ini';
+    SettingForAllUser := False;
     UserFolder := '';
     if FileExists(FileName) then
     begin
       Ini := TIniFile.Create(FileName);
       try
-        UserFolder := Ini.ReadString('Users', FUserName, '');
+        SettingForAllUser := Ini.ReadBool('General', 'SettingForAllUser', False);
+        if SettingForAllUser then
+          UserFolder := Ini.ReadString('Users', 'Default', '')
+        else
+          UserFolder := Ini.ReadString('Users', FUserName, '');
       finally
         Ini.Free;
       end;
@@ -469,12 +480,18 @@ begin
     FUpdateInstall := UserFolder <> '';
     if FUpdateInstall then
     begin
+      chkSettingForAllUser.Checked := SettingForAllUser;
       edtSL4UserFolder.Text := UserFolder;
     end
     else
     begin
-      edtSL4UserFolder.Text := GetTargetFolder + FUserName;
-      edtSL4UserFolder.Text := GetSL4UserFolder;
+      chkSettingForAllUser.Checked := False;
+      FUserFolder := GetTargetFolder + FUserName + '\';
+      FAllFolder := GetTargetFolder + 'Default\';
+      edtSL4UserFolder.Text := FUserFolder;
+
+
+
       if UnknownFileExists(GetTargetFolder) then
       begin
         if Application.MessageBox(PChar('指定のフォルダ "' + GetTargetFolder
@@ -596,7 +613,7 @@ end;
 // インストール先参照ボタン
 procedure TfrmMain.btnTargetFolderClick(Sender: TObject);
 var
-  Folder: String;
+  Folder: string;
 begin
   if SelectDirectory('Special Launch をインストールするフォルダを指定してください。', '', Folder) then
   begin
@@ -606,10 +623,26 @@ begin
   end;
 end;
 
+procedure TfrmMain.chkSettingForAllUserClick(Sender: TObject);
+begin
+  if chkSettingForAllUser.Checked then
+    edtSL4UserFolder.Text := FAllFolder
+  else
+    edtSL4UserFolder.Text := FUserFolder;
+end;
+
+procedure TfrmMain.edtSL4UserFolderChange(Sender: TObject);
+begin
+  if chkSettingForAllUser.Checked then
+    FAllFolder := edtSL4UserFolder.Text
+  else
+    FUserFolder := edtSL4UserFolder.Text;
+end;
+
 // SL4データフォルダ参照ボタン
 procedure TfrmMain.btnSL4UserFolderClick(Sender: TObject);
 var
-  Folder: String;
+  Folder: string;
 begin
   if SelectDirectory('Special Launch のデータを保存するフォルダを指定してください。', '', Folder) then
   begin
@@ -695,6 +728,10 @@ begin
   begin
     SetBrankLine;
     memInfo.Lines.Add('各種設定を保存するフォルダ');
+    if chkSettingForAllUser.Checked then
+      memInfo.Lines.Add('   すべてのユーザーで同じ設定を使う')
+    else
+      memInfo.Lines.Add('   各ユーザーごとに設定を保存する');
     memInfo.Lines.Add(Format('   %s', [GetSL4UserFolder]));
   end;
 
@@ -763,7 +800,7 @@ var
   ButtonGroup: TButtonGroup;
   Ini: TIniFile;
   DoClose: Boolean;
-  Msg: String;
+  Msg: string;
 begin
   DoClose := True;
 
@@ -795,7 +832,11 @@ begin
     begin
       Ini := TIniFile.Create(GetTargetFolder + 'SpLnch.ini');
       try
-        Ini.WriteString('Users', FUserName, GetSL4UserFolder);
+        Ini.WriteBool('General', 'SettingForAllUser', chkSettingForAllUser.Checked);
+        if chkSettingForAllUser.Checked then
+          Ini.WriteString('Users', 'Default', GetSL4UserFolder)
+        else
+          Ini.WriteString('Users', FUserName, GetSL4UserFolder);
       finally
         Ini.Free;
       end;
@@ -804,60 +845,66 @@ begin
     begin
       Ini := TIniFile.Create(GetSL4UserFolder + 'SpLnch.ini');
       try
-        Ini.WriteString('User', 'Name', FUserName);
+        if chkSettingForAllUser.Checked then
+          Ini.WriteString('User', 'Name', 'Default')
+        else
+          Ini.WriteString('User', 'Name', FUserName);
       finally
         Ini.Free;
       end;
     end;
 
 
-    // プログラムメニュー登録
-    if DoClose and chkProgramMenu.Checked then
+    // インストールオプション
+    if VisiblePage(tabInstallOptions) then
     begin
-      chkProgramMenu.Checked := SetProgramMenu(GetTargetFolder);
-      if not chkProgramMenu.Checked then
-        Application.MessageBox('プログラムメニューに登録できませんでした。', 'エラー', MB_ICONSTOP);
-    end;
+      // プログラムメニュー登録
+      if DoClose and chkProgramMenu.Checked then
+      begin
+        chkProgramMenu.Checked := SetProgramMenu(GetTargetFolder);
+        if not chkProgramMenu.Checked then
+          Application.MessageBox('プログラムメニューに登録できませんでした。', 'エラー', MB_ICONSTOP);
+      end;
 
-    // スタートアップ登録
-    if DoClose and chkStartup.Checked then
-    begin
-      chkStartup.Checked := SetStartup(GetTargetFolder);
-      if not chkStartup.Checked then
-        Application.MessageBox('スタートアップに登録できませんでした。', 'エラー', MB_ICONSTOP);
-    end;
+      // スタートアップ登録
+      if DoClose and chkStartup.Checked then
+      begin
+        chkStartup.Checked := SetStartup(GetTargetFolder);
+        if not chkStartup.Checked then
+          Application.MessageBox('スタートアップに登録できませんでした。', 'エラー', MB_ICONSTOP);
+      end;
 
-    // デスクトップ登録
-    if DoClose and chkDesktop.Checked then
-    begin
-      chkDesktop.Checked := SetDesktop(GetTargetFolder);
-      if not chkDesktop.Checked then
-        Application.MessageBox('デスクトップにショートカットを作成できませんでした。', 'エラー', MB_ICONSTOP);
-    end;
+      // デスクトップ登録
+      if DoClose and chkDesktop.Checked then
+      begin
+        chkDesktop.Checked := SetDesktop(GetTargetFolder);
+        if not chkDesktop.Checked then
+          Application.MessageBox('デスクトップにショートカットを作成できませんでした。', 'エラー', MB_ICONSTOP);
+      end;
 
-    // レジストリ登録
-    if DoClose and chkRegistry.Checked then
-    begin
-      chkRegistry.Checked := SetRegistry(GetTargetFolder);
-      if not chkRegistry.Checked then
-        Application.MessageBox('レジストリに登録できませんでした。', 'エラー', MB_ICONSTOP);
-    end;
-    
-    // セットアップオプションを憶える
-    if DoClose then
-    begin
-      Ini := TIniFile.Create(GetTargetFolder + 'Setup.ini');
-      try
-        Ini.WriteBool('Install', 'Installed', True);
-        Ini.WriteBool('Options', 'ProgramMenu', chkProgramMenu.Checked);
-        Ini.WriteBool('Options', 'Startup', chkStartup.Checked);
-        Ini.WriteBool('Options', 'Desktop', chkDesktop.Checked);
-        Ini.WriteBool('Options', 'Registry', chkRegistry.Checked);
-      finally
-        Ini.Free;
+      // レジストリ登録
+      if DoClose and chkRegistry.Checked then
+      begin
+        chkRegistry.Checked := SetRegistry(GetTargetFolder);
+        if not chkRegistry.Checked then
+          Application.MessageBox('レジストリに登録できませんでした。', 'エラー', MB_ICONSTOP);
+      end;
+
+      // セットアップオプションを憶える
+      if DoClose then
+      begin
+        Ini := TIniFile.Create(GetTargetFolder + 'Setup.ini');
+        try
+          Ini.WriteBool('Install', 'Installed', True);
+          Ini.WriteBool('Options', 'ProgramMenu', chkProgramMenu.Checked);
+          Ini.WriteBool('Options', 'Startup', chkStartup.Checked);
+          Ini.WriteBool('Options', 'Desktop', chkDesktop.Checked);
+          Ini.WriteBool('Options', 'Registry', chkRegistry.Checked);
+        finally
+          Ini.Free;
+        end;
       end;
     end;
-
   end;
 
   if DoClose and (rdoInstall.Checked or rdoConvert.Checked) then

@@ -312,7 +312,7 @@ var
   bForeground: Boolean;
   WinHotkey: Word;
 begin
-  SoundFile := UserIniFile.ReadString('Sounds', 'MoveShow', '');
+  SoundFile := UserIniFile.ReadString(IS_SOUNDS, 'MoveShow', '');
   if SoundFile <> '' then
     PlaySound(PChar(SoundFile), 0, SND_ASYNC);
 
@@ -358,7 +358,7 @@ var
   SoundFile: String;
   WinHotkey: Word;
 begin
-  SoundFile := UserIniFile.ReadString('Sounds', 'MoveHide', '');
+  SoundFile := UserIniFile.ReadString(IS_SOUNDS, 'MoveHide', '');
   if SoundFile <> '' then
     PlaySound(PChar(SoundFile), 0, SND_ASYNC);
 

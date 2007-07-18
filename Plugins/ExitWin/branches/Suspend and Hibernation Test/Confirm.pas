@@ -6,7 +6,7 @@ uses
   Windows, Forms, Controls, StdCtrls, Classes, ExtCtrls, SysUtils, ImgList;
 
 type
-  TExitKind = (ekShutdown, ekReboot, ekLogoff);
+  TExitKind = (ekShutdown, ekReboot, ekLogoff, ekSuspend, ekHibernation);
   TfrmConfirm = class(TForm)
     imgIcon: TImage;
     lblMessage: TLabel;
@@ -75,6 +75,18 @@ begin
       ComLine := Comline + 'Logoff';
       Msg := 'Windows からログオフします。';
       IconName := 'MAINICON3';
+    end;
+    ekSuspend:
+    begin
+      ComLine := Comline + 'Suspend';
+      Msg := 'Windows をサスペンド状態に移行します。';
+      IconName := 'MAINICON4';
+    end;
+    ekHibernation:
+    begin
+      ComLine := Comline + 'Hibernation';
+      Msg := 'Windows を休止状態に移行します。';
+      IconName := 'MAINICON5';
     end;
   end;
 

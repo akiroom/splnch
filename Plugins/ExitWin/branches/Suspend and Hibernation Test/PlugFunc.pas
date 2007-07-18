@@ -72,7 +72,7 @@ const
     + '                             制作・著作 : 沢田茂';
 
   // ボタンの数
-  BUTTON_COUNT = 3;
+  BUTTON_COUNT = 5;
   // ボタン定義
   BUTTON_INFO: array[0..BUTTON_COUNT-1] of TSLXButtonInfo =
   (
@@ -96,11 +96,25 @@ const
       OwnerDraw:      False;
       UpdateInterval: 0;
       OwnerChip:      False;
+    ),
+    (
+      Name:           'サスペンド';
+      IconIndex:      4;
+      OwnerDraw:      False;
+      UpdateInterval: 0;
+      OwnerChip:      False;
+    ),
+    (
+      Name:           '休止状態';
+      IconIndex:      5;
+      OwnerDraw:      False;
+      UpdateInterval: 0;
+      OwnerChip:      False;
     )
   );
 
   // メニューの数
-  MENU_COUNT = 5;
+  MENU_COUNT = 8;
   // メニュー定義
   MENU_INFO: array[0..MENU_COUNT-1] of TSLXMenuInfo =
   (
@@ -115,6 +129,18 @@ const
     (
       Name: '再起動(&R)';
       SCut: 'Ctrl+Alt+K';
+    ),
+    (
+      Name: '-';
+      SCut: '';
+    ),
+    (
+      Name: 'サスペンド(&S)';
+      SCut: 'Ctrl+Alt+U';
+    ),
+    (
+      Name: '休止状態(&H)';
+      SCut: 'Ctrl+Alt+M';
     ),
     (
       Name: '-';
@@ -224,6 +250,8 @@ begin
     0: ExitKind := ekShutdown;
     1: ExitKind := ekReboot;
     2: ExitKind := ekLogoff;
+    3: ExitKind := ekSuspend;
+    4: ExitKind := ekHibernation;
   else
     Result := False;
   end;
@@ -257,7 +285,9 @@ begin
   case No of
     1: ExitKind := ekShutdown;
     2: ExitKind := ekReboot;
-    4: ExitKind := ekLogoff;
+    4: ExitKind := ekSuspend;
+    5: ExitKind := ekHibernation;
+    7: ExitKind := ekLogoff;
   else
     Result := False;
   end;

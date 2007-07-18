@@ -114,10 +114,13 @@ begin
   DropEnabled := False;
   dlgComLine := nil;
 
-  UserIniFile.EraseSection(IS_COMMANDLINE);
-  UserIniFile.UpdateFile;
-  for i := 0 to cmbName.Items.Count - 1 do
-    UserIniFile.WriteString(IS_COMMANDLINE, IntToStr(i), cmbName.Items[i]);
+  if not UserIniReadOnly then
+  begin
+    UserIniFile.EraseSection(IS_COMMANDLINE);
+    UserIniFile.UpdateFile;
+    for i := 0 to cmbName.Items.Count - 1 do
+      UserIniFile.WriteString(IS_COMMANDLINE, IntToStr(i), cmbName.Items[i]);
+  end;
 end;
 
 // ÉtÉHÅ[ÉÄï¬Ç∂ÇÈ

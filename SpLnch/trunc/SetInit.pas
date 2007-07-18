@@ -9,6 +9,7 @@ var
   UserName: string;
   UserFolder: string;
   UserIniFile: TIniFile = nil;
+  UserIniReadOnly: Boolean = False;
 
 function LoadAppInit: Boolean;
 
@@ -217,17 +218,46 @@ begin
 
   // ユーザー設定ファイルを作成
   UserIniFile := TIniFile.Create(UserInit);
-  try
-    UserIniFile.WriteString(IS_USER, 'Name', UserName);
-    UserIniFile.UpdateFile;
-  except
-    Result := False;
-    UserIniFile.Free;
-    UserIniFile := nil;
-    Application.MessageBox(PChar('設定ファイル "' + UserInit +
-                                 '" に書き込めません。'),
-                           'エラー', MB_ICONSTOP);
+  if UserIniFile.ReadString(IS_USER, 'Name', '') = '' then
+  begin
+    UserIniReadOnly := False;
+    try
+      UserIniFile.WriteString(IS_USER, 'Name', UserName);
+      UserIniFile.UpdateFile;
+    except
+      Result := False;
+      UserIniFile.Free;
+      UserIniFile := nil;
+      Application.MessageBox(PChar('設定ファイル "' + UserInit +
+                                   '" に書き込めません。'),
+                             'エラー', MB_ICONSTOP);
+    end;
+  end
+  else
+  begin
+    UserIniReadOnly := False;
+    FindHandle := FindFirstFile(PChar(UserInit), Win32FindData);
+    if FindHandle <> INVALID_HANDLE_VALUE then
+    begin
+      // 読み取り専用属性（CD-R等）
+      if (Win32FindData.dwFileAttributes and FILE_ATTRIBUTE_READONLY) <> 0 then
+      begin
+        UserIniReadOnly := True;
+      end;
+      Windows.FindClose(FindHandle)
+    end;
+    if not UserIniReadOnly then
+    begin
+      try
+        UserIniFile.WriteString(IS_USER, 'Name', UserName);
+        UserIniFile.UpdateFile;
+      except
+        // 書き込み時エラー
+        UserIniReadOnly := True;
+      end;
+    end;
   end;
+
 
 end;
 

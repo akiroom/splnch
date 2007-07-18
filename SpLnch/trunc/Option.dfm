@@ -66,6 +66,10 @@ object dlgOption: TdlgOption
     object tabGeneral: TTabSheet
       Caption = #20840#33324
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object grpIconCache: TGroupBox
         Left = 16
         Top = 188
@@ -213,6 +217,10 @@ object dlgOption: TdlgOption
     object tabUserFolder: TTabSheet
       Caption = #12487#12540#12479#12501#12457#12523#12480
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label2: TLabel
         Left = 24
         Top = 69
@@ -263,6 +271,10 @@ object dlgOption: TdlgOption
     object tabPlugins: TTabSheet
       Caption = #12503#12521#12464#12452#12531
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lblPlugins: TLabel
         Left = 12
         Top = 8
@@ -356,6 +368,10 @@ object dlgOption: TdlgOption
     object tabRestrictions: TTabSheet
       Caption = #27231#33021#21046#38480
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object grpRestrictions: TGroupBox
         Left = 16
         Top = 16

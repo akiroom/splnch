@@ -693,27 +693,29 @@ var
   i, Ei, Di: Integer;
   Plugin: TPlugin;
 begin
-
-  UserIniFile.EraseSection(IS_ENABLEPLUGINS);
-  UserIniFile.EraseSection(IS_DISABLEPLUGINS);
-  UserIniFile.UpdateFile;
-  Ei := 0;
-  Di := 0;
-  for i := 0 to Count - 1 do
+  if not UserIniReadOnly then
   begin
-    Plugin := TPlugin(Objects[i]);
-    if Plugin.Enabled then
+    UserIniFile.EraseSection(IS_ENABLEPLUGINS);
+    UserIniFile.EraseSection(IS_DISABLEPLUGINS);
+    UserIniFile.UpdateFile;
+    Ei := 0;
+    Di := 0;
+    for i := 0 to Count - 1 do
     begin
-      UserIniFile.WriteString(IS_ENABLEPLUGINS, IntToStr(Ei), Plugin.Name);
-      Inc(Ei);
-    end
-    else
-    begin
-      UserIniFile.WriteString(IS_DISABLEPLUGINS, IntToStr(Di), Plugin.Name);
-      Inc(Di);
+      Plugin := TPlugin(Objects[i]);
+      if Plugin.Enabled then
+      begin
+        UserIniFile.WriteString(IS_ENABLEPLUGINS, IntToStr(Ei), Plugin.Name);
+        Inc(Ei);
+      end
+      else
+      begin
+        UserIniFile.WriteString(IS_DISABLEPLUGINS, IntToStr(Di), Plugin.Name);
+        Inc(Di);
+      end;
     end;
+    UserIniFile.UpdateFile;
   end;
-  UserIniFile.UpdateFile;
 end;
 
 function TPlugins.FindPlugin(Name: string): TPlugin;

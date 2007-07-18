@@ -3,7 +3,7 @@ unit SetBtn;
 interface
 
 uses
-  Windows, ShellAPI, SysUtils, Classes, Forms, ShlObj, pidl, Dialogs;
+  Windows, ShellAPI, SysUtils, Classes, Forms, ShlObj, pidl, Dialogs, SetInit;
 
 type
 
@@ -828,20 +828,23 @@ var
   MemStream: TMemoryStream;
   Size: Integer;
 begin
-  MemStream := TMemoryStream.Create;
-  FileStream := TFileStream.Create(FileName, fmCreate);
-  try
-    Size := Length(BTNHEAD) + 1;
-    MemStream.Write(BTNHEAD, Size);
+  if not UserIniReadOnly then
+  begin
+    MemStream := TMemoryStream.Create;
+    FileStream := TFileStream.Create(FileName, fmCreate);
+    try
+      Size := Length(BTNHEAD) + 1;
+      MemStream.Write(BTNHEAD, Size);
 
-    for i := 0 to Count - 1 do
-      Items[i].SaveToStream(MemStream);
+      for i := 0 to Count - 1 do
+        Items[i].SaveToStream(MemStream);
 
-    MemStream.Position := 0;
-    FileStream.CopyFrom(MemStream, MemStream.Size);
-  finally
-    MemStream.Free;
-    FileStream.Free;
+      MemStream.Position := 0;
+      FileStream.CopyFrom(MemStream, MemStream.Size);
+    finally
+      MemStream.Free;
+      FileStream.Free;
+    end;
   end;
 end;
 

@@ -709,60 +709,63 @@ procedure TfrmPad.SaveIni;
 var
   Ini: TIniFile;
 begin
-  Ini := TIniFile.Create(ChangeFileExt(BtnFileName, '.ini'));
-  try
-    Ini.WriteInteger(IS_GENERAL, 'ID', ID);
+  if not UserIniReadOnly then
+  begin
+    Ini := TIniFile.Create(ChangeFileExt(BtnFileName, '.ini'));
+    try
+      Ini.WriteInteger(IS_GENERAL, 'ID', ID);
 
-    Ini.WriteInteger(IS_PADOPTIONS, 'Left', Left);
-    Ini.WriteInteger(IS_PADOPTIONS, 'Top', Top);
-    Ini.WriteInteger(IS_PADOPTIONS, 'Cols', Cols);
-    Ini.WriteInteger(IS_PADOPTIONS, 'Rows', Rows);
-    Ini.WriteInteger(IS_PADOPTIONS, 'GroupIndex', GroupIndex);
-    Ini.WriteInteger(IS_PADOPTIONS, 'ScrollBar', ScrollBar);
-    Ini.WriteBool(IS_PADOPTIONS, 'ScrollBtn', ScrollBtn);
-    Ini.WriteBool(IS_PADOPTIONS, 'GroupBtn', GroupBtn);
-    Ini.WriteInteger(IS_PADOPTIONS, 'ScrollSize', ScrollSize);
-    Ini.WriteBool(IS_PADOPTIONS, 'BtnVertical', BtnVertical);
-    Ini.WriteInteger(IS_PADOPTIONS, 'BtnFocusColor', BtnFocusColor);
-    Ini.WriteBool(IS_PADOPTIONS, 'BtnTransparent', BtnTransparent);
-    Ini.WriteBool(IS_PADOPTIONS, 'BtnSelTransparent', BtnSelTransparent);
-    Ini.WriteBool(IS_PADOPTIONS, 'BtnSmallIcon', BtnSmallIcon);
-    Ini.WriteBool(IS_PADOPTIONS, 'BtnSquare', BtnSquare);
-    Ini.WriteInteger(IS_PADOPTIONS, 'BtnWidth', BtnWidth);
-    Ini.WriteInteger(IS_PADOPTIONS, 'BtnHeight', BtnHeight);
-    Ini.WriteInteger(IS_PADOPTIONS, 'BtnCaption', BtnCaption);
-    Ini.WriteInteger(IS_PADOPTIONS, 'BtnColor', BtnColor);
+      Ini.WriteInteger(IS_PADOPTIONS, 'Left', Left);
+      Ini.WriteInteger(IS_PADOPTIONS, 'Top', Top);
+      Ini.WriteInteger(IS_PADOPTIONS, 'Cols', Cols);
+      Ini.WriteInteger(IS_PADOPTIONS, 'Rows', Rows);
+      Ini.WriteInteger(IS_PADOPTIONS, 'GroupIndex', GroupIndex);
+      Ini.WriteInteger(IS_PADOPTIONS, 'ScrollBar', ScrollBar);
+      Ini.WriteBool(IS_PADOPTIONS, 'ScrollBtn', ScrollBtn);
+      Ini.WriteBool(IS_PADOPTIONS, 'GroupBtn', GroupBtn);
+      Ini.WriteInteger(IS_PADOPTIONS, 'ScrollSize', ScrollSize);
+      Ini.WriteBool(IS_PADOPTIONS, 'BtnVertical', BtnVertical);
+      Ini.WriteInteger(IS_PADOPTIONS, 'BtnFocusColor', BtnFocusColor);
+      Ini.WriteBool(IS_PADOPTIONS, 'BtnTransparent', BtnTransparent);
+      Ini.WriteBool(IS_PADOPTIONS, 'BtnSelTransparent', BtnSelTransparent);
+      Ini.WriteBool(IS_PADOPTIONS, 'BtnSmallIcon', BtnSmallIcon);
+      Ini.WriteBool(IS_PADOPTIONS, 'BtnSquare', BtnSquare);
+      Ini.WriteInteger(IS_PADOPTIONS, 'BtnWidth', BtnWidth);
+      Ini.WriteInteger(IS_PADOPTIONS, 'BtnHeight', BtnHeight);
+      Ini.WriteInteger(IS_PADOPTIONS, 'BtnCaption', BtnCaption);
+      Ini.WriteInteger(IS_PADOPTIONS, 'BtnColor', BtnColor);
 
-    Ini.WriteInteger(IS_PADOPTIONS, 'TopLineIndex', TopLineIndex);
-    Ini.WriteInteger(IS_PADOPTIONS, 'ButtonIndex', ButtonIndex);
+      Ini.WriteInteger(IS_PADOPTIONS, 'TopLineIndex', TopLineIndex);
+      Ini.WriteInteger(IS_PADOPTIONS, 'ButtonIndex', ButtonIndex);
 
-//    Ini.WriteInteger(IS_PADOPTIONS, 'PropertyPageNo', PropertyPageNo);
-    Ini.WriteBool(IS_PADOPTIONS, 'TopMost', TopMost);
-    Ini.WriteBool(IS_PADOPTIONS, 'SmoothScroll', SmoothScroll);
-    Ini.WriteInteger(IS_PADOPTIONS, 'Hotkey', Hotkey);
-    Ini.WriteInteger(IS_PADOPTIONS, 'DropAction', DropAction);
-    Ini.WriteInteger(IS_PADOPTIONS, 'DblClickAction', DblClickAction);
-    Ini.WriteInteger(IS_PADOPTIONS, 'BackColor', BackColor);
-    Ini.WriteString(IS_PADOPTIONS, 'WallPaper', WallPaper);
-    Ini.WriteInteger(IS_PADOPTIONS, 'DragBar', DragBar);
-    Ini.WriteBool(IS_PADOPTIONS, 'GroupName', GroupName);
-    Ini.WriteInteger(IS_PADOPTIONS, 'DragBarSize', DragBarSize);
-    Ini.WriteBool(IS_PADOPTIONS, 'HideAuto', HideAuto);
-    Ini.WriteBool(IS_PADOPTIONS, 'HideSmooth', HideSmooth);
-    Ini.WriteBool(IS_PADOPTIONS, 'HideMouseCheck', HideMouseCheck);
-    Ini.WriteBool(IS_PADOPTIONS, 'HideVertical', HideVertical);
-    Ini.WriteBool(IS_PADOPTIONS, 'HideGroupName', HideGroupName);
-    Ini.WriteInteger(IS_PADOPTIONS, 'HideSize', HideSize);
-    Ini.WriteInteger(IS_PADOPTIONS, 'ShowDelay', ShowDelay);
-    Ini.WriteInteger(IS_PADOPTIONS, 'HideDelay', HideDelay);
-    Ini.WriteInteger(IS_PADOPTIONS, 'HideColor', HideColor);
-    if SkinPlugin = nil then
-      Ini.WriteString(IS_PADOPTIONS, 'SkinName', '')
-    else
-      Ini.WriteString(IS_PADOPTIONS, 'SkinName', SkinPlugin.Name);
-    Ini.UpdateFile;
-  finally
-    Ini.Free;
+  //    Ini.WriteInteger(IS_PADOPTIONS, 'PropertyPageNo', PropertyPageNo);
+      Ini.WriteBool(IS_PADOPTIONS, 'TopMost', TopMost);
+      Ini.WriteBool(IS_PADOPTIONS, 'SmoothScroll', SmoothScroll);
+      Ini.WriteInteger(IS_PADOPTIONS, 'Hotkey', Hotkey);
+      Ini.WriteInteger(IS_PADOPTIONS, 'DropAction', DropAction);
+      Ini.WriteInteger(IS_PADOPTIONS, 'DblClickAction', DblClickAction);
+      Ini.WriteInteger(IS_PADOPTIONS, 'BackColor', BackColor);
+      Ini.WriteString(IS_PADOPTIONS, 'WallPaper', WallPaper);
+      Ini.WriteInteger(IS_PADOPTIONS, 'DragBar', DragBar);
+      Ini.WriteBool(IS_PADOPTIONS, 'GroupName', GroupName);
+      Ini.WriteInteger(IS_PADOPTIONS, 'DragBarSize', DragBarSize);
+      Ini.WriteBool(IS_PADOPTIONS, 'HideAuto', HideAuto);
+      Ini.WriteBool(IS_PADOPTIONS, 'HideSmooth', HideSmooth);
+      Ini.WriteBool(IS_PADOPTIONS, 'HideMouseCheck', HideMouseCheck);
+      Ini.WriteBool(IS_PADOPTIONS, 'HideVertical', HideVertical);
+      Ini.WriteBool(IS_PADOPTIONS, 'HideGroupName', HideGroupName);
+      Ini.WriteInteger(IS_PADOPTIONS, 'HideSize', HideSize);
+      Ini.WriteInteger(IS_PADOPTIONS, 'ShowDelay', ShowDelay);
+      Ini.WriteInteger(IS_PADOPTIONS, 'HideDelay', HideDelay);
+      Ini.WriteInteger(IS_PADOPTIONS, 'HideColor', HideColor);
+      if SkinPlugin = nil then
+        Ini.WriteString(IS_PADOPTIONS, 'SkinName', '')
+      else
+        Ini.WriteString(IS_PADOPTIONS, 'SkinName', SkinPlugin.Name);
+      Ini.UpdateFile;
+    finally
+      Ini.Free;
+    end;
   end;
 end;
 

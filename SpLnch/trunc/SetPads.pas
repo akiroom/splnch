@@ -235,22 +235,25 @@ procedure TPads.SaveIni;
 var
   i: Integer;
 begin
-  UserIniFile.WriteInteger(IS_PADS, 'LastPadID', FLastPadID);
-  UserIniFile.EraseSection(IS_PADSZORDER);
-
-  // 書き込み
-  for i := 0 to Count - 1 do
+  if not UserIniReadOnly then
   begin
-    UserIniFile.WriteInteger(IS_PADSZORDER, IntToStr(i), Items[i].ID);
-    try
-      Items[i].SaveIni;
-    except
-      on E: Exception do
-        Application.MessageBox(PChar(E.Message), 'エラー', MB_ICONERROR);
-    end;
-  end;
+    UserIniFile.WriteInteger(IS_PADS, 'LastPadID', FLastPadID);
+    UserIniFile.EraseSection(IS_PADSZORDER);
 
-  UserIniFile.UpdateFile;
+    // 書き込み
+    for i := 0 to Count - 1 do
+    begin
+      UserIniFile.WriteInteger(IS_PADSZORDER, IntToStr(i), Items[i].ID);
+      try
+        Items[i].SaveIni;
+      except
+        on E: Exception do
+          Application.MessageBox(PChar(E.Message), 'エラー', MB_ICONERROR);
+      end;
+    end;
+
+    UserIniFile.UpdateFile;
+  end;
 end;
 
 // すべてのパッドを開始

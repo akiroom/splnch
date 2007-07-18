@@ -139,72 +139,69 @@ var
 begin
   SetClassLong(Handle, GCL_HICON, Application.Icon.Handle);
 
-  with UserIniFile do
+  PageControl.ActivePage := PageControl.Pages[0];
+
+  for i := 0 to lvPlugins.Columns.Count - 1 do
+    lvPlugins.Columns[i].Width := UserIniFile.ReadInteger(IS_WINDOWS,
+      Format('OptionPluginColumns%d', [i]), lvPlugins.Columns[i].Width);
+
+  // 更新チェック
+  chkVerCheck.Checked := UserIniFile.ReadBool(IS_OPTIONS, 'VerCheck', True);
+
+  // タスクトレイ
+  chkTaskTray.Checked := UserIniFile.ReadBool(IS_OPTIONS, 'TaskTray', True);
+
+  // アイコンキャッシュ
+  udIconCache.Position := UserIniFile.ReadInteger(IS_OPTIONS, 'IconCache', 1000);
+  lblNowIconCache.Caption := Format('現在の使用量 : %d', [IconCache.CacheCount]);
+
+  // サウンド
+  for i := 0 to cmbSounds.Items.Count - 1 do
   begin
-    PageControl.ActivePage := PageControl.Pages[0];
-
-    for i := 0 to lvPlugins.Columns.Count - 1 do
-      lvPlugins.Columns[i].Width := ReadInteger(IS_WINDOWS,
-        Format('OptionPluginColumns%d', [i]), lvPlugins.Columns[i].Width);
-
-    // 更新チェック
-    chkVerCheck.Checked := ReadBool(IS_OPTIONS, 'VerCheck', True);
-
-    // タスクトレイ
-    chkTaskTray.Checked := ReadBool(IS_OPTIONS, 'TaskTray', True);
-
-    // アイコンキャッシュ
-    udIconCache.Position := ReadInteger(IS_OPTIONS, 'IconCache', 1000);
-    lblNowIconCache.Caption := Format('現在の使用量 : %d', [IconCache.CacheCount]);
-
-    // サウンド
-    for i := 0 to cmbSounds.Items.Count - 1 do
+    SoundFile := TSoundFile.Create;
+    cmbSounds.Items.Objects[i] := SoundFile;
+    case i of
+      0: SoundAction := 'ButtonClick';
+      1: SoundAction := 'GroupChange';
+      2: SoundAction := 'MoveHide';
+      3: SoundAction := 'MoveShow';
+    else
+      SoundAction := '';
+    end;
+    if SoundAction <> '' then
     begin
-      SoundFile := TSoundFile.Create;
-      cmbSounds.Items.Objects[i] := SoundFile;
-      case i of
-        0: SoundAction := 'ButtonClick';
-        1: SoundAction := 'GroupChange';
-        2: SoundAction := 'MoveHide';
-        3: SoundAction := 'MoveShow';
-      else
-        SoundAction := '';
-      end;
-      if SoundAction <> '' then
+      Work := UserIniFile.ReadString(IS_SOUNDS, SoundAction, '');
+      if Work <> '' then
       begin
-        Work := ReadString(IS_SOUNDS, SoundAction, '');
-        if Work <> '' then
-        begin
-          SoundFile.FileName := Work;
-        end;
+        SoundFile.FileName := Work;
       end;
     end;
-    cmbSounds.ItemIndex := 0;
-    cmbSoundsChange(cmbSounds);
-
-    // 制限
-    chkLockBtnDrag.Checked := ReadBool(IS_RESTRICTIONS, 'LockBtnDrag', False);
-    chkLockBtnEdit.Checked := ReadBool(IS_RESTRICTIONS, 'LockBtnEdit', False);
-    chkLockBtnFolder.Checked := ReadBool(IS_RESTRICTIONS, 'LockBtnFolder', False);
-    chkLockPadProperty.Checked := ReadBool(IS_RESTRICTIONS, 'LockPadProperty', False);
-    chkLockOption.Checked := ReadBool(IS_RESTRICTIONS, 'LockOption', False);
-    chkLockPlugin.Checked := ReadBool(IS_RESTRICTIONS, 'LockPlugin', False);
-    FRestrictionsPassword :=  ReadString(IS_RESTRICTIONS, 'Password', '');
-
-    // データフォルダ
-    Ini := TIniFile.Create(ChangeFileExt(ParamStr(0), '.ini'));
-    try
-      chkSettingForAllUser.Checked := Ini.ReadBool(IS_APPGENERAL, 'SettingForAllUser', False);
-      edtUserFolder.Text := Ini.ReadString(IS_USERS, UserName, '');
-      if edtUserFolder.Text = '' then
-        btnUserFolderReset.Click;
-    finally
-      Ini.Free;
-    end;
-
-
-    EnabledCheck;
   end;
+  cmbSounds.ItemIndex := 0;
+  cmbSoundsChange(cmbSounds);
+
+  // 制限
+  chkLockBtnDrag.Checked := UserIniFile.ReadBool(IS_RESTRICTIONS, 'LockBtnDrag', False);
+  chkLockBtnEdit.Checked := UserIniFile.ReadBool(IS_RESTRICTIONS, 'LockBtnEdit', False);
+  chkLockBtnFolder.Checked := UserIniFile.ReadBool(IS_RESTRICTIONS, 'LockBtnFolder', False);
+  chkLockPadProperty.Checked := UserIniFile.ReadBool(IS_RESTRICTIONS, 'LockPadProperty', False);
+  chkLockOption.Checked := UserIniFile.ReadBool(IS_RESTRICTIONS, 'LockOption', False);
+  chkLockPlugin.Checked := UserIniFile.ReadBool(IS_RESTRICTIONS, 'LockPlugin', False);
+  FRestrictionsPassword :=  UserIniFile.ReadString(IS_RESTRICTIONS, 'Password', '');
+
+  // データフォルダ
+  Ini := TIniFile.Create(ChangeFileExt(ParamStr(0), '.ini'));
+  try
+    chkSettingForAllUser.Checked := Ini.ReadBool(IS_APPGENERAL, 'SettingForAllUser', False);
+    edtUserFolder.Text := Ini.ReadString(IS_USERS, UserName, '');
+    if edtUserFolder.Text = '' then
+      btnUserFolderReset.Click;
+  finally
+    Ini.Free;
+  end;
+
+
+  EnabledCheck;
 
   // プラグイン
   lvPlugins.Items.BeginUpdate;
@@ -247,17 +244,17 @@ var
 begin
   Result := True;
 
-  try
-    with UserIniFile do
-    begin
+  if not UserIniReadOnly then
+  begin
+    try
       // 更新チェック
-      WriteBool(IS_OPTIONS, 'VerCheck', chkVerCheck.Checked);
+      UserIniFile.WriteBool(IS_OPTIONS, 'VerCheck', chkVerCheck.Checked);
 
       // タスクトレイ
-      WriteBool(IS_OPTIONS, 'TaskTray', chkTaskTray.Checked);
+      UserIniFile.WriteBool(IS_OPTIONS, 'TaskTray', chkTaskTray.Checked);
 
       // アイコンキャッシュ
-      WriteInteger(IS_OPTIONS, 'IconCache', udIconCache.Position);
+      UserIniFile.WriteInteger(IS_OPTIONS, 'IconCache', udIconCache.Position);
 
       // サウンド
       for i := 0 to cmbSounds.Items.Count - 1 do
@@ -273,52 +270,56 @@ begin
 
         if SoundAction <> '' then
         begin
-          WriteString(IS_SOUNDS, SoundAction, TSoundFile(cmbSounds.Items.Objects[i]).FileName);
+          UserIniFile.WriteString(IS_SOUNDS, SoundAction, TSoundFile(cmbSounds.Items.Objects[i]).FileName);
         end;
       end;
 
       // 制限
-      WriteBool(IS_RESTRICTIONS, 'LockBtnDrag', chkLockBtnDrag.Checked);
-      WriteBool(IS_RESTRICTIONS, 'LockBtnEdit', chkLockBtnEdit.Checked);
-      WriteBool(IS_RESTRICTIONS, 'LockBtnFolder', chkLockBtnFolder.Checked);
-      WriteBool(IS_RESTRICTIONS, 'LockPadProperty', chkLockPadProperty.Checked);
-      WriteBool(IS_RESTRICTIONS, 'LockOption', chkLockOption.Checked);
-      WriteBool(IS_RESTRICTIONS, 'LockPlugin', chkLockPlugin.Checked);
-      WriteString(IS_RESTRICTIONS, 'Password', FRestrictionsPassword);
+      UserIniFile.WriteBool(IS_RESTRICTIONS, 'LockBtnDrag', chkLockBtnDrag.Checked);
+      UserIniFile.WriteBool(IS_RESTRICTIONS, 'LockBtnEdit', chkLockBtnEdit.Checked);
+      UserIniFile.WriteBool(IS_RESTRICTIONS, 'LockBtnFolder', chkLockBtnFolder.Checked);
+      UserIniFile.WriteBool(IS_RESTRICTIONS, 'LockPadProperty', chkLockPadProperty.Checked);
+      UserIniFile.WriteBool(IS_RESTRICTIONS, 'LockOption', chkLockOption.Checked);
+      UserIniFile.WriteBool(IS_RESTRICTIONS, 'LockPlugin', chkLockPlugin.Checked);
+      UserIniFile.WriteString(IS_RESTRICTIONS, 'Password', FRestrictionsPassword);
 
-      UpdateFile;
+      UserIniFile.UpdateFile;
+
+    except
+      Result := False;
+      MessageBox(Handle, PChar('設定ファイル "' + UserIniFile.FileName +
+                                   '" に書き込めません。'),
+                             'エラー', MB_ICONSTOP);
     end;
 
-  except
-    Result := False;
-    MessageBox(Handle, PChar('設定ファイル "' + UserIniFile.FileName +
-                                 '" に書き込めません。'),
-                           'エラー', MB_ICONSTOP);
-  end;
 
-
-  // ユーザーフォルダを削除
-  if not btnUserFolderReset.Enabled then
-  begin
-    Ini := TIniFile.Create(ChangeFileExt(ParamStr(0), '.ini'));
-    try
-      try
-        Ini.WriteString(IS_USERS, UserName, '');
-      except
-        Result := False;
-        Application.MessageBox(PChar('設定ファイル "' + Ini.FileName + '" に書き込めません。'),
-                               'エラー', MB_ICONSTOP);
+    // ユーザーフォルダを削除
+    if Result then
+    begin
+      if not btnUserFolderReset.Enabled then
+      begin
+        Ini := TIniFile.Create(ChangeFileExt(ParamStr(0), '.ini'));
+        try
+          try
+            Ini.WriteString(IS_USERS, UserName, '');
+          except
+            Result := False;
+            Application.MessageBox(PChar('設定ファイル "' + Ini.FileName + '" に書き込めません。'),
+                                   'エラー', MB_ICONSTOP);
+          end;
+        finally
+          Ini.Free;
+        end;
       end;
-    finally
-      Ini.Free;
     end;
+
+    EnabledCheck;
+    frmMain.ChangeOptions;
+
   end;
-
-
-  EnabledCheck;
-  frmMain.ChangeOptions;
-
-  btnApply.Enabled := False;
+  
+  if Result then
+    btnApply.Enabled := False;
 end;
 
 // フォーム終わり
@@ -330,9 +331,12 @@ begin
     TSoundFile(cmbSounds.Items.Objects[i]).Free;
 
   imlPlugins.Clear;
-  for i := 0 to lvPlugins.Columns.Count - 1 do
-    UserIniFile.WriteInteger(IS_WINDOWS, Format('OptionPluginColumns%d', [i]), lvPlugins.Columns[i].Width);
-  UserIniFile.UpdateFile;
+  if not UserIniReadOnly then
+  begin
+    for i := 0 to lvPlugins.Columns.Count - 1 do
+      UserIniFile.WriteInteger(IS_WINDOWS, Format('OptionPluginColumns%d', [i]), lvPlugins.Columns[i].Width);
+    UserIniFile.UpdateFile;
+  end;
 
   dlgOption := nil;
 end;

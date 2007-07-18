@@ -3,7 +3,7 @@ unit SetIcons;
 interface
 
 uses
-  Windows, Classes, Graphics, ShellAPI, SysUtils, ShlObj, pidl;
+  Windows, Classes, Graphics, ShellAPI, SysUtils, ShlObj, pidl, SetInit;
 
 type
   EIconFileError = class(Exception);
@@ -628,6 +628,10 @@ var
   Size: Integer;
   FileStream: TFileStream;
 begin
+  if UserIniReadOnly then
+    Exit;
+
+
   // ファイルを作成し開く
   try
     FileStream := TFileStream.Create(FileName, fmCreate);

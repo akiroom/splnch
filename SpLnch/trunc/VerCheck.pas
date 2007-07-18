@@ -119,6 +119,8 @@ var
   NextVerCheck: string;
 begin
   Update := False;
+  SLCurrentVersion := GetFileVersionString(ParamStr(0), True);
+
   if not RequestError then
   begin
     memInfo.Lines.BeginUpdate;
@@ -133,11 +135,9 @@ begin
         Item := All.item(I, 0) as IHtmlElement;
         if Item.className = 'slversion' then
         begin
-          CurrentVersion := GetFileVersionString(ParamStr(0), True);
           TargetVersion := item.innerText;
-          if TargetVersion > CurrentVersion then
+          if TargetVersion > SLCurrentVersion then
           begin
-            SLCurrentVersion := CurrentVersion;
             NewVersion := TargetVersion;
           end;
         end
@@ -147,28 +147,20 @@ begin
         end
         else if (Item.className = 'plugininnername') then
         begin
-          if NewPluginVersion <> nil then
-            NewPluginVersionList.Add(NewPluginVersion);
           NewPluginVersion := nil;
           Plugin := Plugins.FindPlugin(item.innerText);
           if Plugin <> nil then
           begin
-            CurrentVersion := GetFileVersionString(Plugin.FileName, True);
             NewPluginVersion := TNewPluginVersion.Create;
             NewPluginVersion.Name := item.innerText;
-            NewPluginVersion.CurrentVersion := CurrentVersion;
+            NewPluginVersion.CurrentVersion := GetFileVersionString(Plugin.FileName, True);
+            NewPluginVersionList.Add(NewPluginVersion);
           end;
         end
         else if (Item.className = 'pluginversion') then
         begin
           if NewPluginVersion <> nil then
-          begin
-            TargetVersion := item.innerText;
-            if TargetVersion > NewPluginVersion.CurrentVersion then
-              NewPluginVersion.Version := TargetVersion
-            else
-              NewPluginVersion := nil;
-          end;
+            NewPluginVersion.Version := item.innerText;
         end
         else if (Item.className = 'plugindate') then
         begin
@@ -189,16 +181,23 @@ begin
           memInfo.Lines.Add(SLCurrentVersion + '→' + NewVersion);
       end;
 
-      if NewPluginVersionList.Count > 0 then
+      for I := 0 to NewPluginVersionList.Count - 1 do
       begin
-        if Update then
-          memInfo.Lines.Add('');
-
-        Update := True;
-        memInfo.Lines.Add('プラグインがバージョンアップしています。');
-        for I := 0 to NewPluginVersionList.Count - 1 do
+        NewPluginVersion := NewPluginVersionList[i];
+        if NewPluginVersion.Version > NewPluginVersion.CurrentVersion then
         begin
-          NewPluginVersion := NewPluginVersionList[i];
+          Update := True;
+          if memInfo.Lines.Count > 0 then
+            memInfo.Lines.Add('');
+          memInfo.Lines.Add('次のプラグインがバージョンアップしています。');
+          Break;
+        end;
+      end;
+      for I := 0 to NewPluginVersionList.Count - 1 do
+      begin
+        NewPluginVersion := NewPluginVersionList[i];
+        if NewPluginVersion.Version > NewPluginVersion.CurrentVersion then
+        begin
           memInfo.Lines.Add('【' + NewPluginVersion.Name + '】');
           if Length(NewPluginVersion.Date) > 0 then
             memInfo.Lines.Add(NewPluginVersion.CurrentVersion + '→' + NewPluginVersion.Version + '（' + NewPluginVersion.Date + '）')
@@ -206,15 +205,50 @@ begin
             memInfo.Lines.Add(NewPluginVersion.CurrentVersion + '→' + NewPluginVersion.Version);
         end;
       end;
+
+      if memInfo.Lines.Count > 0 then
+        memInfo.Lines.Add('');
+
+      if NewVersion = '' then
+      begin
+        if memInfo.Lines.Count > 0 then
+          memInfo.Lines.Add('');
+        memInfo.Lines.Add('Special Launch 本体は最新です。');
+        memInfo.Lines.Add(SLCurrentVersion);
+      end;
+
+      for I := 0 to NewPluginVersionList.Count - 1 do
+      begin
+        NewPluginVersion := NewPluginVersionList[i];
+        if NewPluginVersion.Version <= NewPluginVersion.CurrentVersion then
+        begin
+          if memInfo.Lines.Count > 0 then
+            memInfo.Lines.Add('');
+          memInfo.Lines.Add('次のプラグインは最新です。');
+          Break;
+        end;
+      end;
+      for I := 0 to NewPluginVersionList.Count - 1 do
+      begin
+        NewPluginVersion := NewPluginVersionList[i];
+        if NewPluginVersion.Version <= NewPluginVersion.CurrentVersion then
+        begin
+          memInfo.Lines.Add('【' + NewPluginVersion.Name + '】');
+          memInfo.Lines.Add(NewPluginVersion.CurrentVersion);
+        end;
+      end;
+
+
+
       memInfo.SelStart := 0;
       memInfo.SelLength := 0;
 
       lblMessage.Font.Style := lblMessage.Font.Style + [fsBold];
       if Update then
       begin
-        lblMessage.Caption := '最新版を Web サイトからダウンロードできます。';
+        lblMessage.Caption := '最新版のソフトウェアが見つかりました。'+#13#10
+          +'ダウンロードサイトから最新版を取得できます。';
         btnOk.Default := True;
-        memInfo.Enabled := True;
       end
       else
       begin
@@ -226,7 +260,11 @@ begin
     end;
 
     DateTimeToString(NextVerCheck, 'yyyymmdd', Now + 7);
-    UserIniFile.WriteString(IS_OPTIONS, 'NextVerCheck', NextVerCheck);
+    if not UserIniReadOnly then
+    begin
+      UserIniFile.WriteString(IS_OPTIONS, 'NextVerCheck', NextVerCheck);
+      UserIniFile.UpdateFile;
+    end;
 
   end;
 

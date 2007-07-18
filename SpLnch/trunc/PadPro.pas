@@ -1337,7 +1337,8 @@ begin
   begin
     TPanel(FPartLabels[i]).Visible := chkVisiblePartLabels.Checked;
   end;
-  UserIniFile.WriteBool(IS_WINDOWS, 'PadOptionVisiblePartLabels', chkVisiblePartLabels.Checked);
+  if not UserIniReadOnly then
+    UserIniFile.WriteBool(IS_WINDOWS, 'PadOptionVisiblePartLabels', chkVisiblePartLabels.Checked);
 end;
 
 // ƒXƒLƒ“•`‰æ

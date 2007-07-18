@@ -52,7 +52,6 @@ object dlgVerCheck: TdlgVerCheck
     Top = 56
     Width = 409
     Height = 154
-    Enabled = False
     ReadOnly = True
     ScrollBars = ssVertical
     TabOrder = 1

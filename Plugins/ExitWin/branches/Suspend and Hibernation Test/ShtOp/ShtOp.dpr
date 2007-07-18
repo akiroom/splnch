@@ -16,9 +16,11 @@ type
 var
   UpParam: String;
   CanExit: Boolean;
+  HelpDisp: Boolean;
   ExtMode: Integer;
   HibernateMode: Boolean;
   SuspendFlag: Boolean;
+  SystemPowerState: Boolean;
   VerInfo: TOSVersionInfo;
   tpSv: TTokenPrivileges;
   i: Integer;
@@ -30,16 +32,26 @@ var
   SetSuspendState : TSetSuspendState;
 begin
   CanExit := False;
+  HelpDisp := True;
   ExtMode := 0;
   HibernateMode := False;
   SuspendFlag := False;
+  SystemPowerState := False;
   w := 0;
+  VerInfo.dwOSVersionInfoSize := SizeOf(TOSVersionInfo);
+  GetVersionEx(VerInfo);
   hPowrprof := LoadLibrary('PowrProf.dll');
   if hPowrprof <> 0 then
   begin
     @IsPwrSuspendAllowed := GetProcAddress(hPowrprof, 'IsPwrSuspendAllowed');
     @IsPwrHibernateAllowed := GetProcAddress(hPowrprof, 'IsPwrHibernateAllowed');
     @SetSuspendState := GetProcAddress(hPowrprof, 'SetSuspendState');
+  end
+  else
+  begin
+    IsPwrSuspendAllowed := nil;
+    IsPwrHibernateAllowed := nil;
+    SetSuspendState := nil;
   end;
   for i := 1 to ParamCount do
   begin
@@ -76,33 +88,64 @@ begin
     end
     else if UpParam = 'SUSPEND' then
     begin
-      if Assigned(@IsPwrSuspendAllowed) and IsPwrSuspendAllowed() then
-      begin
-        HibernateMode := False;
-        SuspendFlag := True;
-      end;
+      SystemPowerState := True;
+      HibernateMode := False;
+      SuspendFlag := True;
     end
     else if UpParam = 'HIBERNATION' then
     begin
-      if Assigned(@IsPwrHibernateAllowed) and IsPwrHibernateAllowed() then
-        begin
-          HibernateMode := True;
-          SuspendFlag := True;
-        end;
-      end;
+      SystemPowerState := True;
+      HibernateMode := True;
+      SuspendFlag := True;
+    end;
   end;
 
   if SuspendFlag and Assigned(@SetSuspendState) then
   begin
     // サスペンド処理を追加
-    SetSuspendState(HibernateMode, False, False);
+    if SetSuspendState(HibernateMode, False, False) then
+      SystemPowerState := False;
+    HelpDisp := False;
+  end;
+  if SystemPowerState then
+  begin
+    if HibernateMode and Assigned(IsPwrHibernateAllowed) then
+    begin
+      // 休止状態の場合
+      if not IsPwrHibernateAllowed() then
+      begin
+        SystemPowerState := False;
+        s := '休止状態に移行できませんでした。' + #13#10;
+      end;
+    end;
+    if not HibernateMode and Assigned(IsPwrSuspendAllowed) then
+    begin
+      // サスペンドの場合
+      if not IsPwrSuspendAllowed() then
+      begin
+        SystemPowerState := False;
+        s := 'サスペンドに移行できませんでした。' + #13#10;
+      end;
+    end;
+    if SystemPowerState then
+    begin
+      if VerInfo.dwPlatformId = VER_PLATFORM_WIN32_NT then
+        GetSE_SHUTDOWN(tpSv);
+
+      HibernateMode := not HibernateMode;
+      SetSystemPowerState(HibernateMode, False);
+
+      if VerInfo.dwPlatformId = VER_PLATFORM_WIN32_NT then
+        ReleaseSE_SHUTDOWN(tpSv);
+    end
+    else
+    begin
+      s := s + '電源オプションの設定を確認してください。';
+      MessageBox(0, PChar(s), '情報', MB_ICONINFORMATION);
+    end;
   end
   else if CanExit then
   begin
-    VerInfo.dwOSVersionInfoSize := SizeOf(TOSVersionInfo);
-
-    GetVersionEx(VerInfo);
-
     if VerInfo.dwPlatformId = VER_PLATFORM_WIN32_NT then
       GetSE_SHUTDOWN(tpSv);
 
@@ -138,7 +181,7 @@ begin
     if VerInfo.dwPlatformId = VER_PLATFORM_WIN32_NT then
       ReleaseSE_SHUTDOWN(tpSv);
   end
-  else
+  else if HelpDisp then
   begin
     s := 'Windows の終了を行います。' + #13#10
        + #13#10

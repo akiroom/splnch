@@ -801,19 +801,22 @@ var
   Ini: TIniFile;
   DoClose: Boolean;
   Msg: string;
+  NewTargetFolder: string;
+  NewUserFolder: string;
 begin
   DoClose := True;
 
+  NewTargetFolder := GetTargetFolder;
   if rdoInstall.Checked then
   begin
     // フォルダの作成
-    DoClose := ForceDirectories(GetTargetFolder);
+    DoClose := ForceDirectories(NewTargetFolder);
     if not DoClose then
       Application.MessageBox('インストール先フォルダを作成できませんでした。', 'エラー', MB_ICONSTOP);
 
     // ファイルコピー
     if DoClose then
-      DoClose := SL4FileCopy(GetTargetFolder);
+      DoClose := SL4FileCopy(NewTargetFolder);
 
     // 必要なフォルダの作成
     if DoClose then
@@ -825,18 +828,23 @@ begin
     if not DoClose then
       Application.MessageBox('パッドフォルダを作成できませんでした。', 'エラー', MB_ICONSTOP);
     if DoClose then
-      DoClose := ForceDirectories(GetTargetFolder + 'Plugins');
+      DoClose := ForceDirectories(NewTargetFolder + 'Plugins');
     if not DoClose then
       Application.MessageBox('プラグインフォルダを作成できませんでした。', 'エラー', MB_ICONSTOP);
     if DoClose then
     begin
-      Ini := TIniFile.Create(GetTargetFolder + 'SpLnch.ini');
+      // カレントディレクトリにある場合は相対パスに置き換え
+      NewUserFolder := GetSL4UserFolder;
+      if Pos(NewTargetFolder, NewUserFolder) = 1 then
+        NewUserFolder := ExtractRelativePath(NewTargetFolder, NewUserFolder);
+
+      Ini := TIniFile.Create(NewTargetFolder + 'SpLnch.ini');
       try
         Ini.WriteBool('General', 'SettingForAllUser', chkSettingForAllUser.Checked);
         if chkSettingForAllUser.Checked then
-          Ini.WriteString('Users', 'Default', GetSL4UserFolder)
+          Ini.WriteString('Users', 'Default', NewUserFolder)
         else
-          Ini.WriteString('Users', FUserName, GetSL4UserFolder);
+          Ini.WriteString('Users', FUserName, NewUserFolder);
       finally
         Ini.Free;
       end;
@@ -861,7 +869,7 @@ begin
       // プログラムメニュー登録
       if DoClose and chkProgramMenu.Checked then
       begin
-        chkProgramMenu.Checked := SetProgramMenu(GetTargetFolder);
+        chkProgramMenu.Checked := SetProgramMenu(NewTargetFolder);
         if not chkProgramMenu.Checked then
           Application.MessageBox('プログラムメニューに登録できませんでした。', 'エラー', MB_ICONSTOP);
       end;
@@ -869,7 +877,7 @@ begin
       // スタートアップ登録
       if DoClose and chkStartup.Checked then
       begin
-        chkStartup.Checked := SetStartup(GetTargetFolder);
+        chkStartup.Checked := SetStartup(NewTargetFolder);
         if not chkStartup.Checked then
           Application.MessageBox('スタートアップに登録できませんでした。', 'エラー', MB_ICONSTOP);
       end;
@@ -877,7 +885,7 @@ begin
       // デスクトップ登録
       if DoClose and chkDesktop.Checked then
       begin
-        chkDesktop.Checked := SetDesktop(GetTargetFolder);
+        chkDesktop.Checked := SetDesktop(NewTargetFolder);
         if not chkDesktop.Checked then
           Application.MessageBox('デスクトップにショートカットを作成できませんでした。', 'エラー', MB_ICONSTOP);
       end;
@@ -885,7 +893,7 @@ begin
       // レジストリ登録
       if DoClose and chkRegistry.Checked then
       begin
-        chkRegistry.Checked := SetRegistry(GetTargetFolder);
+        chkRegistry.Checked := SetRegistry(NewTargetFolder);
         if not chkRegistry.Checked then
           Application.MessageBox('レジストリに登録できませんでした。', 'エラー', MB_ICONSTOP);
       end;
@@ -893,7 +901,7 @@ begin
       // セットアップオプションを憶える
       if DoClose then
       begin
-        Ini := TIniFile.Create(GetTargetFolder + 'Setup.ini');
+        Ini := TIniFile.Create(NewTargetFolder + 'Setup.ini');
         try
           Ini.WriteBool('Install', 'Installed', True);
           Ini.WriteBool('Options', 'ProgramMenu', chkProgramMenu.Checked);
@@ -977,10 +985,10 @@ begin
       begin
         SetupUnlock;
         if Application.MessageBox('Special Launch をすぐに起動しますか?', '確認', MB_ICONQUESTION or MB_YESNO) = idYes then
-          WinExec(PChar(GetTargetFolder + 'SpLnch.exe'), SW_SHOW);
+          WinExec(PChar(NewTargetFolder + 'SpLnch.exe'), SW_SHOW);
         if not FUpdateInstall then
           if Application.MessageBox('Special Launch のヘルプを表示しますか?', '確認', MB_ICONQUESTION or MB_YESNO) = idYes then
-            ShellExecute(Handle, nil, PChar(GetTargetFolder + 'SpLnch.chm'), nil, nil, SW_SHOW);
+            ShellExecute(Handle, nil, PChar(NewTargetFolder + 'SpLnch.chm'), nil, nil, SW_SHOW);
       end;
     end;
 

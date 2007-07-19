@@ -108,7 +108,6 @@ var
   All: IHtmlElementCollection;
   Item: IHtmlElement;
   SLCurrentVersion: string;
-  CurrentVersion: string;
   TargetVersion: string;
   NewVersion: string;
   NewDate: string;

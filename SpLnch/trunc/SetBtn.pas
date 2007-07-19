@@ -878,7 +878,11 @@ end;
 function OpenNormalButton(AWnd: HWND; AButton: TNormalButton): Boolean;
 var
   ExecInfo: TShellExecuteInfo;
+
 begin
+  // カレントディレクトリ移動
+  ChDir(ExtractFilePath(ParamStr(0)));
+
   with ExecInfo do
   begin
     cbSize := SizeOf(TShellExecuteInfo);
@@ -886,9 +890,10 @@ begin
     if AButton.ItemIDList = nil then
     begin
       fMask := SEE_MASK_DOENVSUBST;
-      lpFile := PChar(AButton.FileName);
+    // 絶対パス取得
+      lpFile := PChar(ExpandUNCFileName(AButton.FileName));
       lpParameters := PChar(AButton.Option);
-      lpDirectory := PChar(AButton.Folder);
+      lpDirectory := PChar(ExpandUNCFileName(AButton.Folder));
       lpIDList := nil;
     end
     else
@@ -929,6 +934,10 @@ var
   FilePart: PChar;
 begin
   Result := True;
+
+  // カレントディレクトリ移動
+  ChDir(ExtractFilePath(ParamStr(0)));
+
   NormalButton := TNormalButton.Create;
   try
 

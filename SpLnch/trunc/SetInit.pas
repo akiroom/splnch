@@ -54,6 +54,7 @@ var
   FindHandle: THandle;
   Win32FindData: TWin32FindData;
   UnknownFileExist: Boolean;
+  NewUserFolder: string;
 begin
   Result := True;
 
@@ -80,11 +81,16 @@ begin
     Ini.Free;
   end;
 
+  // カレントディレクトリ移動
+  ChDir(ExtractFilePath(ParamStr(0)));
+
   // ユーザー設定ファイル
   if UserFolder = '' then
     UserInit := ''
   else
   begin
+    // 絶対パス取得
+    UserFolder := ExpandUNCFileName(UserFolder);
     if not IsPathDelimiter(UserFolder, Length(UserFolder)) then
       UserFolder := UserFolder + '\';
     UserInit := UserFolder + FileNameIni;
@@ -113,6 +119,9 @@ begin
         if dlgInitFolder.ShowModal = idOk then
         begin
           UserFolder := dlgInitFolder.edtInitFolder.Text;
+
+          // カレントディレクトリ移動
+          ChDir(ExtractFilePath(ParamStr(0)));
 
           if not IsPathDelimiter(UserFolder, Length(UserFolder)) then
             UserFolder := UserFolder + '\';
@@ -193,11 +202,16 @@ begin
 
     if Result then
     begin
+      // カレントディレクトリにある場合は相対パスに置き換え
+      NewUserFolder := UserFolder;
+      if Pos(ExtractFilePath(ParamStr(0)), UserFolder) = 1 then
+        NewUserFolder := ExtractRelativePath(ExtractFilePath(ParamStr(0)), UserFolder);
+
       // ユーザーフォルダを保存
       Ini := TIniFile.Create(ChangeFileExt(ParamStr(0), '.ini'));
       try
         try
-          Ini.WriteString(IS_USERS, UserName, UserFolder);
+          Ini.WriteString(IS_USERS, UserName, NewUserFolder);
         except
           Result := False;
           Application.MessageBox(PChar('設定ファイル "' + Ini.FileName + '" に書き込めません。'),

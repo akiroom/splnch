@@ -47,6 +47,7 @@ type
     Label6: TLabel;
     imgPluginIcon: TImage;
     imgNormalIcon: TImage;
+    btnNormalRelativePath: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btnOkClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
@@ -64,6 +65,7 @@ type
     procedure btnNormalIconClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnNormalRelativePathClick(Sender: TObject);
   private
     FOnWindowActivate: TNotifyEvent;
     FOnWindowDeactivate: TNotifyEvent;
@@ -420,6 +422,9 @@ var
 begin
   tmNormalIconChange.Enabled := False;
 
+  // カレントディレクトリ移動
+  ChDir(ExtractFilePath(ParamStr(0)));
+
   if FNormalIconFile <> '' then
     Ret := GetIconHandle(PChar(FNormalIconFile), ftIconPath, FNormalIconIndex, LIcon, SIcon)
   else if FNormalItemIDList <> nil then
@@ -461,6 +466,7 @@ begin
         edtNormalFileName.ParentColor := True;
         edtNormalFileName.Enabled := False;
         edtNormalFileName.Text := GetItemIDName(DesktopFolder, Value, SHGDN_NORMAL);
+        btnNormalRelativePath.Enabled := False;
         edtNormalOption.ParentColor := True;
         edtNormalOption.Enabled := False;
         edtNormalOption.Text := '';
@@ -475,6 +481,7 @@ begin
     begin
       edtNormalFileName.Color := clWindow;
       edtNormalFileName.Enabled := True;
+      btnNormalRelativePath.Enabled := True;
       edtNormalOption.Color := clWindow;
       edtNormalOption.Enabled := True;
       edtNormalFolder.Color := clWindow;
@@ -643,6 +650,16 @@ begin
       end;
     end;
 
+  end;
+end;
+
+// 相対パスに変換
+procedure TdlgBtnProperty.btnNormalRelativePathClick(Sender: TObject);
+begin
+  if btnNormalRelativePath.Enabled then
+  begin
+    edtNormalFileName.Text := ExtractRelativePath(ExtractFilePath(ParamStr(0)), edtNormalFileName.Text);
+    edtNormalFolder.Text := '';
   end;
 end;
 

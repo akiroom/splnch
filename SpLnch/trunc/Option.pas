@@ -192,8 +192,12 @@ begin
   // データフォルダ
   Ini := TIniFile.Create(ChangeFileExt(ParamStr(0), '.ini'));
   try
+    // カレントディレクトリ移動
+    ChDir(ExtractFilePath(ParamStr(0)));
     chkSettingForAllUser.Checked := Ini.ReadBool(IS_APPGENERAL, 'SettingForAllUser', False);
     edtUserFolder.Text := Ini.ReadString(IS_USERS, UserName, '');
+    edtUserFolder.Text := ExpandUNCFileName(edtUserFolder.Text);
+
     if edtUserFolder.Text = '' then
       btnUserFolderReset.Click;
   finally

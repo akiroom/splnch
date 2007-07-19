@@ -96,7 +96,7 @@ var
   Folder: string;
 begin
   Folder := Trim(edtTargetFolder.Text);
-  Folder := ExpandFileName(Folder);
+  Folder := ExpandUNCFileName(Folder);
   if not IsPathDelimiter(Folder, Length(Folder)) then
     Folder := Folder + '\';
   Result := Folder;
@@ -108,7 +108,11 @@ var
   Folder: string;
 begin
   Folder := Trim(edtSL4UserFolder.Text);
-  Folder := ExpandFileName(Folder);
+  if DirectoryExists(GetTargetFolder) then
+  begin
+    ChDir(GetTargetFolder);
+    Folder := ExpandUNCFileName(Folder);
+  end;
   if not IsPathDelimiter(Folder, Length(Folder)) then
     Folder := Folder + '\';
   Result := Folder;
@@ -820,17 +824,24 @@ begin
 
     // 必要なフォルダの作成
     if DoClose then
+    begin
       DoClose := ForceDirectories(GetSL4UserFolder);
-    if not DoClose then
-      Application.MessageBox('データフォルダを作成できませんでした。', 'エラー', MB_ICONSTOP);
+      if not DoClose then
+        Application.MessageBox('データフォルダを作成できませんでした。', 'エラー', MB_ICONSTOP);
+    end;
     if DoClose then
+    begin
       DoClose := ForceDirectories(GetSL4UserFolder + 'Pads');
-    if not DoClose then
-      Application.MessageBox('パッドフォルダを作成できませんでした。', 'エラー', MB_ICONSTOP);
+      if not DoClose then
+        Application.MessageBox('パッドフォルダを作成できませんでした。', 'エラー', MB_ICONSTOP);
+    end;
     if DoClose then
+    begin
       DoClose := ForceDirectories(NewTargetFolder + 'Plugins');
-    if not DoClose then
-      Application.MessageBox('プラグインフォルダを作成できませんでした。', 'エラー', MB_ICONSTOP);
+      if not DoClose then
+        Application.MessageBox('プラグインフォルダを作成できませんでした。', 'エラー', MB_ICONSTOP);
+    end;
+
     if DoClose then
     begin
       // カレントディレクトリにある場合は相対パスに置き換え
@@ -898,22 +909,25 @@ begin
           Application.MessageBox('レジストリに登録できませんでした。', 'エラー', MB_ICONSTOP);
       end;
 
-      // セットアップオプションを憶える
-      if DoClose then
-      begin
-        Ini := TIniFile.Create(NewTargetFolder + 'Setup.ini');
-        try
-          Ini.WriteBool('Install', 'Installed', True);
-          Ini.WriteBool('Options', 'ProgramMenu', chkProgramMenu.Checked);
-          Ini.WriteBool('Options', 'Startup', chkStartup.Checked);
-          Ini.WriteBool('Options', 'Desktop', chkDesktop.Checked);
-          Ini.WriteBool('Options', 'Registry', chkRegistry.Checked);
-        finally
-          Ini.Free;
-        end;
+
+    end;
+
+    // セットアップオプションを憶える
+    if DoClose then
+    begin
+      Ini := TIniFile.Create(NewTargetFolder + 'Setup.ini');
+      try
+        Ini.WriteBool('Install', 'Installed', True);
+        Ini.WriteBool('Options', 'ProgramMenu', chkProgramMenu.Checked);
+        Ini.WriteBool('Options', 'Startup', chkStartup.Checked);
+        Ini.WriteBool('Options', 'Desktop', chkDesktop.Checked);
+        Ini.WriteBool('Options', 'Registry', chkRegistry.Checked);
+      finally
+        Ini.Free;
       end;
     end;
   end;
+
 
   if DoClose and (rdoInstall.Checked or rdoConvert.Checked) then
   begin

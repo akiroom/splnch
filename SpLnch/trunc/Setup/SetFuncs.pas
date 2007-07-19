@@ -242,6 +242,8 @@ var
   LpFileOp: TSHFILEOPSTRUCT;
 begin
 
+  // カレントディレクトリ移動
+  ChDir(ExtractFilePath(ParamStr(0)));
 
   FileList := TStringList.Create;
   try
@@ -253,6 +255,7 @@ begin
         s := Ini.ReadString('Files', IntToStr(i), '');
         if s = '' then
           Break;
+        s := ExpandUNCFileName(s);
         FileList.Add(s);
         Inc(i);
       end;
@@ -525,12 +528,17 @@ begin
     // データフォルダ
     if DeleteData then
     begin
+      // カレントディレクトリ移動
+      ChDir(TargetFolder);
+
       Ini := TIniFile.Create(TargetFolder + 'SpLnch.ini');
       try
         Ini.ReadSection('Users', SectionData);
         for i := 0 to SectionData.Count - 1 do
         begin
           FileName := Ini.ReadString('Users', SectionData[i], '');
+          // 絶対パス取得
+          FileName := ExpandUNCFileName(FileName);
           if Length(FileName) > 3 then
           begin
             if IsPathDelimiter(FileName, Length(FileName)) then
@@ -541,8 +549,8 @@ begin
       finally
         Ini.Free;
       end;
-      FileList.Add(TargetFolder + 'SpLnch.ini');
     end;
+    FileList.Add(TargetFolder + 'SpLnch.ini');
 
     // プラグインフォルダ
     if DeletePlugins then

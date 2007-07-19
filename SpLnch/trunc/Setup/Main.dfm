@@ -24,7 +24,7 @@ object frmMain: TfrmMain
     Top = 0
     Width = 523
     Height = 293
-    ActivePage = tabSL4UserFolder
+    ActivePage = tabUninstallOptions
     Align = alTop
     Style = tsButtons
     TabHeight = 10
@@ -33,10 +33,6 @@ object frmMain: TfrmMain
     object tabStart: TTabSheet
       Caption = 'tabStart'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object imgIcon: TImage
         Left = 20
         Top = 24
@@ -97,10 +93,6 @@ object frmMain: TfrmMain
     object tabTargetFolder: TTabSheet
       Caption = 'tabTargetFolder'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lblTargetFolder: TLabel
         Left = 10
         Top = 40
@@ -142,10 +134,6 @@ object frmMain: TfrmMain
     object tabInstallOptions: TTabSheet
       Caption = 'tabInstallOptions'
       ImageIndex = 5
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lblInstallOptions: TLabel
         Left = 10
         Top = 40
@@ -261,10 +249,6 @@ object frmMain: TfrmMain
     end
     object tabSL3Groups: TTabSheet
       Caption = 'tabSL3Groups'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lblSL3Groups: TLabel
         Left = 10
         Top = 40
@@ -432,10 +416,6 @@ object frmMain: TfrmMain
     object tabUninstallOptions: TTabSheet
       Caption = 'tabUninstallOptions'
       ImageIndex = 6
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lblUninstallOptions: TLabel
         Left = 10
         Top = 40
@@ -470,10 +450,6 @@ object frmMain: TfrmMain
       Caption = 'tabInfo'
       ImageIndex = 2
       OnShow = tabInfoShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lblInfo: TLabel
         Left = 10
         Top = 4

@@ -1,12 +1,14 @@
 program ShtOp;
 
+{$R 'Resource.res' 'Resource.rc'}
+
 uses
-  Windows, Messages,
+  Windows,
+  Messages,
   SysUtils,
   getse_sd in 'getse_sd.pas';
 
 {$R *.RES}
-{$R SHTOP2.RES}
 
 type
   TIsPwrSuspendAllowed = function(): BOOL;stdcall;

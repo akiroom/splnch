@@ -67,9 +67,8 @@ const
       #13#10
     + 'Windows の終了プラグイン' + #13#10
     + '________________________________________________' + #13#10
-    + '                           Copyright(C)1995-2001' + #13#10
-    + '              SAWADA Shigeru All rights reserved.' + #13#10
-    + '                             制作・著作 : 沢田茂';
+    + '                           Copyright(C)1995-2007' + #13#10
+    + '             Special Launch Open Source Project.';
 
   // ボタンの数
   BUTTON_COUNT = 5;

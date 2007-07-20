@@ -1,5 +1,7 @@
 library ExitWin;
 
+{$R 'Resource.res' 'Resource.rc'}
+
 uses
   SysUtils,
   Classes,
@@ -10,7 +12,6 @@ uses
 {$E slx}
 
 {$R *.RES}
-{$R DATA.RES}
 
 exports
   SLXGetName,

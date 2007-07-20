@@ -890,8 +890,7 @@ begin
     if AButton.ItemIDList = nil then
     begin
       fMask := SEE_MASK_DOENVSUBST;
-    // ê‚ëŒÉpÉXéÊìæ
-      lpFile := PChar(ExpandUNCFileName(AButton.FileName));
+      lpFile := PChar(AButton.FileName);
       lpParameters := PChar(AButton.Option);
       lpDirectory := PChar(ExpandUNCFileName(AButton.Folder));
       lpIDList := nil;

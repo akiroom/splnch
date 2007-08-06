@@ -355,6 +355,26 @@
 		<param name="Local" value="topic\hint-admin.html">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="USB メモリー">
+		<param name="Name" value="USB メモリー等のリムーバブルディスクで使う場合の便利な機能">
+		<param name="Local" value="topic\hint-usb.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="リムーバブルディスク">
+		<param name="Name" value="USB メモリー等のリムーバブルディスクで使う場合の便利な機能">
+		<param name="Local" value="topic\hint-usb.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="CD-R">
+		<param name="Name" value="USB メモリー等のリムーバブルディスクで使う場合の便利な機能">
+		<param name="Local" value="topic\hint-usb.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Autorun.inf">
+		<param name="Name" value="USB メモリー等のリムーバブルディスクで使う場合の便利な機能">
+		<param name="Local" value="topic\hint-usb.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
 		<param name="Name" value="禁止項目">
 		<param name="Name" value="機能を制限する">
 		<param name="Local" value="topic\option-restrictions.html">

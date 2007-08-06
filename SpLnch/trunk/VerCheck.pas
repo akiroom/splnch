@@ -25,6 +25,8 @@ type
       const pDisp: IDispatch; var URL: OleVariant);
   private
     RequestError: Boolean;
+    SpVerup: Boolean;
+    VerupList: TStringList;
   public
     procedure CreateParams(var Params: TCreateParams); override;
   end;
@@ -51,14 +53,44 @@ begin
   Close;
 end;
 
+function URLEncode(src: String): String;
+var
+  i: Integer;
+begin
+  Result:='';
+  for i:=1 to Length(src) do begin
+    Result:=Result+'%'+IntToHex(Ord(src[i]),2);
+  end;
+end;
+
 // OK ボタン
 procedure TdlgVerCheck.btnOkClick(Sender: TObject);
 var
   NormalButton: TNormalButton;
+  I: Integer;
+  Param: string;
 begin
+  Param := '';
+  if SpVerup then
+    Param := 'splnch=1';
+
+
+  for I := 0 to VerupList.Count - 1 do
+  begin
+    if Length(Param) > 0 then
+      Param := Param + '&';
+    Param := Param + 'plugin' + IntToStr(I) + '=' + URLEncode(verupList[i]);
+  end;
+
+
   NormalButton := TNormalButton.Create;
   try
-    NormalButton.FileName := 'http://splnch.sourceforge.jp/download.php';
+    if Length(Param) > 0 then
+      NormalButton.FileName := 'http://splnch.sourceforge.jp/download.php?' + Param 
+    else
+      NormalButton.FileName := 'http://splnch.sourceforge.jp/download.php';
+
+
     OpenNormalButton(GetDesktopWindow, NormalButton);
   finally
     NormalButton.Free;
@@ -89,6 +121,8 @@ procedure TdlgVerCheck.FormCreate(Sender: TObject);
 begin
   SetClassLong(Handle, GCL_HICON, Application.Icon.Handle);
 
+  VerupList := TStringList.Create;
+
   RequestError := False;
   wbVersion.Navigate('http://splnch.sourceforge.jp/download.php');
 end;
@@ -97,6 +131,7 @@ end;
 procedure TdlgVerCheck.FormDestroy(Sender: TObject);
 begin
   dlgVerCheck := nil;
+  VerupList.Free;
 end;
 
 // 読み込み終了
@@ -170,8 +205,10 @@ begin
       if NewPluginVersion <> nil then
         NewPluginVersionList.Add(NewPluginVersion);
 
+      SpVerup := False;
       if NewVersion <> '' then
       begin
+        SpVerup := True;
         Update := True;
         memInfo.Lines.Add('Special Launch 本体がバージョンアップしています。');
         if Length(NewDate) > 0 then
@@ -192,11 +229,13 @@ begin
           Break;
         end;
       end;
+      VerupList.Clear;
       for I := 0 to NewPluginVersionList.Count - 1 do
       begin
         NewPluginVersion := NewPluginVersionList[i];
         if NewPluginVersion.Version > NewPluginVersion.CurrentVersion then
         begin
+          VerupList.Add(NewPluginVersion.Name);
           memInfo.Lines.Add('【' + NewPluginVersion.Name + '】');
           if Length(NewPluginVersion.Date) > 0 then
             memInfo.Lines.Add(NewPluginVersion.CurrentVersion + '→' + NewPluginVersion.Version + '（' + NewPluginVersion.Date + '）')
@@ -205,37 +244,37 @@ begin
         end;
       end;
 
-      if memInfo.Lines.Count > 0 then
-        memInfo.Lines.Add('');
-
-      if NewVersion = '' then
-      begin
-        if memInfo.Lines.Count > 0 then
-          memInfo.Lines.Add('');
-        memInfo.Lines.Add('Special Launch 本体は最新です。');
-        memInfo.Lines.Add(SLCurrentVersion);
-      end;
-
-      for I := 0 to NewPluginVersionList.Count - 1 do
-      begin
-        NewPluginVersion := NewPluginVersionList[i];
-        if NewPluginVersion.Version <= NewPluginVersion.CurrentVersion then
-        begin
-          if memInfo.Lines.Count > 0 then
-            memInfo.Lines.Add('');
-          memInfo.Lines.Add('次のプラグインは最新です。');
-          Break;
-        end;
-      end;
-      for I := 0 to NewPluginVersionList.Count - 1 do
-      begin
-        NewPluginVersion := NewPluginVersionList[i];
-        if NewPluginVersion.Version <= NewPluginVersion.CurrentVersion then
-        begin
-          memInfo.Lines.Add('【' + NewPluginVersion.Name + '】');
-          memInfo.Lines.Add(NewPluginVersion.CurrentVersion);
-        end;
-      end;
+//      if memInfo.Lines.Count > 0 then
+//        memInfo.Lines.Add('');
+//
+//      if NewVersion = '' then
+//      begin
+//        if memInfo.Lines.Count > 0 then
+//          memInfo.Lines.Add('');
+//        memInfo.Lines.Add('Special Launch 本体は最新です。');
+//        memInfo.Lines.Add(SLCurrentVersion);
+//      end;
+//
+//      for I := 0 to NewPluginVersionList.Count - 1 do
+//      begin
+//        NewPluginVersion := NewPluginVersionList[i];
+//        if NewPluginVersion.Version <= NewPluginVersion.CurrentVersion then
+//        begin
+//          if memInfo.Lines.Count > 0 then
+//            memInfo.Lines.Add('');
+//          memInfo.Lines.Add('次のプラグインは最新です。');
+//          Break;
+//        end;
+//      end;
+//      for I := 0 to NewPluginVersionList.Count - 1 do
+//      begin
+//        NewPluginVersion := NewPluginVersionList[i];
+//        if NewPluginVersion.Version <= NewPluginVersion.CurrentVersion then
+//        begin
+//          memInfo.Lines.Add('【' + NewPluginVersion.Name + '】');
+//          memInfo.Lines.Add(NewPluginVersion.CurrentVersion);
+//        end;
+//      end;
 
 
 

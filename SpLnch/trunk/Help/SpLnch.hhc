@@ -150,6 +150,11 @@
 			<param name="Local" value="topic\hint-admin.html">
 			<param name="ImageNumber" value="37">
 			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="USB メモリー等のリムーバブルディスクで使う場合の便利な機能">
+			<param name="Local" value="topic\hint-usb.html">
+			<param name="ImageNumber" value="37">
+			</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
 		<param name="Name" value="よくある質問と答え">

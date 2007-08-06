@@ -2752,8 +2752,12 @@ begin
     HideTitle;
 
   pbDragBar.Refresh;
-  pbWallPaper1.Refresh;
-  pbWallPaper2.Refresh;
+  if (SkinPlugin <> nil) and (@SkinPlugin.SLXDrawWorkspace <> nil) then
+  begin
+    // スキン対応の場合のみ壁紙リフレッシュ
+    pbWallPaper1.Refresh;
+    pbWallPaper2.Refresh;
+  end;
 
   tmHideScreen.Enabled := False;
   if FForeground then

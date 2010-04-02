@@ -1,0 +1,215 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+	<param name="ExWindow Styles" value="0x100">
+	<param name="Window Styles" value="0x800604">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="表紙">
+		<param name="Local" value="topic\title.html">
+		<param name="ImageNumber" value="21">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="セットアップ方法">
+		<param name="Local" value="topic\setup.html">
+		<param name="ImageNumber" value="41">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="使ってみよう">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="プログラムを登録する">
+			<param name="Local" value="topic\use-addbuttons.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="プログラムを実行する">
+			<param name="Local" value="topic\use-runapplications.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="新しいパッドを作成する">
+			<param name="Local" value="topic\use-addpads.html">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="高度な使い方">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ボタンをグループ分けする">
+			<param name="Local" value="topic\advance-group.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="プラグインを使う">
+			<param name="Local" value="topic\advance-plugins.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ホットキーを使う">
+			<param name="Local" value="topic\advance-hotkey.html">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="設定を変更する">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="色や壁紙を指定する">
+			<param name="Local" value="topic\option-color.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ボタンの表示を変更する">
+			<param name="Local" value="topic\option-button.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="配置を変更する">
+			<param name="Local" value="topic\option-arrange.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="様々な動作を変更する">
+			<param name="Local" value="topic\option-movement.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="画面の四辺に隠す">
+			<param name="Local" value="topic\option-hide.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="音を鳴らす">
+			<param name="Local" value="topic\option-sound.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="データフォルダを変更する">
+			<param name="Local" value="topic\option-userfolder.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="機能を制限する">
+			<param name="Local" value="topic\option-restrictions.html">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="リファレンス">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="メニュー">
+			<param name="Local" value="topic\reference-menu.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="キーボードショートカット">
+			<param name="Local" value="topic\reference-key.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="パッドの設定">
+			<param name="Local" value="topic\reference-padpro.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="全体の設定">
+			<param name="Local" value="topic\reference-option.html">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ヒント">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ドラッグ＆ドロップの便利な使い方">
+			<param name="Local" value="topic\hint-dragdrop.html">
+			<param name="ImageNumber" value="37">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ドラッグしながらドロップする先を切り替える">
+			<param name="Local" value="topic\hint-dropterget.html">
+			<param name="ImageNumber" value="37">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ドラッグをキャンセル">
+			<param name="Local" value="topic\hint-canceldrag.html">
+			<param name="ImageNumber" value="37">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ボタンをスタートメニューから登録する">
+			<param name="Local" value="topic\hint-startmenu.html">
+			<param name="ImageNumber" value="37">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ボタンに登録されているファイルが置いてあるフォルダを開く">
+			<param name="Local" value="topic\hint-openfolder.html">
+			<param name="ImageNumber" value="37">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ボタンデータや設定情報をバックアップする">
+			<param name="Local" value="topic\hint-backup.html">
+			<param name="ImageNumber" value="37">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="社内標準のランチャーに指定する場合の便利な機能">
+			<param name="Local" value="topic\hint-admin.html">
+			<param name="ImageNumber" value="37">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="USB メモリー等のリムーバブルディスクで使う場合の便利な機能">
+			<param name="Local" value="topic\hint-usb.html">
+			<param name="ImageNumber" value="37">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="よくある質問と答え">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ダウンロードしたファイルが解凍できない／解凍はできたがファイルが足りない">
+			<param name="Local" value="topic\faq-archive.html">
+			<param name="ImageNumber" value="27">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ボタングループをすばやく切り替えたい">
+			<param name="Local" value="topic\faq-changegroup.html">
+			<param name="ImageNumber" value="27">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ホイールを押しながら回転でボタングループの切り替えができない">
+			<param name="Local" value="topic\faq-cantwheeldown.html">
+			<param name="ImageNumber" value="27">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="起動時は隠れて欲しい">
+			<param name="Local" value="topic\faq-hidestart.html">
+			<param name="ImageNumber" value="27">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="以前のバージョンにあったカレンダーやスクリーンセーバーの起動などの付加機能は？">
+			<param name="Local" value="topic\faq-plugin.html">
+			<param name="ImageNumber" value="27">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="以前のバージョンにあった 1 行に表示できるボタン数、1 度に表示できる行数が設定できなくなってしまいました">
+			<param name="Local" value="topic\faq-widthheight.html">
+			<param name="ImageNumber" value="27">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="以前のバージョンにあった「Ctrl キーを押しながらファイルをドロップ」に対応して欲しい">
+			<param name="Local" value="topic\faq-ctrldrop.html">
+			<param name="ImageNumber" value="27">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="お読みください">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ライセンスについて">
+			<param name="Local" value="topic\info-copyright.html">
+			<param name="ImageNumber" value="17">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="サポートについて">
+			<param name="Local" value="topic\info-support.html">
+			<param name="ImageNumber" value="17">
+			</OBJECT>
+	</UL>
+</UL>
+</BODY></HTML>

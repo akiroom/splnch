@@ -425,7 +425,8 @@ begin
     // –{‘Ì
     lstReadme.Add('Special Launch ');
     lstReadme.Add(GetFileVersionString(ParamStr(0), True));
-    lstReadme.Add('Copyright (C) SAWADA Shigeru');
+    lstReadme.Add('Copyright (C)');
+    lstReadme.Add('Special Launch Open Source Project.');
 
 
     // Windows

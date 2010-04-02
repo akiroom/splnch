@@ -3594,9 +3594,9 @@ begin
   if Item.ButtonData is TNormalButton then
   begin
     // NT‚È‚çƒXƒŒƒbƒh‚É‚·‚é
-    if OSVersionInfo.dwPlatformId = VER_PLATFORM_WIN32_NT then
-      TOpenNormalButtonThread.Create(Handle, TNormalButton(Item.ButtonData))
-    else
+//    if OSVersionInfo.dwPlatformId = VER_PLATFORM_WIN32_NT then
+//      TOpenNormalButtonThread.Create(Handle, TNormalButton(Item.ButtonData))
+//    else
       OpenNormalButton(Handle, TNormalButton(Item.ButtonData));
   end
 

@@ -954,9 +954,9 @@ begin
       end;
 
       // NT‚È‚çƒXƒŒƒbƒh‚É‚·‚é
-      if OSVersionInfo.dwPlatformId = VER_PLATFORM_WIN32_NT then
-        TOpenNormalButtonThread.Create(Pad.Handle, NormalButton)
-      else
+//      if OSVersionInfo.dwPlatformId = VER_PLATFORM_WIN32_NT then
+//        TOpenNormalButtonThread.Create(Pad.Handle, NormalButton)
+//      else
         OpenNormalButton(Pad.Handle, NormalButton);
     finally
       NormalButton.Free;

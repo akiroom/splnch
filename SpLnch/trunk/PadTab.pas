@@ -348,6 +348,7 @@ begin
   WinHotkey := SendMessage(Handle, WM_GETHOTKEY, 0, 0);
   SendMessage(Handle, WM_SETHOTKEY, 0, 0);
   SendMessage(frmPad.Handle, WM_SETHOTKEY, WinHotkey, 0);
+  TfrmPad(frmPad).TopMost := TfrmPad(frmPad).TopMost;
 end;
 
 // ‰B‚ê‚é

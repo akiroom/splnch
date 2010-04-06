@@ -91,7 +91,7 @@ type
     procedure Clear(WithData: Boolean); reintroduce;
     procedure Delete(Index: Integer);
     procedure Assign(Source: TButtonGroups);
-    function Load(FileName: String): Boolean;
+    procedure Load(FileName: String);
     procedure Save(FileName: String);
   end;
 
@@ -758,7 +758,7 @@ begin
 end;
 
 // ボタンファイル読み込み
-function TButtonGroups.Load(FileName: String): Boolean;
+procedure TButtonGroups.Load(FileName: String);
 var
   ButtonGroup: TButtonGroup;
   FileStream: TFileStream;
@@ -767,50 +767,40 @@ var
   pWork: PChar;
 begin
   Clear(True);
+
+  FileStream := TFileStream.Create(FileName, fmOpenRead or fmShareExclusive);
+  MemStream := TMemoryStream.Create;
   try
-    FileStream := TFileStream.Create(FileName, fmOpenRead or fmShareExclusive);
-    MemStream := TMemoryStream.Create;
+    MemStream.CopyFrom(FileStream, FileStream.Size);
+    MemStream.Position := 0;
+
+    Size := Length(BTNHEAD) + 1;
+    pWork := StrAlloc(Size);
     try
-      MemStream.CopyFrom(FileStream, FileStream.Size);
-      MemStream.Position := 0;
-
-      Size := Length(BTNHEAD) + 1;
-      pWork := StrAlloc(Size);
-      try
-        MemStream.Read(pWork^, Size);
-        if StrPas(pWork) <> BTNHEAD then
-          raise EButtonFileError.Create('ファイル形式が違います。');
-      finally
-        StrDispose(pWork);
-      end;
-
-      while MemStream.Position < MemStream.Size do
-      begin
-        ButtonGroup := TButtonGroup.Create;
-        try
-          ButtonGroup.LoadFromStream(MemStream);
-          Add(ButtonGroup);
-        except
-          ButtonGroup.Free;
-        end;
-      end;
+      MemStream.Read(pWork^, Size);
+      if StrPas(pWork) <> BTNHEAD then
+        raise EButtonFileError.Create('ファイル形式が違います。' + FileName);
     finally
-      FileStream.Free;
-      MemStream.Free;
+      StrDispose(pWork);
     end;
-    Result := True;
 
-  except
-    on E: EButtonFileError do
+    while MemStream.Position < MemStream.Size do
     begin
-      Result := Application.MessageBox(PChar('ボタンファイルを読み込めませんでした。' +
-        E.Message + 'このまま続けますか？'), '確認', MB_ICONQUESTION or MB_YESNO) = idYes;
+      ButtonGroup := TButtonGroup.Create;
+      try
+        ButtonGroup.LoadFromStream(MemStream);
+        Add(ButtonGroup);
+      except
+        ButtonGroup.Free;
+      end;
     end;
-  else
-    Result := True;
+  finally
+    FileStream.Free;
+    MemStream.Free;
   end;
 
-  if Result and (Count = 0) then
+
+  if Count = 0 then
   begin
     ButtonGroup := TButtonGroup.Create;
     Add(ButtonGroup);

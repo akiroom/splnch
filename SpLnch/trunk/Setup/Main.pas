@@ -397,6 +397,8 @@ var
   SettingForAllUser: Boolean;
   UserFolder: string;
   NextPage: TTabSheet;
+
+  OSVersionInfo: TOSVersionInfo;
 begin
   // 最初のページ
   if PageControl.ActivePage = tabStart then
@@ -490,7 +492,13 @@ begin
     else
     begin
       chkSettingForAllUser.Checked := False;
-      FUserFolder := GetTargetFolder + FUserName + '\';
+      OSVersionInfo.dwOSVersionInfoSize := SizeOf(TOSVersionInfo);
+      GetVersionEx(OSVersionInfo);
+      if (OSVersionInfo.dwPlatformId = VER_PLATFORM_WIN32_NT) and
+        (OSVersionInfo.dwMajorVersion >= 6) then
+        FUserFolder := GetEnvironmentVariable('appdata') + '\Special Launch\'
+      else
+        FUserFolder := GetTargetFolder + FUserName + '\';
       FAllFolder := GetTargetFolder + 'Default\';
       edtSL4UserFolder.Text := FUserFolder;
 
@@ -992,9 +1000,6 @@ begin
   begin
     if not rdoUninstall.Checked then
     begin
-      Msg := Msg + 'が完了しました。';
-      Application.MessageBox(PChar(Msg), '確認', MB_ICONINFORMATION);
-
       if rdoInstall.Checked then
       begin
         SetupUnlock;
@@ -1003,7 +1008,13 @@ begin
         if not FUpdateInstall then
           if Application.MessageBox('Special Launch のヘルプを表示しますか?', '確認', MB_ICONQUESTION or MB_YESNO) = idYes then
             ShellExecute(Handle, nil, PChar(NewTargetFolder + 'SpLnch.chm'), nil, nil, SW_SHOW);
+      end
+      else
+      begin
+        Msg := Msg + 'が完了しました。';
+        Application.MessageBox(PChar(Msg), '終了', MB_ICONINFORMATION);
       end;
+
     end;
 
     Close;

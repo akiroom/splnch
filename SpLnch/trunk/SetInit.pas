@@ -3,7 +3,7 @@ unit SetInit;
 interface
 
 uses
-  Windows, SysUtils, Forms, IniFiles;
+  Windows, SysUtils, Forms, IniFiles, About;
 
 var
   UserName: string;
@@ -111,7 +111,12 @@ begin
 
     dlgInitFolder := TdlgInitFolder.Create(nil);
     try
-      UserFolder := ExtractFilePath(ParamStr(0)) + UserName + '\';
+      if (OSVersionInfo.dwPlatformId = VER_PLATFORM_WIN32_NT) and
+        (OSVersionInfo.dwMajorVersion >= 6) then
+        UserFolder := GetEnvironmentVariable('appdata') + '\Special Launch\'
+      else
+        UserFolder := ExtractFilePath(ParamStr(0)) + UserName + '\';
+
       dlgInitFolder.edtInitFolder.Text := UserFolder;
       while True do
       begin

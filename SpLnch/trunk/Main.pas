@@ -118,6 +118,8 @@ begin
     begin
       Msg := 'パッドの読み込みに失敗しました。' + E.Message;
       Application.MessageBox(PChar(Msg), 'エラー', MB_ICONERROR);
+      Close;
+      Exit;
     end;
   end;
   Plugins.BeginPlugins;

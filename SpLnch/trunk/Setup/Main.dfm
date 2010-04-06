@@ -24,7 +24,7 @@ object frmMain: TfrmMain
     Top = 0
     Width = 523
     Height = 293
-    ActivePage = tabUninstallOptions
+    ActivePage = tabInstallOptions
     Align = alTop
     Style = tsButtons
     TabHeight = 10

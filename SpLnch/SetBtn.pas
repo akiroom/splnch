@@ -114,7 +114,7 @@ type
 implementation
 
 const
-  BTNHEAD = 'Special Launch 4 Buttons File';
+  BTNHEAD = AnsiString('Special Launch 4 Buttons File');
 
   bkTerminate = 0;
   bkSpace = 1;
@@ -171,7 +171,7 @@ procedure TButtonData.LoadFromStream(Stream: TStream);
 var
   Size: Integer;
   ButtonProperty: Byte;
-  pWork: PChar;
+  pWork: PAnsiChar;
 begin
   while True do
   begin
@@ -187,7 +187,7 @@ begin
     case ButtonProperty of
       bpName:
       begin
-        pWork := StrAlloc(Size);
+        pWork := AnsiStrAlloc(Size);
         try
           Stream.Read(pWork^, Size);
           Name := StrPas(pWork);
@@ -215,7 +215,7 @@ begin
   Stream.Write(ButtonProperty, SizeOf(ButtonProperty));
   Size := Length(Name) + 1;
   Stream.Write(Size, SizeOf(Size));
-  Stream.Write(PChar(Name)^, Size);
+  Stream.Write(PAnsiChar(Name)^, Size);
   // ClickCount
   ButtonProperty := bpClickCount;
   Stream.Write(ButtonProperty, SizeOf(ButtonProperty));
@@ -293,7 +293,7 @@ procedure TNormalButton.LoadFromStream(Stream: TStream);
 var
   Size: Integer;
   NormalProperty: Byte;
-  pWork: PChar;
+  pWork: PAnsiChar;
 begin
   inherited;
 
@@ -312,7 +312,7 @@ begin
     case NormalProperty of
       npFileName:
       begin
-        pWork := StrAlloc(Size);
+        pWork := AnsiStrAlloc(Size);
         try
           Stream.Read(pWork^, Size);
           FileName := StrPas(pWork);
@@ -336,7 +336,7 @@ begin
 
       npOption:
       begin
-        pWork := StrAlloc(Size);
+        pWork := AnsiStrAlloc(Size);
         try
           Stream.Read(pWork^, Size);
           Option := StrPas(pWork);
@@ -347,7 +347,7 @@ begin
 
       npFolder:
       begin
-        pWork := StrAlloc(Size);
+        pWork := AnsiStrAlloc(Size);
         try
           Stream.Read(pWork^, Size);
           Folder := StrPas(pWork);
@@ -361,7 +361,7 @@ begin
 
       npIconFile:
       begin
-        pWork := StrAlloc(Size);
+        pWork := AnsiStrAlloc(Size);
         try
           Stream.Read(pWork^, Size);
           IconFile := StrPas(pWork);
@@ -458,7 +458,7 @@ procedure TPluginButton.LoadFromStream(Stream: TStream);
 var
   Size: Integer;
   PluginProperty: Byte;
-  pWork: PChar;
+  pWork: PAnsiChar;
 begin
   inherited;
 
@@ -476,7 +476,7 @@ begin
     case PluginProperty of
       ppPluginName:
       begin
-        pWork := StrAlloc(Size);
+        pWork := AnsiStrAlloc(Size);
         try
           Stream.Read(pWork^, Size);
           PluginName := StrPas(pWork);
@@ -580,7 +580,7 @@ var
   Size: Integer;
   Kind: Byte;
   GroupProperty: Byte;
-  pWork: PChar;
+  pWork: PAnsiChar;
   ButtonData: TButtonData;
   MemStream: TMemoryStream;
 begin
@@ -598,7 +598,7 @@ begin
     // Name
     if GroupProperty = gpName then
     begin
-      pWork := StrAlloc(Size);
+      pWork := AnsiStrAlloc(Size);
       try
         Stream.Read(pWork^, Size);
         Name := StrPas(pWork);
@@ -764,7 +764,7 @@ var
   FileStream: TFileStream;
   MemStream: TMemoryStream;
   Size: Integer;
-  pWork: PChar;
+  pWork: PAnsiChar;
 begin
   Clear(True);
 
@@ -775,7 +775,7 @@ begin
     MemStream.Position := 0;
 
     Size := Length(BTNHEAD) + 1;
-    pWork := StrAlloc(Size);
+    pWork := AnsiStrAlloc(Size);
     try
       MemStream.Read(pWork^, Size);
       if StrPas(pWork) <> BTNHEAD then

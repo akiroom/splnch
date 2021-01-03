@@ -236,7 +236,7 @@ begin
     HELP_CONTEXTPOPUP:
     begin
       HHPopup.idString := Data;
-      HTMLHelp(Wnd, PAnsiChar(FileName), HH_DISPLAY_TEXT_POPUP, DWORD(@HHPopup));
+      HTMLHelp(Wnd, PChar(FileName), HH_DISPLAY_TEXT_POPUP, DWORD(@HHPopup));
     end;
     HELP_SETPOPUP_POS:
       HHPopup.pt := Point(LoWord(Data), HiWord(Data));

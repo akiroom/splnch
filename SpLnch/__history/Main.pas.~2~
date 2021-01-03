@@ -226,17 +226,17 @@ begin
 
   case Command of
     HELP_CONTENTS:
-      HTMLHelp(Wnd, PAnsiChar(FileName), HH_DISPLAY_TOPIC, 0);
+      HTMLHelp(Wnd, PChar(FileName), HH_DISPLAY_TOPIC, 0);
     HELP_FINDER:
-      HTMLHelp(Wnd, PAnsiChar(FileName), HH_DISPLAY_TOPIC, Data);
+      HTMLHelp(Wnd, PChar(FileName), HH_DISPLAY_TOPIC, Data);
     HELP_QUIT:
-      HTMLHelp(Wnd, PAnsiChar(FileName), HH_CLOSE_ALL, Data);
+      HTMLHelp(Wnd, PChar(FileName), HH_CLOSE_ALL, Data);
     HELP_CONTEXT:
-      HTMLHelp(Wnd, PAnsiChar(FileName), HH_HELP_CONTEXT, Data);
+      HTMLHelp(Wnd, PChar(FileName), HH_HELP_CONTEXT, Data);
     HELP_CONTEXTPOPUP:
     begin
       HHPopup.idString := Data;
-      HTMLHelp(Wnd, PAnsiChar(FileName), HH_DISPLAY_TEXT_POPUP, DWORD(@HHPopup));
+      HTMLHelp(Wnd, PChar(FileName), HH_DISPLAY_TEXT_POPUP, DWORD(@HHPopup));
     end;
     HELP_SETPOPUP_POS:
       HHPopup.pt := Point(LoWord(Data), HiWord(Data));

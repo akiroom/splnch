@@ -168,7 +168,7 @@ begin
       for I := 0 to All.length - 1 do
       begin
         Item := All.item(I, 0) as IHtmlElement;
-        ItemClassName := Item.getAttribute('className', 0);
+        ItemClassName = Item.getAttribute('className');
         if ItemClassName = 'slversion' then
         begin
           TargetVersion := item.innerText;

@@ -420,7 +420,7 @@ begin
           if FileType = ftPidl then
             Size := GetItemIDSize(FilePoint)
           else
-            Size := StrLen(PAnsiChar(FilePoint)) + 1;
+            Size := StrLen(FilePoint) + 1;
           MemStream.Write(Size, SizeOf(Size));
           MemStream.Write(FilePoint^, Size);
           MemStream.Write(IconIndex, SizeOf(IconIndex));
@@ -553,7 +553,7 @@ begin
             IconData.FilePoint := CopyItemID(FilePoint)
           else
           begin
-            IconData.FilePoint := StrAlloc(StrLen(PAnsiChar(FilePoint)) + 1);
+            IconData.FilePoint := StrAlloc(StrLen(FilePoint) + 1);
             StrCopy(PAnsiChar(IconData.FilePoint), FilePoint);
           end;
           IconData.FileType := FileType;

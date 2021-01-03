@@ -62,6 +62,8 @@ object dlgVerCheck: TdlgVerCheck
     Width = 300
     Height = 150
     TabOrder = 3
+    OnNavigateComplete2 = wbVersionNavigateComplete2
+    OnNavigateError = wbVersionNavigateError
     ControlData = {
       4C000000021F0000810F00000000000000000000000000000000000000000000
       000000004C000000000000000000000001000000E0D057007335CF11AE690800

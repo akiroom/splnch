@@ -168,7 +168,7 @@ begin
       for I := 0 to All.length - 1 do
       begin
         Item := All.item(I, 0) as IHtmlElement;
-        ItemClassName := Item.getAttribute('className', 0);
+        ItemClassName = Item.getAttribute('className');
         if ItemClassName = 'slversion' then
         begin
           TargetVersion := item.innerText;
@@ -193,12 +193,12 @@ begin
             NewPluginVersionList.Add(NewPluginVersion);
           end;
         end
-        else if (ItemClassName = 'pluginversion') then
+        else if (Item.className = 'pluginversion') then
         begin
           if NewPluginVersion <> nil then
             NewPluginVersion.Version := item.innerText;
         end
-        else if (ItemClassName = 'plugindate') then
+        else if (Item.className = 'plugindate') then
         begin
           if NewPluginVersion <> nil then
             NewPluginVersion.Date := item.innerText;

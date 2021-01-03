@@ -553,7 +553,7 @@ begin
             IconData.FilePoint := CopyItemID(FilePoint)
           else
           begin
-            IconData.FilePoint := StrAlloc(StrLen(PAnsiChar(FilePoint)) + 1);
+            IconData.FilePoint := StrAlloc(StrLen(FilePoint) + 1);
             StrCopy(PAnsiChar(IconData.FilePoint), FilePoint);
           end;
           IconData.FileType := FileType;

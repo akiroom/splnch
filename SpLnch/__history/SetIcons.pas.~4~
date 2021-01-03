@@ -261,7 +261,7 @@ begin
   if FileType = ftPidl then
     Malloc.Free(FilePoint)
   else
-    StrDispose(PAnsiChar(FilePoint));
+    StrDispose(FilePoint);
   DestroyIcon(LIcon);
   DestroyIcon(SIcon);
   inherited;
@@ -343,7 +343,7 @@ begin
       end
       else
       begin
-        if (StrComp(PAnsiChar(Icons[Result].FilePoint), PAnsiChar(FilePoint)) = 0) and
+        if (StrComp(Icons[Result].FilePoint, FilePoint) = 0) and
           (Icons[Result].IconIndex = IconIndex) then
           Break;
       end;
@@ -420,7 +420,7 @@ begin
           if FileType = ftPidl then
             Size := GetItemIDSize(FilePoint)
           else
-            Size := StrLen(PAnsiChar(FilePoint)) + 1;
+            Size := StrLen(FilePoint) + 1;
           MemStream.Write(Size, SizeOf(Size));
           MemStream.Write(FilePoint^, Size);
           MemStream.Write(IconIndex, SizeOf(IconIndex));
@@ -553,7 +553,7 @@ begin
             IconData.FilePoint := CopyItemID(FilePoint)
           else
           begin
-            IconData.FilePoint := StrAlloc(StrLen(PAnsiChar(FilePoint)) + 1);
+            IconData.FilePoint := StrAlloc(StrLen(FilePoint) + 1);
             StrCopy(PAnsiChar(IconData.FilePoint), FilePoint);
           end;
           IconData.FileType := FileType;

@@ -1,0 +1,74 @@
+<HTML>
+<HEAD>
+	<META http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+	<META http-equiv="Content-Script-Type" content="text/javascript">
+	<META http-equiv="Content-Style-Type" content="text/css">
+	<LINK rel="stylesheet" type="text/css" href="main.css"> 
+	<TITLE>USB メモリー等のリムーバブルディスクで使う場合の便利な機能</TITLE>
+</HEAD>
+
+
+<BODY>
+<H2>USB メモリー等のリムーバブルディスクで使う場合の便利な機能</H2>
+<P>
+	普段使い慣れたテキストエディタやメーラー等のプログラムを USB メモリーに入れて、他の PC で使うために持ち歩きたい場合がありますが、 Special Launch も一緒に USB メモリーに入れて、USB メモリー上のエディタやメーラーの起動を簡単にすることができます。
+</P>
+
+
+
+<H3>USB メモリーにインストールする</H3>
+<OL>
+	<LI><B>sl???.exe</B> を実行してセットアッププログラムを起動します。 </LI>
+	<LI>［インストール先フォルダ］ボックスを USB メモリードライブのルートに変更します。</LI>
+	<LI>［インストールオプション］のチェックボックスをすべて外します。</LI>
+	<LI>［データフォルダ］の設定で［すべてのユーザーで同じ設定を使う］にチェックを付けます。</LI>
+	<LI>USB メモリーを PC に挿した際に Special Launch を簡単に起動できるように、autorun.inf を作成します。</LI>
+</OL>
+<DIV class="hint">
+	実際に使用する PC のユーザーがわからないので［すべてのユーザーで同じ設定を使う］の設定でインストールします。
+</DIV>
+<DIV class="hint">
+	Windows XP SP2 以降では USB メモリーの自動起動に対応していないため、動作を選択するダイアログボックスを表示することで代用します。このメニューでは、USB メモリーのルートにあるプログラムしか起動できないため、Special Launch のインストール先フォルダをルートにします。<BR>
+	USB メモリーのルートフォルダに以下のようなファイルを作成してください。<BR>
+	<P>
+	<B>autorun.inf</B>
+	<PRE>
+[autorun]
+action=Special Launch 起動
+open=SpLnch.exe
+	</PRE>
+	</P>
+</DIV>
+
+
+
+
+
+<H3>USB メモリー上のプログラムを登録する</H3>
+<OL>
+	<LI>USB メモリー上の Special Launch を起動して、USB メモリー上の各プログラムの実行ファイルをパッド上にドラッグ＆ドロップしてボタンを登録します。</LI>
+	<LI>ボタン上で右クリックし、［ボタン］メニューの［変更］をクリックします。</LI>
+	<LI>［ボタンの変更］ダイアログボックスの［相対パスに変換］をクリックします。</LI>
+</OL>
+<DIV class="hint">
+	USB メモリーは、挿した PC によってドライブ番号が変わってしまうため、ボタンのリンク先をフルパスで指定することができません。このため、Special Launch には相対パスで指定する必要があります。
+</DIV>
+
+
+
+
+<H3>CD-R にインストールする</H3>
+<P>
+	CD-R には直接インストールはできませんので、まずは空フォルダを作成して CD-R のイメージを作りますが、基本的には CD-R のイメージを作る手順と USB メモリーにインストールする手順は同じになります。
+</P>
+
+
+
+
+<DIV class="related">
+	<A href="setup.html"><IMG src="arrow.gif">セットアップ方法</A><BR>
+	<A href="use-addbuttons.html"><IMG src="arrow.gif">プログラムを登録する</A><BR>
+</DIV>
+
+</BODY>
+</HTML>

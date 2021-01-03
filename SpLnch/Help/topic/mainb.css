@@ -1,0 +1,150 @@
+
+body {
+	font: x-small;
+	background: white;
+	color: black;
+	line-height: 1.2em;
+}
+
+
+img {
+	border: 0;
+}
+
+h1 {
+	font: bold 100%;
+	text-align: center;
+	color: navy;
+	background: #ddffff;
+	border: solid;
+	border-width: 1px 2px 2px 1px;
+	border-color: navy;
+	padding: 0.2em;
+}
+
+h2 {
+/*	font: bold small; */
+	font: bold 100%;
+/*	letter-spacing: 1em; */
+	color: navy;
+/*	background: #eeffff; */
+	border-top: solid;
+	border-left: solid;
+	border-width: 1px 3px;
+	border-color: navy;
+	padding: 2pt;
+}
+
+h3 {
+	font: bold 100%;
+	margin: 2em 0em 0em 0em;
+}
+
+
+h4 {
+	font: bold 90%;
+	margin: 1em 0em 0em 0em;
+}
+
+
+p {
+	margin: 0.5em 0em;
+}
+
+
+table {
+	font-size: "100%";
+	background: #ffffff;
+	margin-top: 0; 
+	margin-bottom: 0; 
+	padding: "2"; 
+}
+
+th {
+	text-align: left;
+	background: #dddddd;
+	vertical-align: top;
+	white-space: nowrap;
+}
+
+tr {
+	vertical-align: top;
+}
+
+td {
+	background: #eeeeee;
+	vertical-align: top; 
+}
+
+
+ol {
+	margin: 0.5em 0em 1em 2.1em;
+	padding-left: "0em";
+}
+
+ul {
+	margin: 0.5em 0em 1em 1.5em;
+	list-style-type: disc;
+	padding-left: "0em";
+}
+
+li {
+	margin-bottom: 0.5em;
+	clear: both;
+}
+
+dt {
+	margin: 0.5em 0em 0em 0em;
+	font: bold;
+}
+
+dd {
+	margin: 0em;
+}
+
+pre {
+	font: 90%;
+}
+
+a {color: blue; text-decoration: none}
+a:hover {text-decoration: underline}
+
+
+
+/* ヒント */
+div.hint {
+	background: #eeeeee;
+	border: solid;
+	border-width: 1px;
+	border-color: silver;
+	padding: 2pt;
+	margin: 1em 1em;
+}
+
+div h4 {
+	color: blue;
+	margin: 0pt;
+}
+
+/* フッタ */
+div.footer {
+	text-align: right;
+	border-top: solid;
+	border-width: 1px 0px 0px 0px;
+	border-color: navy;
+	padding: 2pt;
+	margin: 2em 0pt;
+	line-height: 1em;
+}
+
+/* 関連文書 */
+div.related {
+	border-top: solid;
+	border-width: 1px 0px 0px 0px;
+	border-color: navy;
+	padding: 2pt;
+	margin: 2em 0pt;
+}
+.related img {
+	margin-right: 3pt;
+}
